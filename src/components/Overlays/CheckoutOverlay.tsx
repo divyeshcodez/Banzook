@@ -5,6 +5,36 @@ import { db } from '../../firebase';
 import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
 import styles from './Overlays.module.css';
 
+interface CoFieldProps {
+  id: string;
+  label: string;
+  type?: string;
+  value: string;
+  activeField: string | null;
+  onChange: (v: string) => void;
+  onFocus: () => void;
+  onBlur: () => void;
+  placeholder?: string;
+}
+
+const CoField: React.FC<CoFieldProps> = ({ id, label, type = 'text', value, activeField, onChange, onFocus, onBlur, placeholder }) => (
+  <div className={`${styles.coField} ${activeField === id ? styles.coFieldActive : ''} ${value ? styles.coFieldFilled : ''}`}>
+    <label className={styles.coFieldLabel} htmlFor={id}>{label}</label>
+    <input
+      id={id}
+      type={type}
+      className={styles.coFieldInput}
+      value={value}
+      placeholder={placeholder || ''}
+      onChange={e => onChange(e.target.value)}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      autoComplete="off"
+    />
+    <div className={styles.coFieldUnderline} />
+  </div>
+);
+
 export const CheckoutOverlay: React.FC = () => {
   const { isCheckoutOpen, setIsCheckoutOpen, cartItems, cartSubtotal, clearCart, triggerToast } = useCart();
 
@@ -233,9 +263,9 @@ export const CheckoutOverlay: React.FC = () => {
                     <span className={styles.coFormStepName}>SHIPPING COORDINATES</span>
                   </div>
                   <div className={styles.coFieldSet}>
-                    <Field id="co-name"  label="FULL NAME"       value={name}    onChange={setName} />
-                    <Field id="co-email" label="EMAIL ADDRESS"   type="email" value={email}   onChange={setEmail} />
-                    <Field id="co-phone" label="PHONE NUMBER"    value={phone}   onChange={setPhone} placeholder="+91 XXXXX XXXXX" />
+                    <CoField id="co-name"  label="FULL NAME"       value={name}    activeField={activeField} onChange={setName}    onFocus={() => setActiveField('co-name')} onBlur={() => setActiveField(null)} />
+                    <CoField id="co-email" label="EMAIL ADDRESS"   type="email" value={email}   activeField={activeField} onChange={setEmail}   onFocus={() => setActiveField('co-email')} onBlur={() => setActiveField(null)} />
+                    <CoField id="co-phone" label="PHONE NUMBER"    value={phone}   activeField={activeField} onChange={setPhone}   onFocus={() => setActiveField('co-phone')} onBlur={() => setActiveField(null)} placeholder="+91 XXXXX XXXXX" />
                     <div className={`${styles.coField} ${activeField === 'co-addr' ? styles.coFieldActive : ''} ${address ? styles.coFieldFilled : ''}`}>
                       <label className={styles.coFieldLabel} htmlFor="co-addr">SHIPPING ADDRESS</label>
                       <textarea id="co-addr" className={`${styles.coFieldInput} ${styles.coFieldTextarea}`} value={address} rows={2} placeholder="BUILDING, STREET, AREA, CITY, PIN" onChange={e => setAddress(e.target.value)} onFocus={() => setActiveField('co-addr')} onBlur={() => setActiveField(null)} />
@@ -276,10 +306,10 @@ export const CheckoutOverlay: React.FC = () => {
 
                   {paymentMethod === 'card' && (
                     <div className={styles.coFieldSet} style={{ marginTop: '1.5rem', borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: '1.5rem' }}>
-                      <Field id="co-cardnum" label="CARD NUMBER" value={cardNumber} onChange={setCardNumber} placeholder="0000 0000 0000 0000" />
+                      <CoField id="co-cardnum" label="CARD NUMBER" value={cardNumber} activeField={activeField} onChange={setCardNumber} onFocus={() => setActiveField('co-cardnum')} onBlur={() => setActiveField(null)} placeholder="0000 0000 0000 0000" />
                       <div className={styles.coFieldRow}>
-                        <Field id="co-exp" label="EXPIRY DATE" value={expiry} onChange={setExpiry} placeholder="MM / YY" />
-                        <Field id="co-cvv" label="CVV" type="password" value={cvv} onChange={setCvv} placeholder="• • •" />
+                        <CoField id="co-exp" label="EXPIRY DATE" value={expiry} activeField={activeField} onChange={setExpiry} onFocus={() => setActiveField('co-exp')} onBlur={() => setActiveField(null)} placeholder="MM / YY" />
+                        <CoField id="co-cvv" label="CVV" type="password" value={cvv} activeField={activeField} onChange={setCvv} onFocus={() => setActiveField('co-cvv')} onBlur={() => setActiveField(null)} placeholder="• • •" />
                       </div>
                     </div>
                   )}

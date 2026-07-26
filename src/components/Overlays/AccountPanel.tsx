@@ -8,6 +8,37 @@ import styles from './Overlays.module.css';
 
 type SubView = 'profile' | 'orders' | 'access';
 
+// Top-level field component to prevent input unmounting/focus loss on state updates
+interface AcFieldProps {
+  id: string;
+  label: string;
+  type?: string;
+  value: string;
+  activeField: string | null;
+  onChange: (v: string) => void;
+  onFocus: () => void;
+  onBlur: () => void;
+  placeholder?: string;
+}
+
+const AcField: React.FC<AcFieldProps> = ({ id, label, type = 'text', value, activeField, onChange, onFocus, onBlur, placeholder }) => (
+  <div className={`${styles.acField} ${activeField === id ? styles.acFieldActive : ''} ${value ? styles.acFieldFilled : ''}`}>
+    <label className={styles.acFieldLabel} htmlFor={id}>{label}</label>
+    <input
+      id={id}
+      type={type}
+      className={styles.acFieldInput}
+      value={value}
+      placeholder={placeholder || ''}
+      onChange={e => onChange(e.target.value)}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      autoComplete="off"
+    />
+    <div className={styles.acFieldUnderline} />
+  </div>
+);
+
 export const AccountPanel: React.FC = () => {
   const { isAccountOpen, setIsAccountOpen } = useCart();
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
@@ -121,14 +152,6 @@ export const AccountPanel: React.FC = () => {
 
   if (!isAccountOpen) return null;
 
-  const Field = ({ id, label, type='text', value, onChange, placeholder }: { id: string; label: string; type?: string; value: string; onChange: (v: string) => void; placeholder?: string }) => (
-    <div className={`${styles.acField} ${activeField===id ? styles.acFieldActive : ''} ${value ? styles.acFieldFilled : ''}`}>
-      <label className={styles.acFieldLabel} htmlFor={id}>{label}</label>
-      <input id={id} type={type} className={styles.acFieldInput} value={value} placeholder={placeholder||''} onChange={e => onChange(e.target.value)} onFocus={() => setActiveField(id)} onBlur={() => setActiveField(null)} autoComplete="off" />
-      <div className={styles.acFieldUnderline} />
-    </div>
-  );
-
   const NAV: { id: SubView; label: string }[] = [
     { id: 'profile', label: 'PROFILE' },
     { id: 'orders',  label: 'ORDERS'  },
@@ -168,9 +191,11 @@ export const AccountPanel: React.FC = () => {
             {successMsg && <div className={styles.acSuccess}>{successMsg}</div>}
 
             <form className={styles.acAuthForm} onSubmit={authMode === 'login' ? handleLogin : handleRegister}>
-              {authMode === 'register' && <Field id="ac-name" label="YOUR NAME" value={name} onChange={setName} />}
-              <Field id="ac-email" label="EMAIL ADDRESS" type="email" value={email} onChange={setEmail} />
-              <Field id="ac-pw"    label="PASSWORD"      type="password" value={password} onChange={setPassword} />
+              {authMode === 'register' && (
+                <AcField id="ac-name" label="YOUR NAME" value={name} activeField={activeField} onChange={setName} onFocus={() => setActiveField('ac-name')} onBlur={() => setActiveField(null)} />
+              )}
+              <AcField id="ac-email" label="EMAIL ADDRESS" type="email" value={email} activeField={activeField} onChange={setEmail} onFocus={() => setActiveField('ac-email')} onBlur={() => setActiveField(null)} />
+              <AcField id="ac-pw" label="PASSWORD" type="password" value={password} activeField={activeField} onChange={setPassword} onFocus={() => setActiveField('ac-pw')} onBlur={() => setActiveField(null)} />
 
               {authMode === 'login' && (
                 <div className={styles.acTestCreds}>TEST CREDENTIALS: admin@gmail.com / 123456</div>
