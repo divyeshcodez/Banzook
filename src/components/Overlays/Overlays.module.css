@@ -208,53 +208,53 @@
   width:100%; margin-bottom:0.25rem;
 }
 .cartItemName {
-  font-family:var(--font-headline); font-size:0.9rem; font-weight:900;
-  color:#111; text-transform:uppercase; line-height:1.1;
+  font-family:var(--font-headline); font-size:1.05rem; font-weight:950;
+  color:#111111; text-transform:uppercase; line-height:1.1; letter-spacing:-0.01em;
 }
 .cartItemRemoveBtn {
-  background:none; border:none; color:rgba(0,0,0,0.3);
+  background:none; border:none; color:rgba(0,0,0,0.5);
   cursor:pointer; transition:color 0.2s; padding:0.2rem; flex-shrink:0;
 }
 .cartItemRemoveBtn:hover { color:#FF4D00; }
 .cartItemSize {
-  font-family:var(--font-mono); font-size:0.68rem; font-weight:700;
-  color:#888; letter-spacing:0.1em; text-transform:uppercase;
+  font-family:var(--font-mono); font-size:0.75rem; font-weight:800;
+  color:#111111; letter-spacing:0.12em; text-transform:uppercase;
 }
 .cartItemFooter {
   display:flex; justify-content:space-between; align-items:center;
   width:100%; margin-top:auto; padding-top:0.75rem;
 }
-.quantityAdjuster { display:flex; align-items:center; border:1px solid rgba(0,0,0,0.15); }
+.quantityAdjuster { display:flex; align-items:center; border:1.5px solid #111111; }
 .qtyBtn {
-  background:none; border:none; color:#111; font-size:1rem;
-  width:30px; height:30px; cursor:pointer;
+  background:none; border:none; color:#111111; font-size:1.1rem; font-weight:900;
+  width:32px; height:32px; cursor:pointer;
   display:flex; align-items:center; justify-content:center; transition:all 0.2s;
 }
-.qtyBtn:hover { background:#111; color:#F8F7F5; }
+.qtyBtn:hover { background:#111111; color:#F8F7F5; }
 .qtyVal {
-  font-family:var(--font-mono); font-size:0.78rem; font-weight:800;
-  width:28px; text-align:center; color:#111;
+  font-family:var(--font-mono); font-size:0.85rem; font-weight:900;
+  width:30px; text-align:center; color:#111111;
 }
 .cartItemPrice {
-  font-family:var(--font-mono); font-size:0.9rem; font-weight:800; color:#111;
+  font-family:var(--font-mono); font-size:1rem; font-weight:900; color:#111111;
 }
 .cartFooter {
-  border-top:1px solid rgba(0,0,0,0.1); padding:1.75rem 2.5rem;
+  border-top:2px solid #111111; padding:1.75rem 2.5rem;
   background:#F8F7F5; display:flex; flex-direction:column; gap:1.25rem;
   position:sticky; bottom:0;
 }
 .subtotalRow { display:flex; justify-content:space-between; align-items:baseline; }
 .subtotalLabel {
-  font-family:var(--font-mono); font-size:0.78rem; font-weight:800;
-  color:#888; letter-spacing:0.12em; text-transform:uppercase;
+  font-family:var(--font-mono); font-size:0.85rem; font-weight:900;
+  color:#111111; letter-spacing:0.15em; text-transform:uppercase;
 }
 .subtotalPrice {
-  font-family:var(--font-headline); font-size:1.5rem; font-weight:950;
-  color:#111; letter-spacing:-0.02em;
+  font-family:var(--font-headline); font-size:1.75rem; font-weight:950;
+  color:#111111; letter-spacing:-0.02em;
 }
 .shippingNotice {
-  font-family:var(--font-mono); font-size:0.65rem; color:rgba(0,0,0,0.4);
-  letter-spacing:0.08em; text-transform:uppercase; line-height:1.5;
+  font-family:var(--font-mono); font-size:0.7rem; font-weight:800; color:#333333;
+  letter-spacing:0.1em; text-transform:uppercase; line-height:1.5;
 }
 .checkoutBtn { width:100%; padding:1.15rem; font-size:0.82rem; letter-spacing:0.12em; }
 
@@ -540,8 +540,8 @@
 }
 
 .coFormStepName {
-  font-family:var(--font-mono); font-size:0.72rem; font-weight:800;
-  color:rgba(0,0,0,0.4); letter-spacing:0.22em; text-transform:uppercase;
+  font-family:var(--font-mono); font-size:0.78rem; font-weight:900;
+  color:#111111; letter-spacing:0.22em; text-transform:uppercase;
 }
 
 /* Underline field system */
@@ -552,27 +552,27 @@
 }
 
 .coFieldLabel {
-  font-family:var(--font-mono); font-size:0.6rem; font-weight:800;
-  color:rgba(0,0,0,0.3); letter-spacing:0.2em; text-transform:uppercase;
+  font-family:var(--font-mono); font-size:0.7rem; font-weight:900;
+  color:#111111; letter-spacing:0.18em; text-transform:uppercase;
   transition:color 0.2s;
 }
 .coFieldActive .coFieldLabel { color:#FF4D00; }
-.coFieldFilled .coFieldLabel { color:rgba(0,0,0,0.55); }
+.coFieldFilled .coFieldLabel { color:#111111; }
 
 .coFieldInput {
   background:none; border:none; outline:none;
-  font-family:var(--font-body); font-size:1.05rem; color:#111;
+  font-family:var(--font-body); font-size:1.1rem; font-weight:700; color:#111111;
   padding:0.4rem 0; width:100%;
 }
-.coFieldInput::placeholder { color:rgba(0,0,0,0.18); font-size:0.9rem; }
+.coFieldInput::placeholder { color:rgba(0,0,0,0.35); font-size:0.9rem; font-weight:600; }
 
-.coFieldTextarea { resize:none; line-height:1.5; }
+.coFieldTextarea { resize:none; line-height:1.5; font-weight:700; }
 
 .coFieldUnderline {
-  height:1px; background:rgba(0,0,0,0.15);
+  height:1.5px; background:rgba(0,0,0,0.35);
   transition: background 0.25s, height 0.25s;
 }
-.coFieldActive .coFieldUnderline { background:#FF4D00; height:2px; }
+.coFieldActive .coFieldUnderline { background:#FF4D00; height:2.5px; }
 
 .coFieldRow { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
 
@@ -787,23 +787,23 @@
 /* ── UNDERLINE FIELD SYSTEM (shared auth + edit) ─────────────────────── */
 .acField { display:flex; flex-direction:column; gap:0.4rem; position:relative; }
 .acFieldLabel {
-  font-family:var(--font-mono); font-size:0.6rem; font-weight:800;
-  color:rgba(0,0,0,0.3); letter-spacing:0.2em; text-transform:uppercase;
+  font-family:var(--font-mono); font-size:0.7rem; font-weight:900;
+  color:#111111; letter-spacing:0.18em; text-transform:uppercase;
   transition:color 0.2s;
 }
 .acFieldActive .acFieldLabel { color:#FF4D00; }
-.acFieldFilled .acFieldLabel { color:rgba(0,0,0,0.55); }
+.acFieldFilled .acFieldLabel { color:#111111; }
 .acFieldInput {
   background:none; border:none; outline:none;
-  font-family:var(--font-body); font-size:1.05rem; color:#111;
+  font-family:var(--font-body); font-size:1.1rem; font-weight:700; color:#111111;
   padding:0.4rem 0; width:100%;
 }
-.acFieldInput::placeholder { color:rgba(0,0,0,0.18); font-size:0.9rem; }
-.acFieldTextarea { resize:none; line-height:1.5; }
+.acFieldInput::placeholder { color:rgba(0,0,0,0.35); font-size:0.9rem; font-weight:600; }
+.acFieldTextarea { resize:none; line-height:1.5; font-weight:700; }
 .acFieldUnderline {
-  height:1px; background:rgba(0,0,0,0.15); transition:background 0.25s, height 0.25s;
+  height:1.5px; background:rgba(0,0,0,0.35); transition:background 0.25s, height 0.25s;
 }
-.acFieldActive .acFieldUnderline { background:#FF4D00; height:2px; }
+.acFieldActive .acFieldUnderline { background:#FF4D00; height:2.5px; }
 
 /* ── AUTH FLOW ─────────────────────────────────────────────────────── */
 .acAuthWrap {
