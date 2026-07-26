@@ -118,13 +118,7 @@ export const CheckoutOverlay: React.FC = () => {
 
   const STEPS = ['SHIPPING', 'PAYMENT', 'CONFIRM'];
 
-  const Field = ({ id, label, type = 'text', value, onChange, placeholder }: { id: string; label: string; type?: string; value: string; onChange: (v: string) => void; placeholder?: string }) => (
-    <div className={`${styles.coField} ${activeField === id ? styles.coFieldActive : ''} ${value ? styles.coFieldFilled : ''}`}>
-      <label className={styles.coFieldLabel} htmlFor={id}>{label}</label>
-      <input id={id} type={type} className={styles.coFieldInput} value={value} placeholder={placeholder || ''} onChange={e => onChange(e.target.value)} onFocus={() => setActiveField(id)} onBlur={() => setActiveField(null)} autoComplete="off" />
-      <div className={styles.coFieldUnderline} />
-    </div>
-  );
+
 
   return (
     <div className={styles.coScreen}>
