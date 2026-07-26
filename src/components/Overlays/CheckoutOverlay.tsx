@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { X, ArrowRight, CheckCircle, Truck, CreditCard } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { db } from '../../firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
 import styles from './Overlays.module.css';
 
 export const CheckoutOverlay: React.FC = () => {
@@ -57,8 +57,22 @@ export const CheckoutOverlay: React.FC = () => {
 
   const placeOrder = async () => {
     setIsOrdering(true);
+    let userId = 'anonymous';
+    try {
+      const saved = localStorage.getItem('banzook_user');
+      if (saved) {
+        const p = JSON.parse(saved);
+        userId = p.uid || 'anonymous';
+        if (p.uid) {
+          const updatedUser = { ...p, name: name.toUpperCase(), email, phone, address };
+          localStorage.setItem('banzook_user', JSON.stringify(updatedUser));
+          setDoc(doc(db, 'users', p.uid), { name: name.toUpperCase(), email, phone, address }, { merge: true }).catch(() => {});
+        }
+      }
+    } catch {}
+
     const payload = {
-      userId: (() => { try { return JSON.parse(localStorage.getItem('banzook_user')!).uid; } catch { return 'anonymous'; } })(),
+      userId,
       name: name.toUpperCase(), email, phone, address,
       items: cartItems.map(i => ({ productId: i.product.id, name: i.product.name, size: i.size, quantity: i.quantity, price: i.product.price })),
       total: orderTotal, paymentMethod: paymentMethod.toUpperCase(),
