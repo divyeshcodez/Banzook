@@ -1,0 +1,212 @@
+/* OFFCUT Header CSS Module */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: rgba(14, 14, 13, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-line);
+  transition: var(--transition-fast);
+}
+
+.scrolled {
+  background-color: rgba(14, 14, 13, 0.95);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.25rem 2rem 1.25rem 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  color: var(--text-bone);
+  text-decoration: none;
+  letter-spacing: -0.03em;
+  transition: var(--transition-fast);
+}
+
+.logo:hover {
+  color: var(--accent-red);
+}
+
+.desktopNav {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+}
+
+.navLink {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--muted-grey);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: var(--transition-fast);
+}
+
+.navLink:hover {
+  color: var(--text-bone);
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.clockContainer {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(42, 42, 39, 0.4);
+  padding: 6px 14px;
+  border-radius: 2px;
+  border: 1px solid var(--border-line);
+}
+
+@media (min-width: 1024px) {
+  .clockContainer { display: flex; }
+}
+
+.clockDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--muted-grey);
+}
+
+.unitsBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(200, 16, 46, 0.12);
+  border: 1px solid rgba(200, 16, 46, 0.3);
+  padding: 6px 14px;
+  border-radius: 2px;
+}
+
+.redPulseDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-red);
+  box-shadow: 0 0 8px var(--accent-red);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+.bagBtn {
+  background: none;
+  border: none;
+  color: var(--text-bone);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: var(--transition-fast);
+}
+
+.bagBtn:hover {
+  color: var(--accent-red);
+}
+
+.bagCount {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background-color: var(--accent-red);
+  color: var(--text-bone);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobileMenuBtn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-bone);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .desktopNav { display: none; }
+  .mobileMenuBtn { display: flex; }
+  .container { padding-left: 2.5rem; }
+}
+
+/* Mobile Drawer Overlay */
+.mobileDrawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-offcut);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 2rem;
+  transform: translateY(-100%);
+  transition: transform 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.mobileDrawerOpen {
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.mobileDrawerContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 500px;
+}
+
+.mobileNavLink {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  color: var(--text-bone);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.mobileNavLink:hover {
+  color: var(--accent-red);
+}
+
+.mobileMeta {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border-line);
+  padding-top: 2rem;
+  margin-top: 2rem;
+}

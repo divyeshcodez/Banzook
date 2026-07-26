@@ -1,0 +1,221 @@
+.section {
+  background-color: var(--bg-black);
+  padding: 8rem 2rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background-color: var(--surface-dark);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.imageWrapper:hover .image {
+  transform: scale(1.05);
+}
+
+/* Detail indicator overlay */
+.imageOverlay {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  background-color: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(5px);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-white);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: var(--transition-fast);
+}
+
+.imageWrapper:hover .imageOverlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Right Content Info */
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.tag {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: var(--orange);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--text-white);
+  margin-bottom: 0.5rem;
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-white);
+  margin-bottom: 2rem;
+}
+
+.desc {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  color: var(--text-gray);
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+/* Navigation Arrow Switcher */
+.navSelector {
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.navLabel {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--text-gray);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.navArrowsGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navArrowBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background-color: var(--surface-dark);
+  color: var(--text-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.navArrowBtn:hover {
+  border-color: var(--orange);
+  background-color: var(--orange);
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+.navArrowBtnPrimary {
+  width: auto;
+  padding: 0 1.25rem;
+  border-radius: 999px;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background-color: var(--surface-medium);
+  border-color: var(--border-strong);
+}
+
+.navArrowBtnPrimary:hover {
+  background-color: var(--orange);
+  border-color: var(--orange);
+  color: #ffffff;
+}
+
+.stepCounter {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-gray);
+  letter-spacing: 0.1em;
+  padding: 0 0.5rem;
+}
+
+/* Mobile responsive constraints */
+@media (max-width: 991px) {
+  .grid {
+    gap: 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 6rem 1.5rem;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .imageWrapper {
+    aspect-ratio: 1 / 1;
+  }
+  .info {
+    align-items: center;
+    text-align: center;
+  }
+  .navSelector {
+    align-items: center;
+  }
+  .title {
+    font-size: 2.5rem;
+  }
+  .price {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .desc {
+    margin-bottom: 2rem;
+  }
+}

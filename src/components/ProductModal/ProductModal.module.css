@@ -1,0 +1,387 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   BANZOOK PRODUCT DOSSIER — EDITORIAL PRODUCT EXPERIENCE
+   Global Design Foundation: Warm Off-White (#F8F7F5), Deep Charcoal (#111111),
+   BANZOOK Orange (#FF4D00), Archivo Black + IBM Plex Mono typography
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.dossierOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.dossierModal {
+  position: relative;
+  background: #F8F7F5;
+  color: #111111;
+  width: 100%;
+  max-width: 1260px;
+  max-height: 95vh;
+  overflow-y: auto;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 2.5rem 3rem;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
+  font-family: var(--font-body);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: transparent;
+  border: none;
+  color: #111111;
+  cursor: pointer;
+  z-index: 20;
+  padding: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.closeBtn:hover {
+  transform: rotate(90deg);
+  color: var(--orange);
+}
+
+.dossierGrid {
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* ── LEFT VISUAL AREA (EDITORIAL DOSSIER) ─────────────────────────────────── */
+.leftVisualArea {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mainMediaFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #EAE8E3;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.mainMediaImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  transition: transform 0.8s ease, opacity 0.4s ease;
+  padding: 0.5rem;
+}
+
+/* Floating Editorial Dossier Badges */
+.dossierTopBadge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--orange);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: rgba(248, 247, 245, 0.9);
+  padding: 0.3rem 0.65rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dossierCounterBadge {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #111111;
+  letter-spacing: 0.15em;
+  background: rgba(248, 247, 245, 0.9);
+  padding: 0.3rem 0.65rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.verticalWatermark {
+  position: absolute;
+  bottom: 4rem;
+  left: 1.25rem;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.2em;
+}
+
+.toggle3dPill {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000000;
+  color: #FFFFFF;
+  border: 1px solid #000000;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 0.65rem 1.4rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.toggle3dPill:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  transform: translateX(-50%) translateY(-2px);
+}
+
+/* Image Navigation Thumbnails */
+.thumbnailRow {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.thumbnailBtn {
+  flex: 1;
+  aspect-ratio: 1 / 1;
+  background: #EAE8E3;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.thumbnailBtnActive {
+  border: 2px solid #000000;
+}
+
+.thumbnailImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.25rem;
+}
+
+/* ── RIGHT INFORMATION AREA (EDITORIAL HIERARCHY) ───────────────────────── */
+.rightInfoArea {
+  display: flex;
+  flex-direction: column;
+}
+
+.metadataRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--orange);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.dropTag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #666666;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.dossierTitle {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 950;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #111111;
+  margin-bottom: 0.5rem;
+}
+
+.subTitleQuote {
+  font-family: var(--font-headline);
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--orange);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.priceTag {
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #111111;
+  margin-bottom: 1.75rem;
+}
+
+.editorialStoryBox {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1.25rem 0;
+  margin-bottom: 2rem;
+}
+
+.editorialStoryHeadline {
+  font-family: var(--font-headline);
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #111111;
+  margin-bottom: 0.5rem;
+}
+
+.editorialStoryText {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #555555;
+}
+
+/* Size Selection */
+.sizeGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+
+.sizeTitle {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #111111;
+}
+
+.sizePillsRow {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.sizeBtn {
+  flex: 1;
+  padding: 0.75rem;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #111111;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sizeBtn:hover {
+  border-color: #000000;
+}
+
+.sizeBtnActive {
+  background: #000000 !important;
+  color: #FFFFFF !important;
+  border-color: #000000 !important;
+}
+
+/* Add to Bag Action */
+.addToBagBtn {
+  width: 100%;
+  background: #000000;
+  color: #FFFFFF;
+  border: none;
+  font-family: var(--font-headline);
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  padding: 1.1rem 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  margin-bottom: 2.5rem;
+}
+
+.addToBagBtn:hover {
+  background: var(--orange);
+}
+
+.addedState {
+  background: #111111 !important;
+  color: #FFFFFF !important;
+}
+
+/* Expandable Accordions */
+.accordionsGroup {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.accordionItem {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.accordionTrigger {
+  width: 100%;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #111111;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.accordionTrigger:hover {
+  color: var(--orange);
+}
+
+.accordionContent {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: #555555;
+  padding-bottom: 1rem;
+}
+
+@media (max-width: 900px) {
+  .dossierGrid {
+    grid-template-columns: 1fr;
+  }
+}

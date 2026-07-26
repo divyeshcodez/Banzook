@@ -1,0 +1,228 @@
+.container {
+  position: relative;
+  background-color: var(--bg-black);
+  width: 100%;
+}
+
+.pinContainer {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.scrollWrapper {
+  display: flex;
+  height: 100vh;
+  width: fit-content;
+  align-items: center;
+  will-change: transform;
+}
+
+/* Header Panel */
+.headerPanel {
+  width: 60vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 6rem;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-subtle);
+  background-color: rgba(10, 10, 10, 0.5);
+}
+
+.label {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: var(--orange);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--text-white);
+  margin-bottom: 2rem;
+}
+
+.storyIndicator {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text-dark);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+}
+
+.arrowLine {
+  width: 80px;
+  height: 1px;
+  background-color: var(--orange);
+  position: relative;
+}
+
+.arrowLine::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--orange);
+  border-right: 1px solid var(--orange);
+  transform: rotate(45deg);
+}
+
+/* Standard Panel */
+.panel {
+  width: 80vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 6rem;
+  flex-shrink: 0;
+  position: relative;
+  border-right: 1px solid var(--border-subtle);
+}
+
+.panelGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  width: 100%;
+  max-width: 1200px;
+  align-items: center;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: var(--surface-dark);
+  border: 1px solid var(--border-subtle);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.panel:hover .image {
+  transform: scale(1.03);
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.panelTag {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: var(--orange);
+  text-transform: uppercase;
+}
+
+.panelTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--text-white);
+}
+
+.panelDesc {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-gray);
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+.panelNumber {
+  position: absolute;
+  bottom: 4rem;
+  right: 6rem;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.02);
+  line-height: 1;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .pinContainer {
+    height: auto;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding-bottom: 2rem;
+  }
+
+  .scrollWrapper {
+    height: auto;
+    display: flex;
+  }
+
+  .headerPanel {
+    width: 90vw;
+    height: auto;
+    padding: 6rem 2.5rem;
+    scroll-snap-align: start;
+    border-right: none;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .panel {
+    width: 90vw;
+    height: auto;
+    padding: 4rem 2.5rem;
+    scroll-snap-align: start;
+    border-right: none;
+    border-bottom: 1px solid var(--border-subtle);
+    display: block;
+  }
+
+  .panelGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .imageContainer {
+    aspect-ratio: 1 / 1;
+  }
+
+  .panelNumber {
+    bottom: 2rem;
+    right: 2.5rem;
+    font-size: 5rem;
+  }
+
+  .arrowLine {
+    display: none;
+  }
+}

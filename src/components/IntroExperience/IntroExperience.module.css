@@ -1,0 +1,110 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-black);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.8s ease;
+}
+
+.exit {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 600px;
+  position: relative;
+  z-index: 2;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--text-white);
+  line-height: 1;
+  text-indent: 0.2em; /* align centered since spacing pushes right */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
+}
+
+.philosophy {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  color: var(--orange);
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s;
+  margin-bottom: 2rem;
+}
+
+.cta {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.3s;
+}
+
+.skipBtn {
+  position: absolute;
+  bottom: 2.5rem;
+  background: none;
+  border: none;
+  color: var(--text-dark);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards 2s;
+}
+
+.skipBtn:hover {
+  color: var(--text-gray);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive constraints */
+@media (max-width: 768px) {
+  .wordmark {
+    font-size: 3rem;
+  }
+  .philosophy {
+    font-size: 0.875rem;
+    letter-spacing: 0.2em;
+  }
+}

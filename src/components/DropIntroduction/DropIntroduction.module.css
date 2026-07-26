@@ -1,0 +1,72 @@
+.section {
+  background-color: var(--bg-black);
+  padding: 10rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--orange);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.labelDot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--orange);
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse 2s infinite;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  color: var(--text-white);
+  margin-bottom: 1.5rem;
+}
+
+.description {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--text-white);
+  max-width: 900px;
+  text-transform: uppercase;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 6rem 1.5rem;
+  }
+  .label {
+    margin-bottom: 1.5rem;
+  }
+  .title {
+    font-size: 1rem;
+  }
+}

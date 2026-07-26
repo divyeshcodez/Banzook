@@ -1,0 +1,158 @@
+.section {
+  background-color: var(--bg-black);
+  padding: 10rem 2rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: var(--text-white);
+  margin-bottom: 5rem;
+  text-transform: uppercase;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+/* Main Visual Column */
+.mainCol {
+  position: relative;
+}
+
+.mainImageWrapper {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background-color: var(--surface-dark);
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mainImageWrapper:hover .image {
+  transform: scale(1.03);
+}
+
+.overlayLabel {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  background-color: var(--orange);
+  color: var(--text-white);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  padding: 0.35rem 0.75rem;
+  text-transform: uppercase;
+}
+
+/* Side Column Details */
+.sideCol {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.detailCard {
+  background-color: var(--surface-dark);
+  border: 1px solid var(--border-subtle);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 1rem;
+}
+
+.cardHeader span {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.locLabel {
+  color: var(--text-white);
+}
+
+.dropLabel {
+  color: var(--orange);
+}
+
+.cardBody {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-gray);
+  line-height: 1.7;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-white);
+  margin-bottom: 0.5rem;
+}
+
+.sideImageWrapper {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background-color: var(--surface-dark);
+}
+
+.sideImageWrapper:hover .image {
+  transform: scale(1.03);
+}
+
+/* Mobile responsive constraints */
+@media (max-width: 991px) {
+  .grid {
+    gap: 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 6rem 1.5rem;
+  }
+  .title {
+    margin-bottom: 3rem;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .mainImageWrapper {
+    aspect-ratio: 4 / 3;
+  }
+  .detailCard {
+    padding: 2rem;
+  }
+}

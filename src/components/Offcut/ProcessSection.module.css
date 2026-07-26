@@ -1,0 +1,101 @@
+/* OFFCUT Process Section CSS Module */
+
+.section {
+  position: relative;
+  width: 100%;
+  padding: 7rem 2rem 7rem 3.5rem;
+  background-color: var(--bg-offcut);
+  border-top: 1px solid var(--border-line);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.headerRow {
+  max-width: 780px;
+  margin-bottom: 4.5rem;
+}
+
+.title {
+  font-family: var(--font-headline);
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  color: var(--text-bone);
+  line-height: 0.98;
+  margin: 0.75rem 0 1.25rem 0;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--muted-grey);
+  line-height: 1.6;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+}
+
+@media (min-width: 900px) {
+  .stepsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.stepCard {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-line);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: var(--transition-fast);
+}
+
+.stepCard:hover {
+  border-color: var(--accent-red);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.stepIcon {
+  color: var(--accent-red);
+}
+
+.stepTitle {
+  font-family: var(--font-headline);
+  font-size: 1.25rem;
+  color: var(--text-bone);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.stepDesc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--muted-grey);
+  line-height: 1.65;
+  margin-bottom: 2rem;
+}
+
+.cardFooter {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-line);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-left: 2rem;
+  }
+}

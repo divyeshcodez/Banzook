@@ -1,0 +1,259 @@
+/* OFFCUT Product Grid CSS Module */
+
+.section {
+  position: relative;
+  width: 100%;
+  padding: 6rem 2rem 6rem 3.5rem;
+  background-color: var(--bg-offcut);
+  border-top: 1px solid var(--border-line);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3.5rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--text-bone);
+  line-height: 1;
+  margin-top: 0.5rem;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .productGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .productGrid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.card {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-line);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: var(--transition-fast);
+}
+
+.card:hover {
+  border-color: var(--accent-red);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+}
+
+.mediaWrapper {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  background-color: #10100F;
+}
+
+.staticImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.6s ease, opacity 0.4s ease;
+}
+
+.staticImgHidden {
+  opacity: 0.2;
+  transform: scale(1.05);
+}
+
+.hoverVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.hoverVideoVisible {
+  opacity: 1;
+}
+
+.mediaFallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--surface-card);
+  border: 1px dashed var(--border-line);
+  color: var(--muted-grey);
+}
+
+.batchTagOverlay {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  background: rgba(14, 14, 13, 0.85);
+  border: 1px solid var(--border-line);
+  color: var(--text-bone);
+  font-size: 0.65rem;
+  padding: 4px 10px;
+  border-radius: 2px;
+  backdrop-filter: blur(4px);
+}
+
+.gsmTagOverlay {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  background: rgba(200, 16, 46, 0.2);
+  border: 1px solid var(--accent-red);
+  color: var(--accent-red);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 2px;
+  backdrop-filter: blur(4px);
+}
+
+.unitsLeftTag {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(14, 14, 13, 0.85);
+  border: 1px solid var(--border-line);
+  padding: 4px 10px;
+  font-size: 0.65rem;
+  color: var(--text-bone);
+}
+
+.redDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent-red);
+}
+
+.hoverActionOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  z-index: 20;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: var(--transition-fast);
+}
+
+.card:hover .hoverActionOverlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quickAddBtn {
+  width: 100%;
+  background-color: var(--accent-red);
+  color: var(--text-bone);
+  border: none;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.quickAddBtn:hover {
+  background-color: var(--text-bone);
+  color: var(--bg-offcut);
+}
+
+.cardContent {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-grow: 1;
+}
+
+.metaTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.productName {
+  font-family: var(--font-headline);
+  font-size: 1.05rem;
+  color: var(--text-bone);
+  line-height: 1.25;
+}
+
+.compositionText {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted-grey);
+  margin-top: auto;
+}
+
+.cardFooterRow {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-line);
+}
+
+.detailBtn {
+  background: none;
+  border: none;
+  color: var(--text-bone);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.detailBtn:hover {
+  color: var(--accent-red);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-left: 2rem;
+  }
+}

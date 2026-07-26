@@ -1,0 +1,408 @@
+/* BANZOOK 100% Nite Riot Exact Full Copy Styling */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #F8F7F5;
+  color: #111111;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5.2rem 2rem 1.2rem 2rem;
+  user-select: none;
+}
+
+/* Background Canvas */
+.bgCanvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 50% 35%, rgba(255, 77, 0, 0.04) 0%, transparent 65%),
+    linear-gradient(to bottom, #F8F7F5 0%, #F2F0EC 100%);
+}
+
+.bgGrid {
+  position: absolute;
+  inset: 0;
+  background-size: 80px 80px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+  opacity: 0.8;
+}
+
+/* Circular Hover Cursor Badge ("OPEN THE PROJECT") */
+.cursorBadge {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  background: rgba(248, 247, 245, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #111111;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease;
+  opacity: 0;
+  will-change: transform, left, top;
+}
+
+.cursorBadgeVisible {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+/* Central Editorial Collage Stage */
+.collageStage {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1440px;
+  height: clamp(430px, 57vh, 600px);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1400px;
+}
+
+/* Left Side Bold Editorial Copy */
+.leftEditorialText {
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 25;
+  max-width: 280px;
+  text-align: left;
+  display: none;
+}
+
+.editorialHeadline {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.4vw, 2.2rem);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: #111111;
+  text-transform: uppercase;
+}
+
+.editorialSubline {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.4vw, 2.2rem);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: #111111;
+  text-transform: uppercase;
+}
+
+/* Right Side Bold Editorial Copy */
+.rightEditorialText {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 25;
+  max-width: 280px;
+  text-align: right;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .leftEditorialText, .rightEditorialText {
+    display: block;
+  }
+}
+
+/* Center Primary Photorealistic Model Container */
+.centerModelContainer {
+  position: relative;
+  z-index: 30;
+  width: 380px;
+  height: 530px;
+  border-radius: 0px;
+  overflow: hidden;
+  background-color: #101012;
+  border: none;
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.25);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: none;
+  will-change: transform;
+}
+
+@media (min-width: 1200px) {
+  .centerModelContainer {
+    width: 430px;
+    height: 580px;
+  }
+}
+
+.centerModelImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.centerModelContainer:hover .centerModelImage {
+  transform: scale(1.04);
+}
+
+/* Left Rotated Image Behind/Left - Increased Size & Moved Out so it is Clearly Visible */
+.leftRotatedSupport {
+  position: absolute;
+  left: calc(50% - 360px);
+  top: 50%;
+  transform: translateY(-50%) rotate(-10deg) scale(0.95);
+  z-index: 10;
+  width: 340px;
+  height: 480px;
+  border-radius: 0px;
+  overflow: hidden;
+  background-color: #121214;
+  border: none;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.16);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+  cursor: none;
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .leftRotatedSupport {
+    left: calc(50% - 410px);
+    width: 380px;
+    height: 520px;
+  }
+}
+
+/* Right Rotated Image Behind/Right - Increased Size & Moved Out so it is Clearly Visible */
+.rightRotatedSupport {
+  position: absolute;
+  right: calc(50% - 360px);
+  top: 50%;
+  transform: translateY(-50%) rotate(10deg) scale(0.95);
+  z-index: 10;
+  width: 340px;
+  height: 480px;
+  border-radius: 0px;
+  overflow: hidden;
+  background-color: #121214;
+  border: none;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.16);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+  cursor: none;
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .rightRotatedSupport {
+    right: calc(50% - 410px);
+    width: 380px;
+    height: 520px;
+  }
+}
+
+@media (min-width: 992px) {
+  .leftRotatedSupport, .rightRotatedSupport {
+    display: block;
+  }
+}
+
+.supportCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: contrast(1.08);
+}
+
+/* Double Ruler Tick Mark Line System - Exact Reference Match */
+.rulerTrackContainer {
+  position: relative;
+  width: 100%;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.rulerLine {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.15);
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+.rulerTicksWrapper {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.rulerTick {
+  width: 1px;
+  height: 8px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.rulerTickMajor {
+  width: 1.5px;
+  height: 15px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.rulerCenterPointer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 20px;
+  background-color: #000000;
+  z-index: 10;
+}
+
+/* Bottom Horizontal Carousel Container */
+.bottomCarouselContainer {
+  position: relative;
+  z-index: 40;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.carouselTrack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.5rem;
+  overflow-x: auto;
+  padding: 0.6rem 0;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.carouselTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.carouselItem {
+  background: transparent;
+  border: none;
+  color: #B8B8BD;
+  font-family: var(--font-display);
+  font-size: 1.95rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  padding: 0 12px;
+}
+
+.carouselItem:hover {
+  color: #111111;
+}
+
+.carouselItemActive {
+  color: #000000;
+  font-size: 2.35rem;
+  font-weight: 900;
+  position: relative;
+}
+
+/* Fixed Bottom Footer */
+.fixedBottomFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.4rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #666666;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.counterCenter {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 900;
+  color: #111111;
+}
+
+.counterArrowBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #111111;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: -0.1em;
+  padding: 0 4px;
+  transition: transform 0.2s ease;
+}
+
+.counterArrowBtn:hover {
+  color: var(--orange);
+  transform: scale(1.15);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .hero {
+    padding: 4.5rem 1rem 1.2rem 1rem;
+  }
+  .centerModelContainer {
+    width: 290px;
+    height: 400px;
+  }
+  .leftRotatedSupport, .rightRotatedSupport {
+    display: none;
+  }
+  .carouselItem {
+    font-size: 1.3rem;
+  }
+  .carouselItemActive {
+    font-size: 1.6rem;
+  }
+}
