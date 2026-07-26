@@ -34,7 +34,10 @@ jobs:
         run: npm install
 
       - name: Build project
-        run: npm run build
+        run: |
+          npm run build
+          cp public/CNAME dist/CNAME
+          touch dist/.nojekyll
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
