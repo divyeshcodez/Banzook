@@ -27,7 +27,7 @@ const BANZOOK_DROPS: DropItem[] = [
   {
     id: 'd-1',
     number: '01',
-    title: 'CULLIGAN',
+    title: 'NO SMOKING',
     leftHeadline: 'STRATEGIC THINKERS.',
     leftSubline: 'SMART STRATEGY.',
     rightHeadline: 'THOUGHTFUL EXECUTION.',
@@ -41,7 +41,7 @@ const BANZOOK_DROPS: DropItem[] = [
   {
     id: 'd-2',
     number: '02',
-    title: 'JLO BEAUTY',
+    title: 'BROKEN SYSTEM',
     leftHeadline: 'RAW INDUSTRIAL.',
     leftSubline: 'HEAVYWEIGHT FLEECE.',
     rightHeadline: 'NO SHORTCUTS.',
@@ -55,7 +55,7 @@ const BANZOOK_DROPS: DropItem[] = [
   {
     id: 'd-3',
     number: '03',
-    title: 'BILLIE CONVERSE',
+    title: 'BAD HABITS',
     leftHeadline: 'SPEAKS IN PRINTS.',
     leftSubline: 'HIGH DENSITY SILICONE.',
     rightHeadline: 'LIMITED MICRO-RUNS.',
@@ -69,7 +69,7 @@ const BANZOOK_DROPS: DropItem[] = [
   {
     id: 'd-4',
     number: '04',
-    title: 'GUEST IN RESIDENCE',
+    title: 'REBEL YOUTH',
     leftHeadline: 'ANARCHIST REBEL.',
     leftSubline: 'VINTAGE WASHED BLACK.',
     rightHeadline: 'CULTURAL CHAPTERS.',
@@ -83,7 +83,7 @@ const BANZOOK_DROPS: DropItem[] = [
   {
     id: 'd-5',
     number: '05',
-    title: 'GENESIS MOTOR',
+    title: 'CHALLENGE ACCEPTED',
     leftHeadline: 'CHALLENGE ACCEPTED.',
     leftSubline: 'SPEEDWAY COLLAB.',
     rightHeadline: 'RAGLAN BOX-FIT.',
