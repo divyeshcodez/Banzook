@@ -234,15 +234,8 @@ export const IntroExperience: React.FC<IntroExperienceProps> = ({ onEnterComplet
       state = S.DONE;
       if (veilRef.current) veilRef.current.classList.add(styles.on);
       setTimeout(() => { 
-        const container = document.getElementById('intro-container');
-        if (container) {
-          container.style.transition = 'opacity 0.8s ease';
-          container.style.opacity = '0';
-        }
-        setTimeout(() => {
-          setIsVisible(false);
-          onEnterComplete(); 
-        }, 800);
+        setIsVisible(false);
+        onEnterComplete(); 
       }, CFG.VEIL_MS + 40);
     }
 
