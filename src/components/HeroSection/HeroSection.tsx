@@ -33,8 +33,8 @@ const BANZOOK_DROPS: DropItem[] = [
     rightHeadline: 'THOUGHTFUL EXECUTION.',
     rightSubline: 'BOLD BRANDS.',
     mainImage: '/images/tshirts/tshirt_nosmoking.png',
-    leftImage: '/images/tshirts/tshirt_nosmoking.png',
-    rightImage: '/images/tshirts/tshirt_nosmoking.png',
+    leftImage: '/models/l.png',
+    rightImage: '/models/r.png',
     price: '₹1,299',
     productId: 'prod-14'
   },
@@ -47,8 +47,8 @@ const BANZOOK_DROPS: DropItem[] = [
     rightHeadline: 'NO SHORTCUTS.',
     rightSubline: 'CONSTRUCTED IN MUMBAI.',
     mainImage: '/images/tshirts/tshirt_brokensystem.png',
-    leftImage: '/images/tshirts/tshirt_brokensystem.png',
-    rightImage: '/images/tshirts/tshirt_brokensystem.png',
+    leftImage: '/models/l1.png',
+    rightImage: '/models/r2.png',
     price: '₹2,499',
     productId: 'prod-17'
   },
@@ -61,8 +61,8 @@ const BANZOOK_DROPS: DropItem[] = [
     rightHeadline: 'LIMITED MICRO-RUNS.',
     rightSubline: 'COLLECTOR EDITIONS.',
     mainImage: '/images/tshirts/tshirt_blue.jpg',
-    leftImage: '/images/tshirts/tshirt_blue.jpg',
-    rightImage: '/images/tshirts/tshirt_blue.jpg',
+    leftImage: '/models/l3.png',
+    rightImage: '/models/r3.png',
     price: '₹1,299',
     productId: 'prod-14'
   },
@@ -75,8 +75,8 @@ const BANZOOK_DROPS: DropItem[] = [
     rightHeadline: 'CULTURAL CHAPTERS.',
     rightSubline: 'BEYOND INVENTORY.',
     mainImage: '/images/tshirts/tshirt_green.png',
-    leftImage: '/images/tshirts/tshirt_green.png',
-    rightImage: '/images/tshirts/tshirt_green.png',
+    leftImage: '/models/l4.png',
+    rightImage: '/models/r4.png',
     price: '₹1,399',
     productId: 'prod-17'
   },
@@ -89,8 +89,8 @@ const BANZOOK_DROPS: DropItem[] = [
     rightHeadline: 'RAGLAN BOX-FIT.',
     rightSubline: 'FLAME CHEST BRANDING.',
     mainImage: '/images/tshirts/tshirt_hotwheels.png',
-    leftImage: '/images/tshirts/tshirt_hotwheels.png',
-    rightImage: '/images/tshirts/tshirt_hotwheels.png',
+    leftImage: '/models/l5.png',
+    rightImage: '/models/r5.png',
     price: '₹1,499',
     productId: 'prod-13'
   },
@@ -103,8 +103,8 @@ const BANZOOK_DROPS: DropItem[] = [
     rightHeadline: 'LEGENDS NEVER DIE.',
     rightSubline: 'TIMELESS CANVASES.',
     mainImage: '/images/tshirts/tshirt_legends.png',
-    leftImage: '/images/tshirts/tshirt_legends.png',
-    rightImage: '/images/tshirts/tshirt_legends.png',
+    leftImage: '/models/l6.png',
+    rightImage: '/models/r6.png',
     price: '₹1,499',
     productId: 'prod-16'
   },
@@ -117,8 +117,8 @@ const BANZOOK_DROPS: DropItem[] = [
     rightHeadline: 'SOFT WATERCOLOR.',
     rightSubline: 'HUMANIST STATEMENT.',
     mainImage: '/images/tshirts/tshirt_kindmind.png',
-    leftImage: '/images/tshirts/tshirt_kindmind.png',
-    rightImage: '/images/tshirts/tshirt_kindmind.png',
+    leftImage: '/models/l7.png',
+    rightImage: '/models/r7.png',
     price: '₹1,299',
     productId: 'prod-15'
   },
@@ -131,8 +131,8 @@ const BANZOOK_DROPS: DropItem[] = [
     rightHeadline: 'EXPERIMENTAL DIGITAL.',
     rightSubline: 'CREATIVE PORTFOLIO INDEX.',
     mainImage: '/images/tshirts/tshirt_orange.jpg',
-    leftImage: '/images/tshirts/tshirt_orange.jpg',
-    rightImage: '/images/tshirts/tshirt_orange.jpg',
+    leftImage: '/models/l8.png',
+    rightImage: '/models/r8.png',
     price: '₹1,399',
     productId: 'prod-14'
   },
@@ -145,8 +145,8 @@ const BANZOOK_DROPS: DropItem[] = [
     rightHeadline: 'PERSONAL ARMOR.',
     rightSubline: 'NO COMPROMISES.',
     mainImage: '/images/tshirts/tshirt_gold.png',
-    leftImage: '/images/tshirts/tshirt_gold.png',
-    rightImage: '/images/tshirts/tshirt_gold.png',
+    leftImage: '/models/l9.png',
+    rightImage: '/models/r9.png',
     price: '₹1,499',
     productId: 'prod-13'
   }
