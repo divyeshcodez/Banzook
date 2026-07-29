@@ -30,8 +30,8 @@ export const IntroExperience: React.FC<IntroExperienceProps> = ({ onEnterComplet
       TABLET   : 1100,
       MOBILE   : 500,
       ANIM_MS  : 1500,
-      NAV_MS   : 1750,
-      VEIL_MS  : 420,
+      NAV_MS   : 1400,
+      VEIL_MS  : 0,
       SPEED_MIN  : 0.8,
       SPEED_MAX  : 6.2,
       GRAVITY    : 0.042,
@@ -232,11 +232,8 @@ export const IntroExperience: React.FC<IntroExperienceProps> = ({ onEnterComplet
     function navigate() {
       if (state === S.DONE) return;
       state = S.DONE;
-      if (veilRef.current) veilRef.current.classList.add(styles.on);
-      setTimeout(() => { 
-        setIsVisible(false);
-        onEnterComplete(); 
-      }, CFG.VEIL_MS + 40);
+      setIsVisible(false);
+      onEnterComplete(); 
     }
 
     function trigger() {
