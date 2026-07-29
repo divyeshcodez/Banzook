@@ -22,13 +22,6 @@ export const IntroExperience: React.FC<IntroExperienceProps> = ({ onEnterComplet
   const dStRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const hasEnteredBefore = sessionStorage.getItem('banzook_entered');
-    if (hasEnteredBefore) {
-      setIsVisible(false);
-      onEnterComplete();
-      return;
-    }
-
     if (!isVisible) return;
 
     // Config and State inside useEffect
@@ -241,9 +234,15 @@ export const IntroExperience: React.FC<IntroExperienceProps> = ({ onEnterComplet
       state = S.DONE;
       if (veilRef.current) veilRef.current.classList.add(styles.on);
       setTimeout(() => { 
-        sessionStorage.setItem('banzook_entered', 'true');
-        setIsVisible(false);
-        onEnterComplete(); 
+        const container = document.getElementById('intro-container');
+        if (container) {
+          container.style.transition = 'opacity 0.8s ease';
+          container.style.opacity = '0';
+        }
+        setTimeout(() => {
+          setIsVisible(false);
+          onEnterComplete(); 
+        }, 800);
       }, CFG.VEIL_MS + 40);
     }
 
@@ -340,7 +339,7 @@ export const IntroExperience: React.FC<IntroExperienceProps> = ({ onEnterComplet
   if (!isVisible) return null;
 
   return (
-    <div className={styles.container}>
+    <div id="intro-container" className={styles.container}>
       <canvas ref={canvasRef} className={styles.stage} aria-hidden="true"></canvas>
 
       <div className={styles.logoLayer}>
