@@ -1,110 +1,139 @@
 .container {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: 100vh;
-  background-color: var(--bg-black);
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  z-index: 9999;
+  background: #000;
   overflow: hidden;
-  transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.8s ease;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.exit {
-  transform: translateY(-100%);
+.stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.logoLayer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
   pointer-events: none;
 }
 
-.content {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  padding: 2rem;
-  max-width: 600px;
-  position: relative;
-  z-index: 2;
-}
-
-.wordmark {
-  font-family: var(--font-display);
-  font-size: 5rem;
-  font-weight: 900;
-  letter-spacing: 0.2em;
-  color: var(--text-white);
-  line-height: 1;
-  text-indent: 0.2em; /* align centered since spacing pushes right */
+.logoImg {
+  display: block;
+  width: min(78vw, 640px);
+  height: auto;
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
+  transition: opacity 0.7s ease;
 }
+.logoImg.loaded { opacity: 1; }
+.logoImg.hidden { opacity: 0 !important; transition: opacity 0.05s linear; }
 
-.philosophy {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  color: var(--orange);
+.logoFallback {
+  display: none;
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(5rem, 20vw, 14rem);
+  color: #fff;
+  letter-spacing: -0.01em;
+  line-height: 1;
   text-transform: uppercase;
   opacity: 0;
-  transform: translateY(15px);
-  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s;
-  margin-bottom: 2rem;
+  transition: opacity 0.6s ease;
 }
+.logoFallback.show { display: block; }
+.logoFallback.loaded { opacity: 1; }
+.logoFallback.hidden { opacity: 0 !important; transition: opacity 0.05s linear; }
 
-.cta {
-  opacity: 0;
-  transform: translateY(15px);
-  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.3s;
-}
-
-.skipBtn {
+.clickZone {
   position: absolute;
-  bottom: 2.5rem;
+  inset: 0;
+  z-index: 20;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+.hint {
+  position: absolute;
+  bottom: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #444;
+  white-space: nowrap;
+  z-index: 25;
+  opacity: 0;
+  animation: fadeIn 0.4s ease-out 1.1s forwards;
+  margin: 0;
+}
+
+.skip {
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #333;
+  cursor: pointer;
+  z-index: 50;
+  opacity: 0;
+  animation: fadeIn 0.3s ease-out 0.5s forwards;
+  transition: color 0.2s ease;
+  text-decoration: none;
   background: none;
   border: none;
-  color: var(--text-dark);
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: var(--transition-fast);
+}
+.skip:hover { color: #888; }
+
+.veil {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  z-index: 200;
   opacity: 0;
-  animation: fadeIn 1.5s ease forwards 2s;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
 }
+.veil.on { opacity: 1; pointer-events: auto; }
 
-.skipBtn:hover {
-  color: var(--text-gray);
+.dev {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(18,18,18,0.92);
+  border: 1px solid #282828;
+  padding: 10px 14px;
+  font-family: 'DM Sans', monospace;
+  font-size: 10px;
+  line-height: 1.9;
+  color: #555;
+  letter-spacing: 0.08em;
+  z-index: 100;
+  display: none;
 }
+.dev.on { display: block; }
+.dev b { color: #888; }
 
-/* Animations */
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+@keyframes fadeIn { to { opacity: 1; } }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-/* Responsive constraints */
-@media (max-width: 768px) {
-  .wordmark {
-    font-size: 3rem;
-  }
-  .philosophy {
-    font-size: 0.875rem;
-    letter-spacing: 0.2em;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .logoImg, .logoFallback { transition: opacity 0.3s ease !important; }
 }

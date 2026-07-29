@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ArrowRight } from 'lucide-react';
+import { X, ArrowRight, ShieldCheck, User, Package, Key, Edit3, LogOut } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { auth, db } from '../../firebase';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut as firebaseSignOut } from 'firebase/auth';
@@ -8,7 +8,6 @@ import styles from './Overlays.module.css';
 
 type SubView = 'profile' | 'orders' | 'access';
 
-// Top-level field component to prevent input unmounting/focus loss on state updates
 interface AcFieldProps {
   id: string;
   label: string;
@@ -142,7 +141,7 @@ export const AccountPanel: React.FC = () => {
     try { await setDoc(doc(db, 'users', user.uid), { name: user.name, email: user.email, phone: editPhone, address: editAddress }, { merge: true }); } catch {}
     const updated = { ...user, phone: editPhone, address: editAddress };
     setUser(updated); localStorage.setItem('banzook_user', JSON.stringify(updated));
-    setIsEditing(false); setSuccessMsg('SAVED ✓'); setTimeout(() => setSuccessMsg(''), 2000);
+    setIsEditing(false); setSuccessMsg('PROFILE UPDATED ✓'); setTimeout(() => setSuccessMsg(''), 2500);
   };
 
   const handleSignOut = async () => {
@@ -152,10 +151,10 @@ export const AccountPanel: React.FC = () => {
 
   if (!isAccountOpen) return null;
 
-  const NAV: { id: SubView; label: string }[] = [
-    { id: 'profile', label: 'PROFILE' },
-    { id: 'orders',  label: 'ORDERS'  },
-    { id: 'access',  label: 'ACCESS'  },
+  const NAV: { id: SubView; label: string; icon: any }[] = [
+    { id: 'profile', label: 'IDENTITY', icon: User },
+    { id: 'orders',  label: 'ORDERS',   icon: Package },
+    { id: 'access',  label: 'ACCESS',   icon: Key },
   ];
 
   return (
@@ -164,11 +163,14 @@ export const AccountPanel: React.FC = () => {
 
         {/* ── HEADER ─────────────────────────────────────────────────────── */}
         <header className={styles.acHeader}>
-          <span className={styles.acHeaderTag}>
-            {user ? 'IDENTITY ARCHIVE' : authMode === 'login' ? 'SIGN IN' : 'CREATE ACCOUNT'}
-          </span>
+          <div className={styles.acHeaderTitleBlock}>
+            <span className={styles.acHeaderTag}>BANZOOK</span>
+            <span className={styles.acHeaderSubTag}>
+              {user ? 'IDENTITY ARCHIVE' : authMode === 'login' ? 'MEMBER SIGN IN' : 'CREATE MEMBER PASS'}
+            </span>
+          </div>
           <button className={styles.acCloseBtn} onClick={() => setIsAccountOpen(false)} aria-label="Close">
-            <X size={18} />
+            <X size={20} />
           </button>
         </header>
 
@@ -176,14 +178,14 @@ export const AccountPanel: React.FC = () => {
         {!user && (
           <div className={styles.acAuthWrap}>
             <div className={styles.acAuthHero}>
-              <div className={styles.acAuthEyebrow}>BANZOOK</div>
+              <div className={styles.acAuthEyebrow}>BANZOOK MEMBERSHIP</div>
               <h2 className={styles.acAuthTitle}>
                 {authMode === 'login' ? <>WELCOME<br />BACK.</> : <>JOIN THE<br />ARCHIVE.</>}
               </h2>
               <p className={styles.acAuthSub}>
                 {authMode === 'login'
-                  ? 'Sign in to access your BANZOOK identity.'
-                  : 'Create your account. Get early access to drops.'}
+                  ? 'Sign in to access your personal BANZOOK identity pass and drop registry.'
+                  : 'Create your BANZOOK member pass. Get early drop access and exclusive collection archives.'}
               </p>
             </div>
 
@@ -192,23 +194,23 @@ export const AccountPanel: React.FC = () => {
 
             <form className={styles.acAuthForm} onSubmit={authMode === 'login' ? handleLogin : handleRegister}>
               {authMode === 'register' && (
-                <AcField id="ac-name" label="YOUR NAME" value={name} activeField={activeField} onChange={setName} onFocus={() => setActiveField('ac-name')} onBlur={() => setActiveField(null)} />
+                <AcField id="ac-name" label="FULL NAME" value={name} activeField={activeField} onChange={setName} onFocus={() => setActiveField('ac-name')} onBlur={() => setActiveField(null)} />
               )}
               <AcField id="ac-email" label="EMAIL ADDRESS" type="email" value={email} activeField={activeField} onChange={setEmail} onFocus={() => setActiveField('ac-email')} onBlur={() => setActiveField(null)} />
               <AcField id="ac-pw" label="PASSWORD" type="password" value={password} activeField={activeField} onChange={setPassword} onFocus={() => setActiveField('ac-pw')} onBlur={() => setActiveField(null)} />
 
               {authMode === 'login' && (
-                <div className={styles.acTestCreds}>TEST CREDENTIALS: admin@gmail.com / 123456</div>
+                <div className={styles.acTestCreds}>DEMO MEMBER: admin@gmail.com / 123456</div>
               )}
 
               <button type="submit" className={styles.acSubmitBtn}>
-                <span>{authMode === 'login' ? 'SIGN IN' : 'CREATE ACCOUNT'}</span>
-                <ArrowRight size={15} />
+                <span>{authMode === 'login' ? 'SIGN IN TO ARCHIVE' : 'CREATE MEMBER PASS'}</span>
+                <ArrowRight size={16} />
               </button>
             </form>
 
             <button className={styles.acModeToggle} onClick={() => { setAuthMode(authMode==='login'?'register':'login'); setErrorMsg(''); }}>
-              {authMode === 'login' ? "NO ACCOUNT? CREATE ONE →" : "HAVE AN ACCOUNT? SIGN IN →"}
+              {authMode === 'login' ? "NEED A MEMBER PASS? CREATE ONE →" : "HAVE A PASS? SIGN IN →"}
             </button>
           </div>
         )}
@@ -217,108 +219,156 @@ export const AccountPanel: React.FC = () => {
         {user && (
           <div className={styles.acArchive}>
 
-            {/* Identity Block */}
-            <div className={styles.acIdentityBlock}>
-              <div className={styles.acWelcomeTag}>WELCOME BACK,</div>
-              <h2 className={styles.acBigName}>{user.name}</h2>
-              <div className={styles.acUserEmail}>{user.email}</div>
-              <div className={styles.acBadgeRow}>
-                <span className={styles.acBadge}>BANZOOK MEMBER</span>
-                <span className={styles.acBadge}>TIER 01</span>
-                <span className={`${styles.acBadge} ${styles.acBadgeOrange}`}>DROP 001</span>
+            {/* Member Dossier Pass Card */}
+            <div className={styles.acMemberPassCard}>
+              <div className={styles.acPassHeader}>
+                <div className={styles.acPassLogo}>BANZOOK // PASS</div>
+                <div className={styles.acPassBadge}>
+                  <ShieldCheck size={14} />
+                  <span>VERIFIED MEMBER</span>
+                </div>
+              </div>
+              <div className={styles.acPassBody}>
+                <div className={styles.acPassWelcome}>MEMBER IDENTITY</div>
+                <h2 className={styles.acPassName}>{user.name}</h2>
+                <div className={styles.acPassEmail}>{user.email}</div>
+              </div>
+              <div className={styles.acPassFooter}>
+                <div className={styles.acPassId}>ID: BAN-{user.uid.slice(0, 8).toUpperCase()}</div>
+                <div className={styles.acPassTier}>TIER 01 FOUNDER</div>
               </div>
             </div>
 
-            {/* Nav Rail */}
-            <nav className={styles.acNavRail}>
-              {NAV.map(n => (
-                <button key={n.id} className={`${styles.acNavBtn} ${activeView===n.id ? styles.acNavBtnActive : ''}`} onClick={() => setActiveView(n.id)}>
-                  {activeView === n.id && <div className={styles.acNavDot} />}
-                  {n.label}
-                </button>
-              ))}
-              <div className={styles.acNavSpacer} />
-              <button className={styles.acSignOutBtn} onClick={handleSignOut}>SIGN OUT <ArrowRight size={12} /></button>
+            {/* Segmented Navigation Rail */}
+            <nav className={styles.acNavSegmented}>
+              {NAV.map(n => {
+                const Icon = n.icon;
+                return (
+                  <button
+                    key={n.id}
+                    className={`${styles.acSegmentBtn} ${activeView === n.id ? styles.acSegmentBtnActive : ''}`}
+                    onClick={() => setActiveView(n.id)}
+                  >
+                    <Icon size={14} />
+                    <span>{n.label}</span>
+                  </button>
+                );
+              })}
+              <button className={styles.acSignOutSegment} onClick={handleSignOut} title="Sign Out">
+                <LogOut size={14} />
+                <span>EXIT</span>
+              </button>
             </nav>
 
-            {successMsg && <div className={styles.acSuccess} style={{ margin: '0', borderRadius: 0 }}>{successMsg}</div>}
+            {successMsg && <div className={styles.acSuccessBar}>{successMsg}</div>}
 
-            {/* ── PROFILE ──────────────────────────────────────────────── */}
+            {/* ── PROFILE / IDENTITY VIEW ──────────────────────────────── */}
             {activeView === 'profile' && (
               <div className={styles.acSection}>
-                <div className={styles.acSectionTitle}>YOUR IDENTITY</div>
+                <div className={styles.acSectionHeader}>
+                  <div className={styles.acSectionTitle}>MEMBER DOSSIER</div>
+                  {!isEditing && (
+                    <button className={styles.acEditBadgeBtn} onClick={() => setIsEditing(true)}>
+                      <Edit3 size={13} />
+                      <span>EDIT DOSSIER</span>
+                    </button>
+                  )}
+                </div>
+
                 {!isEditing ? (
-                  <>
-                    <div className={styles.acDocGrid}>
-                      {[
-                        { k: 'FULL NAME',         v: user.name    },
-                        { k: 'EMAIL',             v: user.email   },
-                        { k: 'PHONE',             v: user.phone || '—' },
-                        { k: 'SHIPPING ADDRESS',  v: user.address || '—' },
-                      ].map(row => (
-                        <div key={row.k} className={styles.acDocRow}>
-                          <span className={styles.acDocKey}>{row.k}</span>
-                          <span className={styles.acDocVal}>{row.v}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <button className={styles.acEditLink} onClick={() => setIsEditing(true)}>EDIT PROFILE →</button>
-                  </>
+                  <div className={styles.acDossierGrid}>
+                    {[
+                      { k: 'FULL NAME', v: user.name, sub: 'PRIMARY ACCOUNT NAME' },
+                      { k: 'EMAIL ADDRESS', v: user.email, sub: 'VERIFIED MEMBER EMAIL' },
+                      { k: 'PHONE NUMBER', v: user.phone || 'NOT SET', sub: 'SHIPPING NOTIFICATIONS' },
+                      { k: 'SHIPPING ADDRESS', v: user.address || 'NOT SET', sub: 'DEFAULT DELIVERY DESTINATION' },
+                    ].map(row => (
+                      <div key={row.k} className={styles.acDossierCard}>
+                        <div className={styles.acDossierKey}>{row.k}</div>
+                        <div className={styles.acDossierVal}>{row.v}</div>
+                        <div className={styles.acDossierSub}>{row.sub}</div>
+                      </div>
+                    ))}
+                  </div>
                 ) : (
-                  <div className={styles.acEditForm}>
-                    <div className={`${styles.acField} ${activeField==='ed-ph' ? styles.acFieldActive : ''}`}>
-                      <label className={styles.acFieldLabel} htmlFor="ed-ph">PHONE NUMBER</label>
-                      <input id="ed-ph" type="text" className={styles.acFieldInput} value={editPhone} placeholder="+91 XXXXX XXXXX" onChange={e => setEditPhone(e.target.value)} onFocus={() => setActiveField('ed-ph')} onBlur={() => setActiveField(null)} />
-                      <div className={styles.acFieldUnderline} />
-                    </div>
-                    <div className={`${styles.acField} ${activeField==='ed-ad' ? styles.acFieldActive : ''}`}>
+                  <div className={styles.acEditFormCard}>
+                    <div className={styles.acEditFormTitle}>EDIT SHIPPING COORDINATES</div>
+                    <AcField id="ed-ph" label="PHONE NUMBER" value={editPhone} activeField={activeField} onChange={setEditPhone} onFocus={() => setActiveField('ed-ph')} onBlur={() => setActiveField(null)} placeholder="+91 XXXXX XXXXX" />
+                    
+                    <div className={`${styles.acField} ${activeField === 'ed-ad' ? styles.acFieldActive : ''}`}>
                       <label className={styles.acFieldLabel} htmlFor="ed-ad">SHIPPING ADDRESS</label>
-                      <textarea id="ed-ad" className={`${styles.acFieldInput} ${styles.acFieldTextarea}`} value={editAddress} rows={3} placeholder="BUILDING, STREET, AREA, CITY, PIN" onChange={e => setEditAddress(e.target.value)} onFocus={() => setActiveField('ed-ad')} onBlur={() => setActiveField(null)} />
+                      <textarea
+                        id="ed-ad"
+                        className={`${styles.acFieldInput} ${styles.acFieldTextarea}`}
+                        value={editAddress}
+                        rows={3}
+                        placeholder="BUILDING, STREET, AREA, CITY, PIN CODE"
+                        onChange={e => setEditAddress(e.target.value)}
+                        onFocus={() => setActiveField('ed-ad')}
+                        onBlur={() => setActiveField(null)}
+                      />
                       <div className={styles.acFieldUnderline} />
                     </div>
+
                     <div className={styles.acEditActions}>
                       <button className={styles.acCancelLink} onClick={() => setIsEditing(false)}>CANCEL</button>
-                      <button className={styles.acSaveBtn} onClick={handleSave}>SAVE CHANGES →</button>
+                      <button className={styles.acSaveBtn} onClick={handleSave}>
+                        <span>SAVE DOSSIER</span>
+                        <ArrowRight size={14} />
+                      </button>
                     </div>
                   </div>
                 )}
               </div>
             )}
 
-            {/* ── ORDERS ───────────────────────────────────────────────── */}
+            {/* ── ORDERS VIEW ──────────────────────────────────────────── */}
             {activeView === 'orders' && (
               <div className={styles.acSection}>
-                <div className={styles.acSectionTitle}>ORDER ARCHIVE</div>
+                <div className={styles.acSectionHeader}>
+                  <div className={styles.acSectionTitle}>ORDER REGISTRY</div>
+                  <div className={styles.acOrderCountTag}>{orders.length} {orders.length === 1 ? 'RECORD' : 'RECORDS'}</div>
+                </div>
+
                 {isLoadingOrders ? (
-                  <div className={styles.acStateMsg}>RETRIEVING ORDER REGISTRY...</div>
+                  <div className={styles.acStateMsg}>RETRIEVING MEMBER ORDERS...</div>
                 ) : orders.length === 0 ? (
                   <div className={styles.acEmptyOrders}>
-                    <div className={styles.acEmptyTitle}>ARCHIVE EMPTY.</div>
-                    <div className={styles.acEmptySub}>YOUR ORDER HISTORY WILL APPEAR HERE.</div>
+                    <Package size={40} className={styles.acEmptyIcon} />
+                    <div className={styles.acEmptyTitle}>NO ORDERS YET.</div>
+                    <div className={styles.acEmptySub}>YOUR ACQUIRED PIECES WILL BE ARCHIVED HERE.</div>
                   </div>
                 ) : (
                   <div className={styles.acOrderList}>
                     {orders.map((order, i) => (
-                      <div key={order.id||i} className={styles.acOrderEntry}>
-                        <div className={styles.acOrderEntryHead}>
-                          <span className={styles.acOrderNum}>ORDER {String(i+1).padStart(3,'0')}</span>
-                          <span className={`${styles.acOrderBadge} ${order.status==='delivered' ? styles.acBadgeGreen : styles.acBadgeOrange}`}>
-                            {(order.status||'IN TRANSIT').toUpperCase()}
+                      <div key={order.id || i} className={styles.acOrderCard}>
+                        <div className={styles.acOrderCardHead}>
+                          <div>
+                            <div className={styles.acOrderCardNum}>RECORD {String(i + 1).padStart(3, '0')}</div>
+                            <div className={styles.acOrderCardId}>{order.id}</div>
+                          </div>
+                          <span className={`${styles.acStatusBadge} ${order.status === 'delivered' ? styles.acStatusDelivered : styles.acStatusTransit}`}>
+                            {(order.status || 'IN TRANSIT').toUpperCase()}
                           </span>
                         </div>
-                        <div className={styles.acOrderItemList}>
+
+                        <div className={styles.acOrderCardItems}>
                           {order.items?.map((item: any, idx: number) => (
-                            <div key={idx} className={styles.acOrderItem}>
-                              <span className={styles.acOrderItemName}>{item.name}</span>
+                            <div key={idx} className={styles.acOrderItemRow}>
+                              <div className={styles.acOrderItemLeft}>
+                                <span className={styles.acOrderItemDot} />
+                                <span className={styles.acOrderItemName}>{item.name}</span>
+                              </div>
                               <span className={styles.acOrderItemMeta}>SIZE {item.size} · QTY {item.quantity}</span>
                             </div>
                           ))}
                         </div>
-                        <div className={styles.acOrderEntryFoot}>
+
+                        <div className={styles.acOrderCardFoot}>
                           <span className={styles.acOrderDate}>
                             {order.date ? new Date(order.date).toLocaleDateString('en-GB').split('/').join('.') : ''}
                           </span>
-                          <span className={styles.acOrderTotal}>₹{order.total?.toLocaleString('en-IN')}</span>
+                          <span className={styles.acOrderTotal}>TOTAL ₹{order.total?.toLocaleString('en-IN')}</span>
                         </div>
                       </div>
                     ))}
@@ -327,28 +377,34 @@ export const AccountPanel: React.FC = () => {
               </div>
             )}
 
-            {/* ── ACCESS ───────────────────────────────────────────────── */}
+            {/* ── ACCESS VIEW ──────────────────────────────────────────── */}
             {activeView === 'access' && (
               <div className={styles.acSection}>
-                <div className={styles.acSectionTitle}>YOUR ACCESS</div>
+                <div className={styles.acSectionHeader}>
+                  <div className={styles.acSectionTitle}>ACCESS TIERS</div>
+                </div>
+
                 <div className={styles.acAccessGrid}>
                   {[
-                    { label: 'MEMBERSHIP', value: 'TIER 01', sub: 'FOUNDING MEMBER', active: true },
-                    { label: 'DROP ACCESS', value: 'DROP 001', sub: 'FULL ARCHIVE UNLOCKED', active: true },
-                    { label: 'EARLY ACCESS', value: 'ACTIVE', sub: 'NEXT DROP NOTIFICATION', active: true },
-                    { label: 'TIER 02', value: 'LOCKED', sub: 'COMPLETE 3 ORDERS', active: false },
+                    { label: 'FOUNDER MEMBERSHIP', value: 'TIER 01 ACTIVE', sub: 'VERIFIED MEMBER ACCOUNT STATUS', active: true },
+                    { label: 'DROP 001 ARCHIVE', value: 'FULL ACCESS', sub: 'COMPLETE CATALOG UNLOCKED', active: true },
+                    { label: 'EARLY NOTIFICATIONS', value: 'ENABLED', sub: 'SMS & EMAIL ALERTS BEFORE DROPS', active: true },
+                    { label: 'TIER 02 ARCHIVE', value: 'LOCKED', sub: 'COMPLETE 3 PURCHASES TO UNLOCK', active: false },
                   ].map(item => (
-                    <div key={item.label} className={`${styles.acAccessRow} ${!item.active ? styles.acAccessRowLocked : ''}`}>
-                      <div>
+                    <div key={item.label} className={`${styles.acAccessCard} ${!item.active ? styles.acAccessCardLocked : ''}`}>
+                      <div className={styles.acAccessCardLeft}>
                         <div className={styles.acAccessLabel}>{item.label}</div>
                         <div className={styles.acAccessSub}>{item.sub}</div>
                       </div>
-                      <div className={`${styles.acAccessBadge} ${item.active ? styles.acAccessBadgeOn : styles.acAccessBadgeOff}`}>{item.value}</div>
+                      <span className={`${styles.acAccessBadge} ${item.active ? styles.acAccessBadgeActive : styles.acAccessBadgeLocked}`}>
+                        {item.value}
+                      </span>
                     </div>
                   ))}
                 </div>
               </div>
             )}
+
           </div>
         )}
       </div>

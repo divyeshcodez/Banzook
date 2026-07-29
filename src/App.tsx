@@ -12,6 +12,7 @@ import { CheckoutOverlay } from './components/Overlays/CheckoutOverlay';
 import { HelpOverlay } from './components/Overlays/HelpOverlay';
 import { CartProvider, useCart } from './context/CartContext';
 import { Check } from 'lucide-react';
+import { IntroExperience } from './components/IntroExperience/IntroExperience';
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState<'home' | 'shop' | 'drops' | 'about'>('home');
@@ -29,6 +30,7 @@ function AppContent() {
 
   return (
     <div style={{ backgroundColor: '#F8F7F5', color: '#111111', minHeight: '100vh', width: '100vw', overflowX: 'hidden' }}>
+      <IntroExperience onEnterComplete={() => {}} />
       
       {/* Noise Grain Overlay */}
       <div className="noise-overlay" aria-hidden="true" />
