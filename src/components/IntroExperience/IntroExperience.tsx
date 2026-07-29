@@ -7,7 +7,6 @@ interface IntroExperienceProps {
 
 export const IntroExperience: React.FC<IntroExperienceProps> = ({ onEnterComplete }) => {
   const [isVisible, setIsVisible] = useState(true);
-  const [useImg, setUseImg] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgFailed, setImgFailed] = useState(false);
   const [devMode, setDevMode] = useState(false);
@@ -320,7 +319,6 @@ export const IntroExperience: React.FC<IntroExperienceProps> = ({ onEnterComplet
             if (logoImgRef.current.complete) {
                 if (logoImgRef.current.naturalWidth > 0) {
                     setImgLoaded(true);
-                    setUseImg(true);
                     setTimeout(precompute, 120);
                 } else {
                     setImgFailed(true);
@@ -351,8 +349,8 @@ export const IntroExperience: React.FC<IntroExperienceProps> = ({ onEnterComplet
           className={`${styles.logoImg} ${imgLoaded ? styles.loaded : ''} ${imgFailed ? styles.hidden : ''}`}
           src="/assets/logo.png"
           alt="Banzook — Speak in Prints" 
-          onLoad={() => { setUseImg(true); setImgLoaded(true); }}
-          onError={() => { setUseImg(false); setImgFailed(true); }}
+          onLoad={() => { setImgLoaded(true); }}
+          onError={() => { setImgFailed(true); }}
           style={{ display: imgFailed ? 'none' : 'block' }}
         />
         <span 
