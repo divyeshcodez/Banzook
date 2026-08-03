@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Navbar } from './components/Navbar/Navbar';
-import { HeroSection } from './components/HeroSection/HeroSection';
+import { HomePage } from './pages/Home/HomePage';
 import { ShopPage as Shop } from './pages/Shop/Shop';
 import { DropsPage as Drops } from './pages/Drops/Drops';
 import { AboutPage as About } from './pages/About/About';
@@ -46,7 +46,7 @@ function AppContent() {
       {/* Single Viewport Interactive Visual Index Canvas Homepage */}
       <main>
         {currentPage === 'home' && (
-          <HeroSection onCtaClick={() => handleNavigate('shop')} />
+          <HomePage onNavigateToShop={() => handleNavigate('shop')} />
         )}
 
         {currentPage === 'shop' && (
@@ -62,15 +62,13 @@ function AppContent() {
         )}
       </main>
 
-      {/* Footer only rendered on subpages, keeping Homepage clean full-screen canvas */}
-      {currentPage !== 'home' && (
-        <Footer 
-          currentPage={currentPage}
-          onPageChange={handleNavigate}
-          onNavigate={handleNavigate}
-          onOpenHelp={(tab) => setHelpTab(tab)}
-        />
-      )}
+      {/* Footer rendered globally */}
+      <Footer 
+        currentPage={currentPage}
+        onPageChange={handleNavigate}
+        onNavigate={handleNavigate}
+        onOpenHelp={(tab) => setHelpTab(tab)}
+      />
 
       {/* Global Interactive Overlays */}
       <SearchOverlay onNavigateToShop={() => handleNavigate('shop')} />

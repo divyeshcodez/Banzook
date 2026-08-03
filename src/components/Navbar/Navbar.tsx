@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Search, User, ShoppingBag } from 'lucide-react';
+import { Menu, X, Search, ShoppingBag } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
-import styles from './Navbar.module.css';
 
 interface NavbarProps {
   onNavigate?: (sectionId: string) => void;
@@ -10,244 +9,122 @@ interface NavbarProps {
   onOpenHelp?: (tab: 'returns' | 'size-guide' | 'faq') => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage = 'home', onPageChange, onOpenHelp }) => {
+export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChange }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const { 
-    cartCount, 
-    setIsCartOpen, 
-    setIsSearchOpen, 
-    setIsAccountOpen 
-  } = useCart();
+  const { cartCount, setIsCartOpen, setIsSearchOpen } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (sectionId: string, e: React.MouseEvent) => {
+  const handleNavClick = (page: string, e: React.MouseEvent) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-
-    if (sectionId === 'size-guide') {
-      if (onOpenHelp) {
-        onOpenHelp('size-guide');
-      }
-      return;
-    }
-
-    const page = (sectionId === 'shop' || sectionId === 'drops' || sectionId === 'about') ? sectionId : 'home';
-
-    if (onPageChange) {
-      onPageChange(page);
-    }
-    if (onNavigate) {
-      onNavigate(sectionId);
+    if (onPageChange && (page === 'home' || page === 'shop' || page === 'drops' || page === 'about')) {
+      onPageChange(page as any);
     }
   };
 
-  const isTransparentNav = currentPage === 'drops';
+  const navLinks = [
+    { name: 'HOME', id: 'home' },
+    { name: 'SHOP', id: 'shop' },
+    { name: 'DROPS', id: 'drops' },
+    { name: 'LOOKBOOK', id: 'lookbook' },
+    { name: 'ABOUT', id: 'about' }
+  ];
 
   return (
     <>
-      <header className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${isTransparentNav ? styles.navbarTransparent : ''}`}>
-        {/* Desktop Navigation */}
-        <div className={styles.container}>
+      <header 
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+          isScrolled ? 'bg-white/70 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 flex items-center justify-between">
           
-          {/* Floating Black Capsule Pill Navigation Bar */}
-          <nav className={styles.blackNavPill}>
+          {/* Left - Logo */}
+          <div className="flex-1">
             <a 
-              href="#shop" 
-              className={`${styles.pillLink} ${currentPage === 'shop' ? styles.pillLinkActive : ''}`} 
-              onClick={(e) => handleNavClick('shop', e)}
+              href="#home" 
+              onClick={(e) => handleNavClick('home', e)}
+              className="text-2xl font-black font-condensed tracking-tighter text-[#111111]"
             >
-              SHOP
+              BANZOOK
             </a>
-            <a 
-              href="#drops" 
-              className={`${styles.pillLink} ${currentPage === 'drops' ? styles.pillLinkActive : ''}`} 
-              onClick={(e) => handleNavClick('drops', e)}
-            >
-              DROPS
-            </a>
-            <a 
-              href="#about" 
-              className={`${styles.pillLink} ${currentPage === 'about' ? styles.pillLinkActive : ''}`} 
-              onClick={(e) => handleNavClick('about', e)}
-            >
-              ABOUT
-            </a>
+          </div>
+
+          {/* Center - Links (Desktop) */}
+          <nav className="hidden md:flex items-center gap-8 justify-center">
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => handleNavClick(link.id, e)}
+                className={`text-xs font-bold tracking-widest uppercase transition-colors ${
+                  currentPage === link.id ? 'text-[#FF4D1A]' : 'text-[#111111] hover:text-[#FF4D1A]'
+                }`}
+              >
+                {link.name}
+              </a>
+            ))}
           </nav>
 
-          {/* Centered Logo */}
-          <a href="#" className={styles.logo} onClick={(e) => handleNavClick('home', e)}>
-            BANZOOK®
-          </a>
-
-          {/* Right Side Utility Actions */}
-          <div className={styles.navActionsRight}>
+          {/* Right - Actions */}
+          <div className="flex-1 flex justify-end items-center gap-4 lg:gap-6">
             <button 
-              className={styles.actionButton} 
-              aria-label="Search"
               onClick={() => setIsSearchOpen(true)}
+              className="text-[#111111] hover:text-[#FF4D1A] transition-colors"
             >
-              <Search size={18} strokeWidth={2} />
+              <Search size={20} strokeWidth={2} />
             </button>
             <button 
-              className={styles.actionButton} 
-              aria-label="Account"
-              onClick={() => setIsAccountOpen(true)}
-            >
-              <User size={18} strokeWidth={2} />
-            </button>
-            <button 
-              className={styles.actionButton} 
-              aria-label={`Shopping Bag containing ${cartCount} items`}
               onClick={() => setIsCartOpen(true)}
+              className="text-[#111111] hover:text-[#FF4D1A] transition-colors flex items-center gap-1"
             >
-              <ShoppingBag size={18} strokeWidth={2} />
-              <span className={styles.cartCount}>{cartCount}</span>
+              <ShoppingBag size={20} strokeWidth={2} />
+              <span className="text-xs font-bold font-mono">({cartCount})</span>
+            </button>
+            <button 
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="md:hidden text-[#111111] hover:text-[#FF4D1A] transition-colors"
+            >
+              <Menu size={24} strokeWidth={2} />
             </button>
           </div>
 
-        </div>
-
-        {/* Mobile Navigation */}
-        <div className={styles.mobileContainer}>
-          <button 
-            className={styles.actionButton} 
-            onClick={() => setIsMobileMenuOpen(true)}
-            aria-label="Open menu"
-          >
-            <Menu size={24} strokeWidth={2.5} />
-          </button>
-
-          <a href="#" className={styles.logo} onClick={(e) => handleNavClick('home', e)}>
-            BANZOOK
-          </a>
-
-          <button 
-            className={styles.actionButton} 
-            aria-label={`Shopping Bag containing ${cartCount} items`}
-            onClick={() => setIsCartOpen(true)}
-          >
-            <ShoppingBag size={22} strokeWidth={2.5} />
-            <span className={styles.cartCount}>{cartCount}</span>
-          </button>
         </div>
       </header>
 
-      {/* Full-screen Mobile Menu Drawer */}
-      <div className={`${styles.drawer} ${isMobileMenuOpen ? styles.drawerOpen : ''}`}>
-        <div className={styles.drawerHeader}>
-          <a href="#" className={styles.logo} onClick={(e) => handleNavClick('home', e)}>
-            BANZOOK
-          </a>
-          <button 
-            className={styles.actionButton} 
-            onClick={() => setIsMobileMenuOpen(false)}
-            aria-label="Close menu"
-          >
-            <X size={26} strokeWidth={2.5} />
-          </button>
-        </div>
-
-        <nav className={styles.drawerNav}>
-          <a 
-            href="#shop" 
-            className={styles.drawerNavLink} 
-            style={currentPage === 'shop' ? { color: 'var(--orange)' } : {}}
-            onClick={(e) => handleNavClick('shop', e)}
-          >
-            SHOP
-          </a>
-          <a 
-            href="#drops" 
-            className={styles.drawerNavLink} 
-            style={currentPage === 'drops' ? { color: 'var(--orange)' } : {}}
-            onClick={(e) => handleNavClick('drops', e)}
-          >
-            DROPS
-          </a>
-          <a 
-            href="#search" 
-            className={styles.drawerNavLink} 
-            onClick={(e) => {
-              e.preventDefault();
-              setIsMobileMenuOpen(false);
-              setIsSearchOpen(true);
-            }}
-          >
-            SEARCH
-          </a>
-          <a 
-            href="#account" 
-            className={styles.drawerNavLink} 
-            onClick={(e) => {
-              e.preventDefault();
-              setIsMobileMenuOpen(false);
-              setIsAccountOpen(true);
-            }}
-          >
-            ACCOUNT
-          </a>
-          <a 
-            href="#story" 
-            className={styles.drawerNavLink} 
-            onClick={(e) => handleNavClick('story', e)}
-          >
-            LATEST DROP
-          </a>
-          <a 
-            href="#about" 
-            className={styles.drawerNavLink} 
-            style={currentPage === 'about' ? { color: 'var(--orange)' } : {}}
-            onClick={(e) => handleNavClick('about', e)}
-          >
-            ABOUT
-          </a>
-          <a 
-            href="#" 
-            className={styles.drawerNavLink} 
-            onClick={(e) => handleNavClick('size-guide', e)}
-          >
-            SIZE GUIDE
-          </a>
-          <a 
-            href="#footer" 
-            className={styles.drawerNavLink} 
-            onClick={(e) => handleNavClick('footer', e)}
-          >
-            CONTACT
-          </a>
-        </nav>
-
-        <div className={styles.drawerFooter}>
-          <div className={styles.drawerSocials}>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer" className={styles.drawerSocialLink}>
-              INSTAGRAM
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-[100] bg-white flex flex-col p-6">
+          <div className="flex justify-between items-center mb-12">
+             <a href="#home" onClick={(e) => handleNavClick('home', e)} className="text-2xl font-black font-condensed tracking-tighter">
+              BANZOOK
             </a>
-            <a href="https://youtube.com" target="_blank" rel="noreferrer" className={styles.drawerSocialLink}>
-              YOUTUBE
-            </a>
+            <button onClick={() => setIsMobileMenuOpen(false)}>
+              <X size={28} strokeWidth={2} />
+            </button>
           </div>
-          <div className={styles.drawerMeta}>
-            <span>MUMBAI / INDIA</span>
-            <span>SPEAKS IN PRINTS.</span>
-          </div>
+          <nav className="flex flex-col gap-6 text-3xl font-black font-condensed tracking-tighter">
+             {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => handleNavClick(link.id, e)}
+                className={currentPage === link.id ? 'text-[#FF4D1A]' : 'text-[#111111]'}
+              >
+                {link.name}
+              </a>
+            ))}
+          </nav>
         </div>
-      </div>
+      )}
     </>
   );
 };

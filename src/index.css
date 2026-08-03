@@ -1,5 +1,8 @@
-/* OFFCUT Production Design System & Global Styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* OFFCUT Production Design System & Global Styles */
 :root {
   /* OFFCUT Brand Colors */
   --bg-offcut: #0E0E0D;

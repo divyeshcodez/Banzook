@@ -25,20 +25,6 @@ interface DropItem {
 
 const BANZOOK_DROPS: DropItem[] = [
   {
-    id: 'd-1',
-    number: '01',
-    title: 'NO SMOKING',
-    leftHeadline: 'STRATEGIC THINKERS.',
-    leftSubline: 'SMART STRATEGY.',
-    rightHeadline: 'THOUGHTFUL EXECUTION.',
-    rightSubline: 'BOLD BRANDS.',
-    mainImage: '/images/tshirts/tshirt_nosmoking.png',
-    leftImage: '/models/l.png',
-    rightImage: '/models/r.png',
-    price: '₹1,299',
-    productId: 'prod-14'
-  },
-  {
     id: 'd-2',
     number: '02',
     title: 'BROKEN SYSTEM',

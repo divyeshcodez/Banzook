@@ -23,15 +23,6 @@ const VARIANTS: Variant[] = [
     hex: '#ffcc00'
   },
   {
-    id: 'prod-14',
-    name: 'BANZOOK "NO SMOKING" TEE',
-    price: '₹1,299',
-    desc: 'Ultra-heavyweight 300GSM organic cotton tee promoting healthy living. Silkscreened blue slogan "KILL YOUR BAD HABITS, NOT YOURSELF" on front and bold "NO SMOKING, BREATHE FREELY" design on back.',
-    image: '/images/tshirt_nosmoking.jpg',
-    colorName: 'No Smoking',
-    hex: '#0055ff'
-  },
-  {
     id: 'prod-15',
     name: 'BANZOOK "KIND TO YOUR MIND" TEE',
     price: '₹1,299',

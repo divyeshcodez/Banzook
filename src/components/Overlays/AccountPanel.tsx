@@ -99,8 +99,7 @@ export const AccountPanel: React.FC = () => {
           setOrders([{
             id: 'BAN-2026-9042', status: 'in-transit', date: new Date().toISOString(), total: 2998,
             items: [
-              { name: 'BANZOOK X HOT WHEELS TEE', size: 'M', quantity: 1, price: 1499 },
-              { name: 'BANZOOK "NO SMOKING" TEE', size: 'L', quantity: 1, price: 1499 }
+              { name: 'BANZOOK X HOT WHEELS TEE', size: 'M', quantity: 1, price: 1499 }
             ]
           }]);
         })

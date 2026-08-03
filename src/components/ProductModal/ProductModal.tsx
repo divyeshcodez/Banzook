@@ -42,10 +42,9 @@ const PRODUCT_MODEL_IMAGES: Record<string, { front: string; back: string }> = {
 };
 
 export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
-  if (!product) return null;
 
   const [activeImageIdx, setActiveImageIdx] = useState(0);
-  const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0] || 'L');
+  const [selectedSize, setSelectedSize] = useState<string>(product?.sizes?.[0] || 'L');
   const [show3D, setShow3D] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
 
@@ -53,6 +52,8 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) 
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
   const { addToCart, triggerToast } = useCart();
+
+  if (!product) return null;
 
   const modelFront = PRODUCT_MODEL_IMAGES[product.id]?.front || product.images[0];
   const modelBack = PRODUCT_MODEL_IMAGES[product.id]?.back || product.images[1] || product.images[0];

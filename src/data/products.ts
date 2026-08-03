@@ -29,25 +29,6 @@ export const PRODUCTS: Product[] = [
     description: 'Custom raglan boxy-fit tee featuring the iconic Hot Wheels flame branding on the chest, paired with a high-density vintage racing sports car graphic across the back.'
   },
   {
-    id: 'prod-14',
-    name: 'BANZOOK "NO SMOKING" TEE',
-    slug: 'banzook-no-smoking-tee',
-    price: 1299,
-    images: [
-      '/images/tshirts/tshirt_nosmoking.jpg',
-      '/images/model_nosmoking_front.jpg',
-      '/images/model_nosmoking_back.jpg',
-      '/images/model_nosmoking_split.jpg'
-    ],
-    category: 'Tees',
-    collection: 'Drop 001',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    availability: 'in-stock',
-    isNew: true,
-    isLimited: false,
-    description: 'Ultra-heavyweight 300GSM organic cotton tee promoting healthy living. Silkscreened blue slogan "KILL YOUR BAD HABITS, NOT YOURSELF" on front and bold "NO SMOKING, BREATHE FREELY" design on back.'
-  },
-  {
     id: 'prod-15',
     name: 'BANZOOK "KIND TO YOUR MIND" TEE',
     slug: 'banzook-kind-to-your-mind-tee',

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ArrowRight, CheckCircle, Truck, CreditCard } from 'lucide-react';
+import { X, ArrowRight, CheckCircle, Truck, CreditCard, QrCode } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { db } from '../../firebase';
 import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
@@ -43,10 +43,11 @@ export const CheckoutOverlay: React.FC = () => {
   const [email, setEmail]   = useState('');
   const [phone, setPhone]   = useState('');
   const [address, setAddress] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState<'cod' | 'card'>('cod');
+  const [paymentMethod, setPaymentMethod] = useState<'cod' | 'card' | 'qr'>('cod');
   const [cardNumber, setCardNumber] = useState('');
   const [expiry, setExpiry] = useState('');
   const [cvv, setCvv]       = useState('');
+  const [transactionId, setTransactionId] = useState('');
   const [isOrdering, setIsOrdering] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState<string | null>(null);
   const [activeField, setActiveField] = useState<string | null>(null);
@@ -81,6 +82,7 @@ export const CheckoutOverlay: React.FC = () => {
       setStep(2);
     } else if (step === 2) {
       if (paymentMethod === 'card' && (!cardNumber || !expiry || !cvv)) { triggerToast('PLEASE FILL IN CARD DETAILS ⚠'); return; }
+      if (paymentMethod === 'qr' && !transactionId) { triggerToast('PLEASE ENTER TRANSACTION ID ⚠'); return; }
       setStep(3);
     }
   };
@@ -106,6 +108,7 @@ export const CheckoutOverlay: React.FC = () => {
       name: name.toUpperCase(), email, phone, address,
       items: cartItems.map(i => ({ productId: i.product.id, name: i.product.name, size: i.size, quantity: i.quantity, price: i.product.price })),
       total: orderTotal, paymentMethod: paymentMethod.toUpperCase(),
+      transactionId: paymentMethod === 'qr' ? transactionId : null,
       date: new Date().toISOString(), status: 'in-transit'
     };
     try {
@@ -296,6 +299,14 @@ export const CheckoutOverlay: React.FC = () => {
                       </div>
                       <div className={`${styles.coPayDot} ${paymentMethod==='card' ? styles.coPayDotActive : ''}`} />
                     </button>
+                    <button type="button" className={`${styles.coPayCard} ${paymentMethod==='qr' ? styles.coPayCardActive : ''}`} onClick={() => setPaymentMethod('qr')}>
+                      <QrCode size={22} />
+                      <div className={styles.coPayCardText}>
+                        <div className={styles.coPayCardTitle}>QR / UPI</div>
+                        <div className={styles.coPayCardSub}>SCAN & PAY DIRECTLY</div>
+                      </div>
+                      <div className={`${styles.coPayDot} ${paymentMethod==='qr' ? styles.coPayDotActive : ''}`} />
+                    </button>
                   </div>
 
                   {paymentMethod === 'card' && (
@@ -304,6 +315,19 @@ export const CheckoutOverlay: React.FC = () => {
                       <div className={styles.coFieldRow}>
                         <CoField id="co-exp" label="EXPIRY DATE" value={expiry} activeField={activeField} onChange={setExpiry} onFocus={() => setActiveField('co-exp')} onBlur={() => setActiveField(null)} placeholder="MM / YY" />
                         <CoField id="co-cvv" label="CVV" type="password" value={cvv} activeField={activeField} onChange={setCvv} onFocus={() => setActiveField('co-cvv')} onBlur={() => setActiveField(null)} placeholder="• • •" />
+                      </div>
+                    </div>
+                  )}
+
+                  {paymentMethod === 'qr' && (
+                    <div className={styles.coFieldSet} style={{ marginTop: '1.5rem', borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: '1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
+                      <div style={{ textAlign: 'center' }}>
+                        <img src="/qr.jpeg" alt="Scan to Pay" style={{ width: '200px', height: '200px', objectFit: 'contain', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '8px' }} />
+                        <div style={{ fontSize: '0.875rem', fontWeight: 500, marginTop: '0.5rem', letterSpacing: '0.05em' }}>SCAN WITH ANY UPI APP</div>
+                        <div style={{ fontSize: '0.75rem', color: 'rgba(0,0,0,0.5)', marginTop: '0.25rem' }}>TOTAL: ₹{orderTotal.toLocaleString('en-IN')}</div>
+                      </div>
+                      <div style={{ width: '100%' }}>
+                        <CoField id="co-txnid" label="TRANSACTION ID (REQUIRED)" value={transactionId} activeField={activeField} onChange={setTransactionId} onFocus={() => setActiveField('co-txnid')} onBlur={() => setActiveField(null)} placeholder="ENTER 12-DIGIT UPI REF / TXN ID" />
                       </div>
                     </div>
                   )}
@@ -329,7 +353,7 @@ export const CheckoutOverlay: React.FC = () => {
                     {[
                       { k: 'SHIPPING TO', v: name, sub: address },
                       { k: 'CONTACT', v: email, sub: phone },
-                      { k: 'PAYMENT', v: paymentMethod === 'cod' ? 'CASH ON DELIVERY' : 'CARD PAYMENT' },
+                      { k: 'PAYMENT', v: paymentMethod === 'cod' ? 'CASH ON DELIVERY' : paymentMethod === 'qr' ? `QR / UPI (TXN: ${transactionId})` : 'CARD PAYMENT' },
                     ].map(row => (
                       <div key={row.k} className={styles.coReviewRow}>
                         <span className={styles.coReviewKey}>{row.k}</span>
