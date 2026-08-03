@@ -632,3 +632,31 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 6rem 1.5rem 3rem;
+  }
+  .heroTitle {
+    font-size: 3rem;
+  }
+  .filtersToolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .searchInput {
+    width: 100%;
+  }
+  .searchInput:focus {
+    width: 100%;
+  }
+  .constellationTitle {
+    font-size: 2.2rem;
+  }
+  .modalContent {
+    padding: 1.5rem;
+  }
+  .modalTitle {
+    font-size: 1.6rem;
+  }
+}

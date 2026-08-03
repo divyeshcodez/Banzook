@@ -132,10 +132,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
                 {/* Logo Text & Subtitle */}
                 <div className="flex flex-col">
                   <span 
-                    className="text-[#F4F0E8] uppercase leading-none banzook-logo-text"
+                    className="text-[#F4F0E8] uppercase leading-none banzook-logo-text text-[22px] md:text-[30px]"
                     style={{ 
                       fontFamily: "'Space Grotesk', sans-serif", 
-                      fontSize: '30px',
                       fontWeight: 700, 
                       letterSpacing: '0.18em' 
                     }}
@@ -213,7 +212,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
             </nav>
 
             {/* RIGHT: Actions */}
-            <div className="flex justify-end items-center gap-[24px]">
+            <div className="flex justify-end items-center gap-[12px] md:gap-[24px]">
               {/* Search */}
               <button 
                 onClick={() => setIsSearchOpen(true)}
@@ -227,8 +226,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
                 onClick={() => setIsCartOpen(true)}
                 className="group flex items-center justify-center transition-all duration-300 focus:outline-none rounded-[4px] border-none outline-none"
                 style={{
-                  width: '100px',
-                  height: '42px',
+                  width: '90px',
+                  height: '38px',
                   background: '#F4F0E8',
                 }}
                 onMouseEnter={(e) => {

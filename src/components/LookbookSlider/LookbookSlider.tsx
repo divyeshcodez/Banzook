@@ -60,19 +60,15 @@ export const LookbookSlider: React.FC = () => {
       
       {/* Hero Card Container */}
       <div 
-        className="relative bg-[#EDE9E1] rounded-[24px] overflow-hidden"
-        style={{ 
-          width: 'min(1400px, calc(100vw - 80px))', 
-          height: '720px', 
-          margin: '180px auto 110px auto'
-        }}
+        className="relative bg-[#EDE9E1] rounded-[16px] md:rounded-[24px] overflow-hidden w-[calc(100vw-32px)] md:w-[calc(100vw-80px)] max-w-[1400px] mx-auto mt-[120px] mb-[60px] md:mt-[180px] md:mb-[110px]"
+        style={{ minHeight: '650px' }}
       >
         
         {/* Two-Column Layout */}
-        <div className="grid h-full w-full" style={{ gridTemplateColumns: '48% 52%' }}>
+        <div className="grid h-full w-full grid-cols-1 md:grid-cols-[48%_52%]">
           
           {/* LEFT EDITORIAL PANEL */}
-          <div className="flex flex-col justify-center h-full relative" style={{ padding: '72px' }}>
+          <div className="flex flex-col justify-center h-full relative order-2 md:order-1 p-[32px] md:p-[72px]">
             
             <AnimatePresence mode="wait">
               <motion.div
@@ -81,7 +77,7 @@ export const LookbookSlider: React.FC = () => {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                className="flex flex-col w-full absolute top-[72px]"
+                className="flex flex-col w-full absolute top-[32px] md:top-[72px]"
               >
                 {/* Top Label */}
                 <span 
@@ -126,7 +122,7 @@ export const LookbookSlider: React.FC = () => {
                 <h1 
                   style={{
                     fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: 'clamp(100px, 9vw, 155px)',
+                    fontSize: 'clamp(56px, 12vw, 155px)',
                     lineHeight: '0.80',
                     letterSpacing: '-0.025em',
                     color: '#111111',
@@ -181,7 +177,7 @@ export const LookbookSlider: React.FC = () => {
             </AnimatePresence>
 
             {/* Bottom Slide Navigation */}
-            <div className="absolute bottom-[35px] left-[72px] flex gap-[10px] z-20">
+            <div className="absolute bottom-[24px] left-[24px] md:bottom-[35px] md:left-[72px] flex gap-[8px] md:gap-[10px] z-20 w-[calc(100vw-80px)] overflow-x-auto overflow-y-hidden pb-4 md:pb-0 hide-scrollbar">
               {SLIDES.map((s, idx) => {
                 const isActive = idx === currentIndex;
                 return (
@@ -202,7 +198,7 @@ export const LookbookSlider: React.FC = () => {
                       {String(idx + 1).padStart(2, '0')}
                     </span>
                     <div 
-                      className="w-[72px] h-[52px] rounded-[2px] overflow-hidden transition-all duration-300"
+                      className="w-[50px] h-[36px] md:w-[72px] md:h-[52px] rounded-[2px] overflow-hidden transition-all duration-300 flex-shrink-0"
                       style={{
                         opacity: isActive ? 1 : 0.35,
                         filter: isActive ? 'grayscale(0)' : 'grayscale(100%)',
@@ -223,7 +219,7 @@ export const LookbookSlider: React.FC = () => {
           </div>
 
           {/* RIGHT IMAGE PANEL */}
-          <div className="h-full w-full relative overflow-hidden bg-[#111111]">
+          <div className="h-[350px] md:h-full w-full relative overflow-hidden bg-[#111111] order-1 md:order-2">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
