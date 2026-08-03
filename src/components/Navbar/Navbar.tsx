@@ -25,19 +25,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
   }, []);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (isMobileMenuOpen && window.innerWidth < 768) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = 'unset';
-      }
-    };
-    
-    handleResize(); // call once on mount/update
-    window.addEventListener('resize', handleResize);
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
     
     return () => { 
-      window.removeEventListener('resize', handleResize);
       document.body.style.overflow = 'unset'; 
     };
   }, [isMobileMenuOpen]);
@@ -239,69 +233,26 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
                 </span>
               </button>
               
-              {/* Custom 3-Line Hamburger Menu & Desktop Dropdown */}
-              <div className="relative flex items-center">
-                <button 
-                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  onMouseEnter={() => setIsHoveringMenu(true)}
-                  onMouseLeave={() => setIsHoveringMenu(false)}
-                  className="text-[#F4F0E8] hover:text-[#FF4D1A] transition-colors focus:outline-none flex flex-col justify-between items-end w-[32px] h-[14px] bg-transparent border-none outline-none p-0 ml-2"
-                >
-                  <div 
-                    className="h-[2px] bg-current transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] origin-right"
-                    style={{ width: '100%' }}
-                  />
-                  <div 
-                    className="h-[2px] bg-current transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] origin-right"
-                    style={{ width: isHoveringMenu ? '60%' : '100%' }}
-                  />
-                  <div 
-                    className="h-[2px] bg-current transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] origin-right"
-                    style={{ width: isHoveringMenu ? '100%' : '100%' }}
-                  />
-                </button>
-                
-                {/* Desktop Dropdown Menu */}
+              {/* Custom 3-Line Hamburger Menu */}
+              <button 
+                onClick={() => setIsMobileMenuOpen(true)}
+                onMouseEnter={() => setIsHoveringMenu(true)}
+                onMouseLeave={() => setIsHoveringMenu(false)}
+                className="text-[#F4F0E8] hover:text-[#FF4D1A] transition-colors focus:outline-none flex flex-col justify-between items-end w-[32px] h-[14px] bg-transparent border-none outline-none p-0 ml-2"
+              >
                 <div 
-                  className={`absolute top-[40px] right-0 w-[240px] bg-[#0B0B0D] border border-[rgba(255,255,255,0.08)] py-4 flex flex-col transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] origin-top-right hidden md:flex ${
-                    isMobileMenuOpen ? 'opacity-100 scale-100 pointer-events-auto shadow-2xl' : 'opacity-0 scale-95 pointer-events-none'
-                  }`}
-                  style={{ backdropFilter: 'blur(12px)' }}
-                >
-                  {navLinks.map((link, i) => (
-                    <a
-                      key={link.id}
-                      href={`#${link.id}`}
-                      onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleNavClick(link.id, e)}
-                      className="group flex items-center justify-between px-6 py-3 transition-colors hover:bg-[rgba(255,255,255,0.03)] focus:outline-none"
-                    >
-                      <span
-                        className="text-white group-hover:text-[#FF4D1A] transition-colors duration-300"
-                        style={{
-                          fontFamily: "'Inter', sans-serif",
-                          fontSize: '11px',
-                          fontWeight: 700,
-                          letterSpacing: '0.15em',
-                          textTransform: 'uppercase'
-                        }}
-                      >
-                        {link.name}
-                      </span>
-                      <span
-                        style={{
-                          fontFamily: "'Inter', sans-serif",
-                          fontSize: '9px',
-                          fontWeight: 700,
-                          letterSpacing: '0.12em',
-                          color: '#FF4D1A',
-                        }}
-                      >
-                        0{i + 1}
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              </div>
+                  className="h-[2px] bg-current transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] origin-right"
+                  style={{ width: '100%' }}
+                />
+                <div 
+                  className="h-[2px] bg-current transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] origin-right"
+                  style={{ width: isHoveringMenu ? '60%' : '100%' }}
+                />
+                <div 
+                  className="h-[2px] bg-current transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] origin-right"
+                  style={{ width: isHoveringMenu ? '100%' : '100%' }}
+                />
+              </button>
             </div>
           </div>
         </header>
@@ -335,9 +286,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
         </div>
       </motion.div>
 
-      {/* MOBILE MENU OVERLAY */}
+      {/* FULL-SCREEN MENU OVERLAY */}
       <div 
-        className={`fixed inset-0 z-[2000] bg-[#09090B] flex flex-col p-[22px] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
+        className={`fixed inset-0 z-[2000] bg-[#09090B] flex flex-col p-[22px] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
