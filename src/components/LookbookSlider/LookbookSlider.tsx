@@ -64,7 +64,7 @@ export const LookbookSlider: React.FC = () => {
         style={{ 
           width: 'min(1400px, calc(100vw - 80px))', 
           height: '720px', 
-          margin: '40px auto 110px auto'
+          margin: '180px auto 110px auto'
         }}
       >
         
