@@ -73,22 +73,44 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
             
             {/* LEFT: Logo */}
             <div className="flex justify-start items-center">
+              <style>{`
+                .banzook-logo-text {
+                  transition: letter-spacing 0.5s cubic-bezier(0.22,1,0.36,1), color 0.3s ease;
+                }
+                .logo-group:hover .banzook-logo-text {
+                  letter-spacing: 0.22em !important;
+                  color: #FF4D1A;
+                  text-shadow: 0 0 20px rgba(255, 77, 26, 0.4);
+                }
+                .logo-accent {
+                  transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+                  transform-origin: center;
+                }
+                .logo-group:hover .logo-accent {
+                  transform: scaleY(1.3);
+                }
+              `}</style>
               <motion.a 
                 href="#home" 
-                onClick={(e) => handleNavClick('home', e)}
-                className="flex items-center gap-[12px] group focus:outline-none"
+                onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleNavClick('home', e)}
+                className="flex items-center gap-[12px] logo-group focus:outline-none"
+                style={{ 
+                  transform: isScrolled ? 'scale(0.95)' : 'scale(1)', 
+                  transformOrigin: 'left center', 
+                  transition: 'transform 0.3s ease',
+                  textDecoration: 'none'
+                }}
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
-                style={{ transform: isScrolled ? 'scale(0.95)' : 'scale(1)', transformOrigin: 'left center', transition: 'transform 0.3s ease' }}
               >
                 {/* Orange Rectangle Accent */}
-                <div className="w-[8px] h-[30px] bg-[#FF4D1A]" />
+                <div className="w-[8px] h-[30px] bg-[#FF4D1A] logo-accent" />
                 
                 {/* Logo Text & Subtitle */}
                 <div className="flex flex-col">
                   <span 
-                    className="text-[#F4F0E8] uppercase leading-none"
+                    className="text-[#F4F0E8] uppercase leading-none banzook-logo-text"
                     style={{ 
                       fontFamily: "'Space Grotesk', sans-serif", 
                       fontSize: '30px',
