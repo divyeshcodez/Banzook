@@ -7,14 +7,14 @@ const SLIDES = [
     title: 'BUILT\nDIFFERENT.',
     subtitle: 'STREETWEAR FOR THE ONES\nWHO CREATE THEIR OWN RULES.',
     collection: 'BANZOOK / DROP 01',
-    image: 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&q=80',
+    image: '/images/banzook_model_cinematic_hero.png',
   },
   {
     id: 2,
     title: 'OWN THE\nSTREET.',
     subtitle: 'REDEFINING THE STANDARDS\nOF MODERN LUXURY.',
     collection: 'BANZOOK / ORIGINALS',
-    image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=80',
+    image: '/images/model_brokensystem.png',
   },
   {
     id: 3,
@@ -28,14 +28,14 @@ const SLIDES = [
     title: 'MADE TO\nSTAND OUT.',
     subtitle: 'ELEVATED SILHOUETTES,\nRAW AESTHETICS.',
     collection: 'BANZOOK / LIMITED DROP',
-    image: 'https://images.unsplash.com/photo-1571945153237-4929e783af4a?auto=format&fit=crop&q=80',
+    image: '/images/model_hotwheels.jpg',
   },
   {
     id: 5,
     title: 'THE NEXT\nFORM.',
     subtitle: 'THE GENESIS OF A NEW\nERA IN STREETWEAR.',
     collection: 'BANZOOK / FUTURE EDITION',
-    image: 'https://images.unsplash.com/photo-1492288991661-058aa541ff43?auto=format&fit=crop&q=80',
+    image: '/images/hero_campaign.png',
   }
 ];
 
