@@ -236,7 +236,7 @@ export const LookbookSlider: React.FC = () => {
                 <img
                   src={slide.image}
                   alt={slide.title.replace('\n', ' ')}
-                  className="w-full h-full object-cover object-center filter contrast-[1.05] brightness-95"
+                  className="w-full h-full object-contain object-center filter contrast-[1.05] brightness-95"
                 />
                 
                 {/* Subtle dark gradient at the bottom */}
