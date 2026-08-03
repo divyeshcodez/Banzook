@@ -181,7 +181,7 @@ export const LookbookSlider: React.FC = () => {
             </AnimatePresence>
 
             {/* Bottom Slide Navigation */}
-            <div className="absolute bottom-[72px] left-[72px] flex gap-[10px] z-20">
+            <div className="absolute bottom-[35px] left-[72px] flex gap-[10px] z-20">
               {SLIDES.map((s, idx) => {
                 const isActive = idx === currentIndex;
                 return (

@@ -1,20 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
+import { motion } from 'framer-motion';
 
 interface NavbarProps {
   onNavigate?: (sectionId: string) => void;
   currentPage?: 'home' | 'shop' | 'drops' | 'about';
   onPageChange?: (page: 'home' | 'shop' | 'drops' | 'about') => void;
-  onOpenHelp?: (tab: 'returns' | 'size-guide' | 'faq') => void;
+  onOpenHelp?: (tab: any) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChange }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isHoveringMenu, setIsHoveringMenu] = useState(false);
   const { cartCount, setIsCartOpen, setIsSearchOpen } = useCart();
 
-  // Prevent scroll when mobile menu is open
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -27,214 +36,303 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
   const handleNavClick = (page: string, e: React.MouseEvent) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-    if (onPageChange && (page === 'home' || page === 'shop' || page === 'drops' || page === 'about')) {
+    if (onPageChange && ['home', 'shop', 'drops', 'about'].includes(page)) {
       onPageChange(page as any);
     }
   };
 
   const navLinks = [
     { name: 'HOME', id: 'home' },
+    { name: 'NEW DROP', id: 'drops' },
     { name: 'SHOP', id: 'shop' },
-    { name: 'DROPS', id: 'drops' },
     { name: 'LOOKBOOK', id: 'lookbook' },
-    { name: 'ABOUT', id: 'about' }
+    { name: 'OUR STORY', id: 'about' }
   ];
 
   return (
     <>
-      {/* 
-        DESKTOP & MOBILE HEADER
-        Height: 96px (desktop) / 76px (mobile)
-        Padding: 0 64px (desktop) / 0 20px (mobile)
-      */}
-      <header 
-        className="sticky top-0 w-full z-[1000] flex items-center bg-[#09090B]/90 backdrop-blur-[18px]"
-        style={{ 
-          borderBottom: '1px solid rgba(255,255,255,0.10)',
-        }}
+      {/* INITIAL LOAD ANIMATION WRAPPER */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+        className="fixed top-0 w-full z-[1000] flex flex-col"
       >
-        <div className="w-full h-[76px] md:h-[96px] px-[20px] md:px-[64px] grid grid-cols-[1fr_auto_1fr] items-center">
-          
-          {/* LEFT: Logo */}
-          <div className="flex justify-start items-center">
-            <a 
-              href="#home" 
-              onClick={(e) => handleNavClick('home', e)}
-              className="flex items-center gap-[12px] group focus:outline-none"
-            >
-              {/* Orange Square Accent */}
-              <div className="w-[10px] h-[10px] bg-[#FF4D1A] group-hover:scale-110 transition-transform duration-300" />
-              {/* Logo Text */}
+        {/* MAIN NAVBAR */}
+        <header 
+          className="w-full flex items-center transition-all duration-300"
+          style={{ 
+            height: isScrolled ? '78px' : '110px',
+            backgroundColor: isScrolled ? 'rgba(11,11,13,0.96)' : '#0B0B0D',
+            backdropFilter: isScrolled ? 'blur(18px)' : 'none',
+            borderBottom: '1px solid rgba(255,255,255,0.12)',
+          }}
+        >
+          {/* Container padding is 0 70px on desktop, 0 22px on mobile */}
+          <div className="w-full px-[22px] md:px-[70px] grid grid-cols-[auto_1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center h-full">
+            
+            {/* LEFT: Logo */}
+            <div className="flex justify-start items-center">
+              <motion.a 
+                href="#home" 
+                onClick={(e) => handleNavClick('home', e)}
+                className="flex items-center gap-[12px] group focus:outline-none"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
+                style={{ transform: isScrolled ? 'scale(0.95)' : 'scale(1)', transformOrigin: 'left center', transition: 'transform 0.3s ease' }}
+              >
+                {/* Orange Rectangle Accent */}
+                <div className="w-[8px] h-[30px] bg-[#FF4D1A]" />
+                
+                {/* Logo Text & Subtitle */}
+                <div className="flex flex-col">
+                  <span 
+                    className="text-[#F4F0E8] uppercase leading-none"
+                    style={{ 
+                      fontFamily: "'Space Grotesk', sans-serif", 
+                      fontSize: '30px',
+                      fontWeight: 700, 
+                      letterSpacing: '0.18em' 
+                    }}
+                  >
+                    BANZOOK
+                  </span>
+                  <span 
+                    className="mt-[4px] uppercase leading-none"
+                    style={{ 
+                      fontFamily: "'Inter', sans-serif", 
+                      fontSize: '8px',
+                      fontWeight: 500,
+                      letterSpacing: '0.25em',
+                      color: 'rgba(255,255,255,0.40)'
+                    }}
+                  >
+                    EST. 2026 / MUMBAI
+                  </span>
+                </div>
+              </motion.a>
+            </div>
+
+            {/* CENTER: Navigation (Desktop Only) */}
+            <nav className="hidden md:flex items-center justify-center gap-[48px]">
+              {navLinks.map((link, i) => {
+                const isActive = currentPage === link.id || (link.id === 'lookbook' && false); // Adjust active logic as needed
+                return (
+                  <motion.a
+                    key={link.id}
+                    href={`#${link.id}`}
+                    onClick={(e) => handleNavClick(link.id, e)}
+                    className="relative group py-2 flex flex-col items-center focus:outline-none"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 + (i * 0.05) }}
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: '12px',
+                      fontWeight: 700,
+                      letterSpacing: '0.16em',
+                      color: isActive ? '#FFFFFF' : 'rgba(255,255,255,0.55)',
+                      textTransform: 'uppercase'
+                    }}
+                  >
+                    <span className="group-hover:text-white transition-colors duration-300">
+                      {link.name}
+                    </span>
+                    
+                    {/* Animated Underline Container */}
+                    <div className="absolute -bottom-1 h-[2px] w-[28px] overflow-hidden flex justify-center">
+                      <span 
+                        className="absolute h-full bg-[#FF4D1A] transition-all duration-300 ease-out"
+                        style={{
+                          width: '100%',
+                          transform: isActive ? 'translateX(0)' : 'translateX(-101%)'
+                        }}
+                      />
+                      {/* Hover Effect Line */}
+                      <span 
+                        className={`absolute h-full bg-[#FF4D1A] transition-transform duration-300 ease-out ${isActive ? 'hidden' : ''}`}
+                        style={{
+                          width: '100%',
+                          transform: 'translateX(-101%)'
+                        }}
+                      />
+                      <style>{`
+                        a:hover div span:last-child {
+                          transform: translateX(0) !important;
+                        }
+                      `}</style>
+                    </div>
+                  </motion.a>
+                );
+              })}
+            </nav>
+
+            {/* RIGHT: Actions */}
+            <div className="flex justify-end items-center gap-[24px]">
+              {/* Search */}
+              <button 
+                onClick={() => setIsSearchOpen(true)}
+                className="text-white hover:text-[#FF4D1A] transition-colors focus:outline-none flex items-center justify-center hidden md:flex"
+              >
+                <Search size={20} strokeWidth={2} />
+              </button>
+              
+              {/* Bag Button */}
+              <button 
+                onClick={() => setIsCartOpen(true)}
+                className="group flex items-center justify-center transition-all duration-300 focus:outline-none"
+                style={{
+                  width: '105px',
+                  height: '48px',
+                  border: '1px solid rgba(255,255,255,0.25)',
+                  background: 'transparent'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#F4F0E8';
+                  e.currentTarget.style.borderColor = '#F4F0E8';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'transparent';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
+                }}
+              >
+                <span 
+                  className="text-white group-hover:text-[#0B0B0D] transition-colors duration-300"
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase'
+                  }}
+                >
+                  BAG {String(cartCount).padStart(2, '0')}
+                </span>
+              </button>
+              
+              {/* Custom 3-Line Hamburger Menu */}
+              <button 
+                onClick={() => setIsMobileMenuOpen(true)}
+                onMouseEnter={() => setIsHoveringMenu(true)}
+                onMouseLeave={() => setIsHoveringMenu(false)}
+                className="text-white hover:text-[#FF4D1A] transition-colors focus:outline-none flex flex-col justify-between items-center w-[30px] h-[12px] overflow-hidden"
+              >
+                <div 
+                  className="w-full h-[2px] bg-current transition-transform duration-300 ease-out origin-center"
+                  style={{ transform: isHoveringMenu ? 'translateX(6px)' : 'translateX(0)' }}
+                />
+                <div 
+                  className="w-full h-[2px] bg-current transition-transform duration-300 ease-out origin-center"
+                />
+                <div 
+                  className="w-full h-[2px] bg-current transition-transform duration-300 ease-out origin-center"
+                  style={{ transform: isHoveringMenu ? 'translateX(-6px)' : 'translateX(0)' }}
+                />
+              </button>
+            </div>
+          </div>
+        </header>
+
+        {/* FASHION TICKER */}
+        <div className="w-full h-[30px] bg-[#FF4D1A] overflow-hidden flex items-center relative">
+          <div className="whitespace-nowrap flex" style={{ animation: 'ticker-scroll 25s linear infinite' }}>
+            {Array(4).fill('NEW DROP 01 — BUILT DIFFERENT — FREE SHIPPING ABOVE ₹2,999 — LIMITED EDITION — ').map((text, i) => (
               <span 
-                className="text-[#F5F1E8] text-[18px] md:text-[24px] uppercase"
+                key={i}
+                className="inline-block px-4"
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: '9px',
+                  fontWeight: 800,
+                  letterSpacing: '0.20em',
+                  color: '#000000',
+                  textTransform: 'uppercase'
+                }}
+              >
+                {text}
+              </span>
+            ))}
+          </div>
+          <style>{`
+            @keyframes ticker-scroll {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+          `}</style>
+        </div>
+      </motion.div>
+
+      {/* MOBILE MENU OVERLAY */}
+      <div 
+        className={`fixed inset-0 z-[2000] bg-[#09090B] flex flex-col p-[22px] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className="flex justify-between items-center mb-16 h-[82px]">
+          <div className="flex items-center gap-[12px]">
+            <div className="w-[8px] h-[30px] bg-[#FF4D1A]" />
+            <div className="flex flex-col">
+              <span 
+                className="text-[#F4F0E8] uppercase leading-none"
                 style={{ 
-                  fontFamily: "'Space Grotesk', 'Inter', sans-serif", 
-                  fontWeight: 800, 
-                  letterSpacing: '0.22em' 
+                  fontFamily: "'Space Grotesk', sans-serif", 
+                  fontSize: '24px',
+                  fontWeight: 700, 
+                  letterSpacing: '0.18em' 
                 }}
               >
                 BANZOOK
               </span>
-            </a>
-          </div>
-
-          {/* CENTER: Navigation (Desktop Only) */}
-          <nav className="hidden md:flex items-center justify-center gap-[42px]">
-            {navLinks.map((link) => {
-              const isActive = currentPage === link.id;
-              return (
-                <a
-                  key={link.id}
-                  href={`#${link.id}`}
-                  onClick={(e) => handleNavClick(link.id, e)}
-                  className="relative group py-2 focus:outline-none"
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: '12px',
-                    fontWeight: 600,
-                    letterSpacing: '0.14em',
-                    color: isActive ? '#FFFFFF' : 'rgba(255,255,255,0.65)'
-                  }}
-                >
-                  <span className="group-hover:text-white transition-colors duration-300">
-                    {link.name}
-                  </span>
-                  
-                  {/* Animated underline */}
-                  <span 
-                    className="absolute bottom-0 left-0 h-[1px] bg-[#FF4D1A] transition-all duration-300 ease-out"
-                    style={{
-                      width: isActive ? '100%' : '0%',
-                      opacity: isActive ? 1 : 0
-                    }}
-                  />
-                  {/* Hover underline effect */}
-                  <span 
-                    className={`absolute bottom-0 left-0 h-[1px] bg-[#FF4D1A] transition-all duration-300 ease-out ${isActive ? 'hidden' : ''}`}
-                    style={{ width: '0%' }}
-                  />
-                  <style>{`
-                    a:hover span:last-child {
-                      width: 100% !important;
-                    }
-                  `}</style>
-                </a>
-              );
-            })}
-          </nav>
-
-          {/* RIGHT: Actions */}
-          <div className="flex justify-end items-center gap-[24px]">
-            {/* Search */}
-            <button 
-              onClick={() => setIsSearchOpen(true)}
-              className="text-white hover:text-[#FF4D1A] transition-colors focus:outline-none flex items-center justify-center"
-            >
-              <Search size={22} strokeWidth={2} />
-            </button>
-            
-            {/* Bag Button */}
-            <button 
-              onClick={() => setIsCartOpen(true)}
-              className="group flex items-center justify-center h-[42px] px-[18px] transition-all duration-300 focus:outline-none"
-              style={{
-                border: '1px solid rgba(255,255,255,0.25)',
-                borderRadius: '0px',
-                background: 'transparent'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#FF4D1A';
-                e.currentTarget.style.borderColor = '#FF4D1A';
-                e.currentTarget.style.color = '#000000';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
-                e.currentTarget.style.color = '#FFFFFF';
-              }}
-            >
-              <span 
-                className="text-white group-hover:text-black transition-colors duration-300"
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: '11px',
-                  fontWeight: 600,
-                  letterSpacing: '0.14em'
-                }}
-              >
-                BAG ({cartCount})
-              </span>
-            </button>
-            
-            {/* Custom 2-Line Hamburger Menu */}
-            <button 
-              onClick={() => setIsMobileMenuOpen(true)}
-              onMouseEnter={() => setIsHoveringMenu(true)}
-              onMouseLeave={() => setIsHoveringMenu(false)}
-              className="text-white hover:text-[#FF4D1A] transition-colors focus:outline-none flex flex-col justify-center items-center gap-[6px] w-[22px] h-[22px] md:w-[24px] md:h-[24px] overflow-hidden"
-            >
-              <div 
-                className="w-full h-[2px] bg-current transition-transform duration-300 ease-out"
-                style={{ transform: isHoveringMenu ? 'translateX(4px)' : 'translateX(0)' }}
-              />
-              <div 
-                className="w-full h-[2px] bg-current transition-transform duration-300 ease-out"
-                style={{ transform: isHoveringMenu ? 'translateX(-4px)' : 'translateX(0)' }}
-              />
-            </button>
-          </div>
-
-        </div>
-      </header>
-
-      {/* MOBILE MENU OVERLAY */}
-      <div 
-        className={`fixed inset-0 z-[2000] bg-[#09090B] flex flex-col p-6 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <div className="flex justify-between items-center mb-16 h-[52px]">
-          <div className="flex items-center gap-[12px]">
-            <div className="w-[10px] h-[10px] bg-[#FF4D1A]" />
-            <span 
-              className="text-[#F5F1E8] text-[18px] uppercase"
-              style={{ 
-                fontFamily: "'Space Grotesk', 'Inter', sans-serif", 
-                fontWeight: 800, 
-                letterSpacing: '0.22em' 
-              }}
-            >
-              BANZOOK
-            </span>
+            </div>
           </div>
           
           <button 
             onClick={() => setIsMobileMenuOpen(false)} 
-            className="text-white hover:text-[#FF4D1A] transition-colors flex flex-col justify-center items-center w-[24px] h-[24px] relative"
+            className="text-white hover:text-[#FF4D1A] transition-colors flex flex-col justify-center items-center w-[30px] h-[30px] relative focus:outline-none"
           >
-            <div className="w-full h-[2px] bg-current absolute rotate-45 transition-transform" />
-            <div className="w-full h-[2px] bg-current absolute -rotate-45 transition-transform" />
+            <div className="w-[30px] h-[2px] bg-current absolute rotate-45 transition-transform" />
+            <div className="w-[30px] h-[2px] bg-current absolute -rotate-45 transition-transform" />
           </button>
         </div>
         
-        <nav className="flex flex-col gap-8 px-4 h-full overflow-y-auto">
+        <nav className="flex flex-col gap-6 px-4 h-full overflow-y-auto">
           {navLinks.map((link, i) => (
             <a
               key={link.id}
               href={`#${link.id}`}
-              onClick={(e) => handleNavClick(link.id, e)}
-              className="text-white uppercase transition-colors hover:text-[#FF4D1A] transform hover:translate-x-2 duration-300"
+              onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleNavClick(link.id, e)}
+              className="group flex items-end gap-6 uppercase transition-colors hover:text-[#FF4D1A] transform hover:translate-x-2 duration-300 focus:outline-none"
               style={{
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: '12vw',
-                lineHeight: '0.9',
-                letterSpacing: '0.02em',
+                textDecoration: 'none',
                 transitionDelay: isMobileMenuOpen ? `${i * 50}ms` : '0ms',
                 opacity: isMobileMenuOpen ? 1 : 0,
                 transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(20px)'
               }}
             >
-              {link.name}
+              <span
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: '14px',
+                  fontWeight: 700,
+                  letterSpacing: '0.12em',
+                  color: '#FF4D1A',
+                  marginBottom: '10px'
+                }}
+              >
+                0{i + 1}
+              </span>
+              <span
+                className="text-white group-hover:text-[#FF4D1A] transition-colors"
+                style={{
+                  fontFamily: "'Bebas Neue', sans-serif",
+                  fontSize: '64px',
+                  lineHeight: '0.9',
+                  letterSpacing: '0.02em',
+                }}
+              >
+                {link.name}
+              </span>
             </a>
           ))}
         </nav>
