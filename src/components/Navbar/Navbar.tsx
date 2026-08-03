@@ -32,31 +32,44 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
   return (
     <>
       <header 
-        className={`sticky top-0 w-full z-[100] transition-all duration-300 h-[72px] flex items-center bg-[#0B0B0C]/80 backdrop-blur-md border-b border-white/10`}
+        className="sticky top-0 w-full z-[100] h-[76px] flex items-center bg-[rgba(10,10,11,0.92)] backdrop-blur-[16px]"
+        style={{ borderBottom: '1px solid rgba(255,255,255,0.10)' }}
       >
-        <div className="w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-12 flex items-center justify-between">
+        <div className="w-full px-[24px] md:px-[56px] flex items-center justify-between">
           
           {/* Left - Logo */}
           <div className="flex-1">
             <a 
               href="#home" 
               onClick={(e) => handleNavClick('home', e)}
-              className="text-2xl font-black font-condensed tracking-tighter text-white"
+              className="text-white hover:text-white/80 transition-colors focus:outline-none"
+              style={{ 
+                fontFamily: "'Inter', sans-serif", 
+                fontSize: '18px', 
+                fontWeight: 800, 
+                letterSpacing: '0.12em' 
+              }}
             >
               BANZOOK
             </a>
           </div>
 
           {/* Center - Links (Desktop) */}
-          <nav className="hidden md:flex items-center gap-8 justify-center">
+          <nav className="hidden md:flex items-center justify-center gap-[36px]">
             {navLinks.map((link) => (
               <a
                 key={link.id}
                 href={`#${link.id}`}
                 onClick={(e) => handleNavClick(link.id, e)}
-                className={`text-xs font-bold tracking-widest uppercase transition-colors ${
-                  currentPage === link.id ? 'text-[#FF4D1A]' : 'text-white/80 hover:text-white'
+                className={`uppercase transition-colors focus:outline-none ${
+                  currentPage === link.id ? 'text-white' : 'text-white/65 hover:text-white'
                 }`}
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: '11px',
+                  fontWeight: 600,
+                  letterSpacing: '0.14em'
+                }}
               >
                 {link.name}
               </a>
@@ -64,23 +77,32 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
           </nav>
 
           {/* Right - Actions */}
-          <div className="flex-1 flex justify-end items-center gap-4 lg:gap-6">
+          <div className="flex-1 flex justify-end items-center gap-[24px]">
             <button 
               onClick={() => setIsSearchOpen(true)}
-              className="text-white hover:text-[#FF4D1A] transition-colors"
+              className="text-white hover:text-white/80 transition-colors focus:outline-none"
             >
               <Search size={20} strokeWidth={2} />
             </button>
             <button 
               onClick={() => setIsCartOpen(true)}
-              className="text-white hover:text-[#FF4D1A] transition-colors flex items-center gap-1"
+              className="text-white hover:text-white/80 transition-colors flex items-center gap-[8px] focus:outline-none"
             >
               <ShoppingBag size={20} strokeWidth={2} />
-              <span className="text-xs font-bold font-mono">({cartCount})</span>
+              <span 
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: '11px',
+                  fontWeight: 600,
+                  letterSpacing: '0.14em'
+                }}
+              >
+                BAG ({cartCount})
+              </span>
             </button>
             <button 
               onClick={() => setIsMobileMenuOpen(true)}
-              className="md:hidden text-white hover:text-[#FF4D1A] transition-colors"
+              className="md:hidden text-white hover:text-[#FF4D1A] transition-colors focus:outline-none"
             >
               <Menu size={24} strokeWidth={2} />
             </button>
@@ -91,22 +113,22 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[100] bg-white flex flex-col p-6">
+        <div className="fixed inset-0 z-[100] bg-[#0A0A0B] flex flex-col p-6">
           <div className="flex justify-between items-center mb-12">
-             <a href="#home" onClick={(e) => handleNavClick('home', e)} className="text-2xl font-black font-condensed tracking-tighter">
+             <a href="#home" onClick={(e) => handleNavClick('home', e)} className="text-white text-xl font-black tracking-widest">
               BANZOOK
             </a>
-            <button onClick={() => setIsMobileMenuOpen(false)}>
+            <button onClick={() => setIsMobileMenuOpen(false)} className="text-white">
               <X size={28} strokeWidth={2} />
             </button>
           </div>
-          <nav className="flex flex-col gap-6 text-3xl font-black font-condensed tracking-tighter">
+          <nav className="flex flex-col gap-6 text-2xl font-bold tracking-widest">
              {navLinks.map((link) => (
               <a
                 key={link.id}
                 href={`#${link.id}`}
                 onClick={(e) => handleNavClick(link.id, e)}
-                className={currentPage === link.id ? 'text-[#FF4D1A]' : 'text-[#111111]'}
+                className={currentPage === link.id ? 'text-[#FF4D1A]' : 'text-white'}
               >
                 {link.name}
               </a>

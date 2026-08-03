@@ -33,10 +33,10 @@ export const FeaturedDrop: React.FC<{ onViewPiece: () => void }> = ({ onViewPiec
             FEATURED DROP
           </span>
           <h2 
-            className="text-4xl md:text-5xl uppercase tracking-tighter text-white"
-            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+            className="uppercase text-white mt-4"
+            style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '80px', lineHeight: '0.85', letterSpacing: '0.02em' }}
           >
-            DROP 01 — BUILT DIFFERENT
+            DROP 01<br/>BUILT DIFFERENT.
           </h2>
         </div>
       </div>
