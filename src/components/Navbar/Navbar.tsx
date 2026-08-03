@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
+import { auth } from '../../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 import { motion } from 'framer-motion';
 
 interface NavbarProps {
@@ -14,14 +16,24 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isHoveringMenu, setIsHoveringMenu] = useState(false);
-  const { cartCount, setIsCartOpen, setIsSearchOpen } = useCart();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { cartCount, setIsCartOpen, setIsSearchOpen, setIsAccountOpen } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    // Listen for auth state changes
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuthenticated(!!user);
+    });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      unsubscribe();
+    };
   }, []);
 
   useEffect(() => {
@@ -39,6 +51,12 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
   const handleNavClick = (page: string, e: React.MouseEvent) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
+    
+    if (page === 'signin') {
+      setIsAccountOpen(true);
+      return;
+    }
+
     if (onPageChange && ['home', 'shop', 'drops', 'about'].includes(page)) {
       onPageChange(page as any);
     }
@@ -50,7 +68,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
     { name: 'SHOP', id: 'shop' },
     { name: 'LOOKBOOK', id: 'lookbook' },
     { name: 'OUR STORY', id: 'about' },
-    { name: 'SIGN IN', id: 'signin' }
+    { name: isAuthenticated ? 'ACCOUNT' : 'SIGN IN', id: 'signin' }
   ];
 
   return (
