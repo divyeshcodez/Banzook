@@ -11,7 +11,7 @@ interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigateToShop }) => {
   return (
-    <div className="bg-[#0E0E0E] min-h-screen text-[#111111] overflow-hidden">
+    <div className="bg-[#0B0B0C] min-h-screen text-white w-full flex flex-col">
       <LookbookSlider />
       <FeaturedDrop onViewPiece={onNavigateToShop} />
       <BrandStatement />

@@ -5,7 +5,7 @@ const CATEGORIES = [
   {
     id: 1,
     title: 'T-SHIRTS',
-    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?auto=format&fit=crop&q=80',
   },
   {
     id: 2,
@@ -15,44 +15,58 @@ const CATEGORIES = [
   {
     id: 3,
     title: 'ESSENTIALS',
-    image: 'https://images.unsplash.com/photo-1489987707023-af816086bb5e?auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80',
   }
 ];
 
 export const ShopByCategory: React.FC = () => {
   return (
-    <section className="py-24 px-4 md:px-8 lg:px-12 max-w-7xl mx-auto">
-      <div className="mb-16">
-        <h2 className="text-4xl md:text-5xl font-black font-condensed uppercase tracking-tighter">
-          SHOP BY CATEGORY
-        </h2>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-[70vh] min-h-[500px]">
-        {CATEGORIES.map((cat, idx) => (
-          <motion.div
-            key={cat.id}
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: idx * 0.15 }}
-            className="relative group rounded-3xl overflow-hidden cursor-pointer bg-gray-200"
+    <section className="w-full bg-[#0B0B0C] py-24 md:py-32 px-4 md:px-8 lg:px-12">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="mb-12">
+          <h2 
+            className="text-4xl md:text-5xl uppercase tracking-tighter text-white"
+            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
           >
-            <img 
-              src={cat.image} 
-              alt={cat.title} 
-              className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out filter brightness-75 group-hover:brightness-50"
-            />
-            <div className="absolute inset-0 p-8 flex flex-col justify-end">
-               <h3 className="text-white text-3xl md:text-4xl font-black font-condensed uppercase tracking-tighter mb-4 transform group-hover:-translate-y-2 transition-transform duration-300">
-                 {cat.title}
-               </h3>
-               <span className="text-white text-xs font-bold tracking-widest uppercase flex items-center gap-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                 SHOP NOW <span>→</span>
-               </span>
-            </div>
-          </motion.div>
-        ))}
+            SHOP BY CATEGORY
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {CATEGORIES.map((category, idx) => (
+            <motion.a
+              href={`#${category.title.toLowerCase()}`}
+              key={category.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: idx * 0.15 }}
+              className="group relative block aspect-[4/5] overflow-hidden rounded-[4px] cursor-pointer"
+            >
+              <img 
+                src={category.image} 
+                alt={category.title} 
+                className="w-full h-full object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+              />
+              
+              {/* Subtle Dark Overlay */}
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-500" />
+              
+              {/* Text Content at Bottom */}
+              <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end transform transition-transform duration-500">
+                <h3 
+                  className="text-4xl md:text-5xl uppercase text-white mb-2"
+                  style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '0.02em' }}
+                >
+                  {category.title}
+                </h3>
+                <span className="text-[11px] font-bold tracking-[0.12em] uppercase text-white group-hover:text-[#FF4D1A] transition-colors flex items-center gap-2">
+                  SHOP NOW <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                </span>
+              </div>
+            </motion.a>
+          ))}
+        </div>
       </div>
     </section>
   );

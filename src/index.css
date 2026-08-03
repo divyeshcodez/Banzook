@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #0B0B0C;
+}
+
+main {
+  position: relative;
+  overflow: visible;
+}
+
+/* OFFCUT Production Design System & Global Styles */
+@tailwind utilities;
+
 /* OFFCUT Production Design System & Global Styles */
 :root {
   /* OFFCUT Brand Colors */

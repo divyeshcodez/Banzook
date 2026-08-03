@@ -57,12 +57,12 @@ export const LookbookSlider: React.FC = () => {
   };
 
   return (
-    <div className="w-full flex items-center justify-center min-h-screen py-16 lg:py-24 bg-transparent font-['Inter',sans-serif]">
+    <div className="w-full bg-transparent font-['Inter',sans-serif] relative z-10 pt-32 pb-24 border-b border-white/5">
       
       {/* Main Luxury Card Container */}
       <div 
-        className="relative w-[calc(100%-24px)] lg:w-[calc(100%-96px)] max-w-[1400px] h-auto lg:h-[680px] bg-[#F3F0EA] rounded-[28px] mx-auto overflow-hidden flex flex-col lg:block shadow-[0_30px_80px_rgba(0,0,0,0.25)]"
-        style={{ border: '1px solid rgba(20, 20, 20, 0.10)' }}
+        className="relative w-[calc(100%-32px)] lg:w-[calc(100%-64px)] max-w-[1400px] h-auto lg:h-[680px] bg-[#F1EEE8] rounded-[28px] mx-auto overflow-hidden flex flex-col lg:block shadow-[0_30px_80px_rgba(0,0,0,0.25)]"
+        style={{ margin: '32px auto 100px auto' }}
       >
         
         {/* Subtle warm paper grain/noise texture overlay */}
