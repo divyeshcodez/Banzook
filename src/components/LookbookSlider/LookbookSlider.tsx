@@ -21,7 +21,7 @@ const SLIDES = [
     title: 'NO\nRULES.',
     subtitle: 'UNAPOLOGETIC DESIGN\nFOR THE BOLD.',
     collection: 'BANZOOK / STREET CODE',
-    image: 'https://images.unsplash.com/photo-1512353087810-254cb3617d1d?auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?auto=format&fit=crop&q=80',
   },
   {
     id: 4,
