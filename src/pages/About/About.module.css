@@ -321,3 +321,48 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+  .openingHero {
+    padding: 2rem 0;
+  }
+  .heroHeadline {
+    font-size: 3.5rem;
+  }
+  .heroBrandName {
+    font-size: 4rem;
+  }
+  .beforeBanzookSection, .dreamBuildingSection, .whyBanzookSection, .threeFriendsSection, .buildingNothingSection, .mindsetSection {
+    padding: 4rem 0;
+  }
+  .finalSection {
+    padding: 6rem 0 4rem;
+  }
+  .sectionTitle {
+    font-size: 2.5rem;
+  }
+  .dreamTypography {
+    font-size: 2.5rem;
+  }
+  .whyHeadline {
+    font-size: 2.2rem;
+  }
+  .friendsTitle {
+    font-size: 2.5rem;
+  }
+  .nothingHeadline {
+    font-size: 2.5rem;
+  }
+  .finalStatement {
+    font-size: 3rem;
+  }
+  .storyParagraphBlock {
+    font-size: 1rem;
+  }
+  .quoteHighlight {
+    font-size: 1.4rem;
+  }
+}

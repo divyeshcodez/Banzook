@@ -354,3 +354,39 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+  .campaignHero {
+    padding: 2rem 0;
+  }
+  .campaignTitle {
+    font-size: 3rem;
+  }
+  .visualStorySection, .collectionStoryBlock, .productRevealSection, .lookbookSection, .selectionSection {
+    padding: 4rem 0;
+  }
+  .storyHeading {
+    font-size: 2.5rem;
+  }
+  .storyBlockHeadline {
+    font-size: 2rem;
+  }
+  .revealTitle {
+    font-size: 2.2rem;
+  }
+  .lookbookTitle {
+    font-size: 2.5rem;
+  }
+  .finalCampaignMoment {
+    padding: 6rem 0 4rem;
+  }
+  .finalTitle {
+    font-size: 2.5rem;
+  }
+  .revealMedia {
+    aspect-ratio: 4 / 5;
+  }
+}
