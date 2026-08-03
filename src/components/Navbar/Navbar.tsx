@@ -203,29 +203,26 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
               {/* Bag Button */}
               <button 
                 onClick={() => setIsCartOpen(true)}
-                className="group flex items-center justify-center transition-all duration-300 focus:outline-none"
+                className="group flex items-center justify-center transition-all duration-300 focus:outline-none rounded-[4px] border-none outline-none"
                 style={{
-                  width: '105px',
-                  height: '48px',
-                  border: '1px solid rgba(255,255,255,0.25)',
-                  background: 'transparent'
+                  width: '100px',
+                  height: '42px',
+                  background: '#F4F0E8',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#F4F0E8';
-                  e.currentTarget.style.borderColor = '#F4F0E8';
+                  e.currentTarget.style.background = '#FF4D1A';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
+                  e.currentTarget.style.background = '#F4F0E8';
                 }}
               >
                 <span 
-                  className="text-white group-hover:text-[#0B0B0D] transition-colors duration-300"
+                  className="text-[#0B0B0D] group-hover:text-white transition-colors duration-300"
                   style={{
                     fontFamily: "'Inter', sans-serif",
                     fontSize: '11px',
-                    fontWeight: 700,
-                    letterSpacing: '0.12em',
+                    fontWeight: 800,
+                    letterSpacing: '0.15em',
                     textTransform: 'uppercase'
                   }}
                 >
@@ -238,18 +235,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
                 onClick={() => setIsMobileMenuOpen(true)}
                 onMouseEnter={() => setIsHoveringMenu(true)}
                 onMouseLeave={() => setIsHoveringMenu(false)}
-                className="text-white hover:text-[#FF4D1A] transition-colors focus:outline-none flex flex-col justify-between items-center w-[30px] h-[12px] overflow-hidden"
+                className="text-[#F4F0E8] hover:text-[#FF4D1A] transition-colors focus:outline-none flex flex-col justify-between items-end w-[32px] h-[14px] bg-transparent border-none outline-none p-0 ml-2"
               >
                 <div 
-                  className="w-full h-[2px] bg-current transition-transform duration-300 ease-out origin-center"
-                  style={{ transform: isHoveringMenu ? 'translateX(6px)' : 'translateX(0)' }}
+                  className="h-[2px] bg-current transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] origin-right"
+                  style={{ width: '100%' }}
                 />
                 <div 
-                  className="w-full h-[2px] bg-current transition-transform duration-300 ease-out origin-center"
+                  className="h-[2px] bg-current transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] origin-right"
+                  style={{ width: isHoveringMenu ? '60%' : '100%' }}
                 />
                 <div 
-                  className="w-full h-[2px] bg-current transition-transform duration-300 ease-out origin-center"
-                  style={{ transform: isHoveringMenu ? 'translateX(-6px)' : 'translateX(0)' }}
+                  className="h-[2px] bg-current transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] origin-right"
+                  style={{ width: isHoveringMenu ? '100%' : '100%' }}
                 />
               </button>
             </div>
