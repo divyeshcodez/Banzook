@@ -223,7 +223,7 @@ export const LookbookSlider: React.FC = () => {
           </div>
 
           {/* RIGHT IMAGE PANEL */}
-          <div className="h-full w-full relative overflow-hidden bg-[#d3d0c9]">
+          <div className="h-full w-full relative overflow-hidden bg-[#111111]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
@@ -231,16 +231,24 @@ export const LookbookSlider: React.FC = () => {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                className="absolute inset-0 z-10"
+                className="absolute inset-0 z-10 flex items-center justify-center"
               >
+                {/* Ambient Blurred Background to Fill Empty Space */}
+                <img
+                  src={slide.image}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover filter blur-[40px] opacity-70 scale-110"
+                />
+                
+                {/* Foreground Image - Contained so no cropping occurs */}
                 <img
                   src={slide.image}
                   alt={slide.title.replace('\n', ' ')}
-                  className="w-full h-full object-cover object-top filter contrast-[1.05] brightness-95"
+                  className="relative z-10 w-full h-full object-contain object-center drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] filter contrast-[1.05] brightness-95"
                 />
                 
                 {/* Subtle dark gradient at the bottom */}
-                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent mix-blend-multiply" />
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent mix-blend-multiply z-20 pointer-events-none" />
               </motion.div>
             </AnimatePresence>
 
