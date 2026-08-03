@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Menu, X, Search, ShoppingBag } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Search } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 
 interface NavbarProps {
@@ -11,7 +11,18 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChange }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isHoveringMenu, setIsHoveringMenu] = useState(false);
   const { cartCount, setIsCartOpen, setIsSearchOpen } = useCart();
+
+  // Prevent scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [isMobileMenuOpen]);
 
   const handleNavClick = (page: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -31,65 +42,119 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
 
   return (
     <>
+      {/* 
+        DESKTOP & MOBILE HEADER
+        Height: 96px (desktop) / 76px (mobile)
+        Padding: 0 64px (desktop) / 0 20px (mobile)
+      */}
       <header 
-        className="sticky top-0 w-full z-[100] h-[76px] flex items-center bg-[rgba(10,10,11,0.92)] backdrop-blur-[16px]"
-        style={{ borderBottom: '1px solid rgba(255,255,255,0.10)' }}
+        className="sticky top-0 w-full z-[1000] flex items-center bg-[#09090B]/90 backdrop-blur-[18px]"
+        style={{ 
+          borderBottom: '1px solid rgba(255,255,255,0.10)',
+        }}
       >
-        <div className="w-full px-[24px] md:px-[56px] flex items-center justify-between">
+        <div className="w-full h-[76px] md:h-[96px] px-[20px] md:px-[64px] grid grid-cols-[1fr_auto_1fr] items-center">
           
-          {/* Left - Logo */}
-          <div className="flex-1">
+          {/* LEFT: Logo */}
+          <div className="flex justify-start items-center">
             <a 
               href="#home" 
               onClick={(e) => handleNavClick('home', e)}
-              className="text-white hover:text-white/80 transition-colors focus:outline-none"
-              style={{ 
-                fontFamily: "'Inter', sans-serif", 
-                fontSize: '18px', 
-                fontWeight: 800, 
-                letterSpacing: '0.12em' 
-              }}
+              className="flex items-center gap-[12px] group focus:outline-none"
             >
-              BANZOOK
+              {/* Orange Square Accent */}
+              <div className="w-[10px] h-[10px] bg-[#FF4D1A] group-hover:scale-110 transition-transform duration-300" />
+              {/* Logo Text */}
+              <span 
+                className="text-[#F5F1E8] text-[18px] md:text-[24px] uppercase"
+                style={{ 
+                  fontFamily: "'Space Grotesk', 'Inter', sans-serif", 
+                  fontWeight: 800, 
+                  letterSpacing: '0.22em' 
+                }}
+              >
+                BANZOOK
+              </span>
             </a>
           </div>
 
-          {/* Center - Links (Desktop) */}
-          <nav className="hidden md:flex items-center justify-center gap-[36px]">
-            {navLinks.map((link) => (
-              <a
-                key={link.id}
-                href={`#${link.id}`}
-                onClick={(e) => handleNavClick(link.id, e)}
-                className={`uppercase transition-colors focus:outline-none ${
-                  currentPage === link.id ? 'text-white' : 'text-white/65 hover:text-white'
-                }`}
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: '11px',
-                  fontWeight: 600,
-                  letterSpacing: '0.14em'
-                }}
-              >
-                {link.name}
-              </a>
-            ))}
+          {/* CENTER: Navigation (Desktop Only) */}
+          <nav className="hidden md:flex items-center justify-center gap-[42px]">
+            {navLinks.map((link) => {
+              const isActive = currentPage === link.id;
+              return (
+                <a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  onClick={(e) => handleNavClick(link.id, e)}
+                  className="relative group py-2 focus:outline-none"
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: '12px',
+                    fontWeight: 600,
+                    letterSpacing: '0.14em',
+                    color: isActive ? '#FFFFFF' : 'rgba(255,255,255,0.65)'
+                  }}
+                >
+                  <span className="group-hover:text-white transition-colors duration-300">
+                    {link.name}
+                  </span>
+                  
+                  {/* Animated underline */}
+                  <span 
+                    className="absolute bottom-0 left-0 h-[1px] bg-[#FF4D1A] transition-all duration-300 ease-out"
+                    style={{
+                      width: isActive ? '100%' : '0%',
+                      opacity: isActive ? 1 : 0
+                    }}
+                  />
+                  {/* Hover underline effect */}
+                  <span 
+                    className={`absolute bottom-0 left-0 h-[1px] bg-[#FF4D1A] transition-all duration-300 ease-out ${isActive ? 'hidden' : ''}`}
+                    style={{ width: '0%' }}
+                  />
+                  <style>{`
+                    a:hover span:last-child {
+                      width: 100% !important;
+                    }
+                  `}</style>
+                </a>
+              );
+            })}
           </nav>
 
-          {/* Right - Actions */}
-          <div className="flex-1 flex justify-end items-center gap-[24px]">
+          {/* RIGHT: Actions */}
+          <div className="flex justify-end items-center gap-[24px]">
+            {/* Search */}
             <button 
               onClick={() => setIsSearchOpen(true)}
-              className="text-white hover:text-white/80 transition-colors focus:outline-none"
+              className="text-white hover:text-[#FF4D1A] transition-colors focus:outline-none flex items-center justify-center"
             >
-              <Search size={20} strokeWidth={2} />
+              <Search size={22} strokeWidth={2} />
             </button>
+            
+            {/* Bag Button */}
             <button 
               onClick={() => setIsCartOpen(true)}
-              className="text-white hover:text-white/80 transition-colors flex items-center gap-[8px] focus:outline-none"
+              className="group flex items-center justify-center h-[42px] px-[18px] transition-all duration-300 focus:outline-none"
+              style={{
+                border: '1px solid rgba(255,255,255,0.25)',
+                borderRadius: '0px',
+                background: 'transparent'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#FF4D1A';
+                e.currentTarget.style.borderColor = '#FF4D1A';
+                e.currentTarget.style.color = '#000000';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
+                e.currentTarget.style.color = '#FFFFFF';
+              }}
             >
-              <ShoppingBag size={20} strokeWidth={2} />
               <span 
+                className="text-white group-hover:text-black transition-colors duration-300"
                 style={{
                   fontFamily: "'Inter', sans-serif",
                   fontSize: '11px',
@@ -100,42 +165,80 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
                 BAG ({cartCount})
               </span>
             </button>
+            
+            {/* Custom 2-Line Hamburger Menu */}
             <button 
               onClick={() => setIsMobileMenuOpen(true)}
-              className="md:hidden text-white hover:text-[#FF4D1A] transition-colors focus:outline-none"
+              onMouseEnter={() => setIsHoveringMenu(true)}
+              onMouseLeave={() => setIsHoveringMenu(false)}
+              className="text-white hover:text-[#FF4D1A] transition-colors focus:outline-none flex flex-col justify-center items-center gap-[6px] w-[22px] h-[22px] md:w-[24px] md:h-[24px] overflow-hidden"
             >
-              <Menu size={24} strokeWidth={2} />
+              <div 
+                className="w-full h-[2px] bg-current transition-transform duration-300 ease-out"
+                style={{ transform: isHoveringMenu ? 'translateX(4px)' : 'translateX(0)' }}
+              />
+              <div 
+                className="w-full h-[2px] bg-current transition-transform duration-300 ease-out"
+                style={{ transform: isHoveringMenu ? 'translateX(-4px)' : 'translateX(0)' }}
+              />
             </button>
           </div>
 
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[100] bg-[#0A0A0B] flex flex-col p-6">
-          <div className="flex justify-between items-center mb-12">
-             <a href="#home" onClick={(e) => handleNavClick('home', e)} className="text-white text-xl font-black tracking-widest">
+      {/* MOBILE MENU OVERLAY */}
+      <div 
+        className={`fixed inset-0 z-[2000] bg-[#09090B] flex flex-col p-6 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className="flex justify-between items-center mb-16 h-[52px]">
+          <div className="flex items-center gap-[12px]">
+            <div className="w-[10px] h-[10px] bg-[#FF4D1A]" />
+            <span 
+              className="text-[#F5F1E8] text-[18px] uppercase"
+              style={{ 
+                fontFamily: "'Space Grotesk', 'Inter', sans-serif", 
+                fontWeight: 800, 
+                letterSpacing: '0.22em' 
+              }}
+            >
               BANZOOK
-            </a>
-            <button onClick={() => setIsMobileMenuOpen(false)} className="text-white">
-              <X size={28} strokeWidth={2} />
-            </button>
+            </span>
           </div>
-          <nav className="flex flex-col gap-6 text-2xl font-bold tracking-widest">
-             {navLinks.map((link) => (
-              <a
-                key={link.id}
-                href={`#${link.id}`}
-                onClick={(e) => handleNavClick(link.id, e)}
-                className={currentPage === link.id ? 'text-[#FF4D1A]' : 'text-white'}
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
+          
+          <button 
+            onClick={() => setIsMobileMenuOpen(false)} 
+            className="text-white hover:text-[#FF4D1A] transition-colors flex flex-col justify-center items-center w-[24px] h-[24px] relative"
+          >
+            <div className="w-full h-[2px] bg-current absolute rotate-45 transition-transform" />
+            <div className="w-full h-[2px] bg-current absolute -rotate-45 transition-transform" />
+          </button>
         </div>
-      )}
+        
+        <nav className="flex flex-col gap-8 px-4 h-full overflow-y-auto">
+          {navLinks.map((link, i) => (
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              onClick={(e) => handleNavClick(link.id, e)}
+              className="text-white uppercase transition-colors hover:text-[#FF4D1A] transform hover:translate-x-2 duration-300"
+              style={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: '12vw',
+                lineHeight: '0.9',
+                letterSpacing: '0.02em',
+                transitionDelay: isMobileMenuOpen ? `${i * 50}ms` : '0ms',
+                opacity: isMobileMenuOpen ? 1 : 0,
+                transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(20px)'
+              }}
+            >
+              {link.name}
+            </a>
+          ))}
+        </nav>
+      </div>
     </>
   );
 };
