@@ -286,13 +286,21 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
         </div>
       </motion.div>
 
-      {/* FULL-SCREEN MENU OVERLAY */}
+      {/* MENU BACKDROP DIMMER */}
       <div 
-        className={`fixed inset-0 z-[2000] bg-[#09090B] flex flex-col p-[22px] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`fixed inset-0 z-[1999] bg-black/60 backdrop-blur-sm transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
+        onClick={() => setIsMobileMenuOpen(false)}
+      />
+
+      {/* LEFT DRAWER MENU */}
+      <div 
+        className={`fixed top-0 left-0 bottom-0 w-full md:w-[500px] z-[2000] bg-[#09090B] border-r border-[rgba(255,255,255,0.08)] flex flex-col p-[32px] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
       >
-        <div className="flex justify-between items-center mb-16 h-[82px]">
+        <div className="flex justify-between items-center mb-16 h-[60px]">
           <div className="flex items-center gap-[12px]">
             <div className="w-[8px] h-[30px] bg-[#FF4D1A]" />
             <div className="flex flex-col">
@@ -319,7 +327,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
           </button>
         </div>
         
-        <nav className="flex flex-col px-4 h-full overflow-y-auto mt-4 pb-12">
+        <nav className="flex flex-col h-full overflow-y-auto mt-4 pb-12">
           {navLinks.map((link, i) => (
             <a
               key={link.id}
@@ -328,7 +336,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
               className="group flex items-center gap-6 uppercase transition-all duration-500 focus:outline-none w-full border-b border-[rgba(255,255,255,0.06)] py-6"
               style={{
                 textDecoration: 'none',
-                transitionDelay: isMobileMenuOpen ? `${i * 80}ms` : '0ms',
+                transitionDelay: isMobileMenuOpen ? `${i * 80 + 100}ms` : '0ms',
                 opacity: isMobileMenuOpen ? 1 : 0,
                 transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(30px)'
               }}
@@ -351,7 +359,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
                   className="transition-all duration-500 block transform group-hover:translate-y-[-100%] absolute"
                   style={{
                     fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: 'clamp(56px, 14vw, 92px)',
+                    fontSize: 'clamp(48px, 10vw, 72px)',
                     lineHeight: '0.85',
                     letterSpacing: '0.02em',
                     color: 'transparent',
@@ -365,7 +373,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
                   className="transition-all duration-500 block transform translate-y-[100%] group-hover:translate-y-0"
                   style={{
                     fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: 'clamp(56px, 14vw, 92px)',
+                    fontSize: 'clamp(48px, 10vw, 72px)',
                     lineHeight: '0.85',
                     letterSpacing: '0.02em',
                     color: '#F4F0E8',
