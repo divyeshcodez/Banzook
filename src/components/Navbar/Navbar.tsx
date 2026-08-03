@@ -368,42 +368,64 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
           </button>
         </div>
         
-        <nav className="flex flex-col gap-6 px-4 h-full overflow-y-auto">
+        <nav className="flex flex-col px-4 h-full overflow-y-auto mt-4 pb-12">
           {navLinks.map((link, i) => (
             <a
               key={link.id}
               href={`#${link.id}`}
               onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleNavClick(link.id, e)}
-              className="group flex items-end gap-6 uppercase transition-colors hover:text-[#FF4D1A] transform hover:translate-x-2 duration-300 focus:outline-none"
+              className="group flex items-center gap-6 uppercase transition-all duration-500 focus:outline-none w-full border-b border-[rgba(255,255,255,0.06)] py-6"
               style={{
                 textDecoration: 'none',
-                transitionDelay: isMobileMenuOpen ? `${i * 50}ms` : '0ms',
+                transitionDelay: isMobileMenuOpen ? `${i * 80}ms` : '0ms',
                 opacity: isMobileMenuOpen ? 1 : 0,
-                transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(20px)'
+                transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(30px)'
               }}
             >
               <span
+                className="group-hover:text-[#FF4D1A] transition-colors duration-500"
                 style={{
                   fontFamily: "'Inter', sans-serif",
                   fontSize: '14px',
-                  fontWeight: 700,
+                  fontWeight: 800,
                   letterSpacing: '0.12em',
-                  color: '#FF4D1A',
-                  marginBottom: '10px'
+                  color: 'rgba(255,255,255,0.25)',
                 }}
               >
                 0{i + 1}
               </span>
-              <span
-                className="text-white group-hover:text-[#FF4D1A] transition-colors"
-                style={{
-                  fontFamily: "'Bebas Neue', sans-serif",
-                  fontSize: '64px',
-                  lineHeight: '0.9',
-                  letterSpacing: '0.02em',
-                }}
-              >
-                {link.name}
+              <div className="relative overflow-hidden w-full flex items-center">
+                {/* Default Outline Text */}
+                <span
+                  className="transition-all duration-500 block transform group-hover:translate-y-[-100%] absolute"
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: 'clamp(56px, 14vw, 92px)',
+                    lineHeight: '0.85',
+                    letterSpacing: '0.02em',
+                    color: 'transparent',
+                    WebkitTextStroke: '1px rgba(255,255,255,0.4)',
+                  }}
+                >
+                  {link.name}
+                </span>
+                {/* Hover Solid Text */}
+                <span
+                  className="transition-all duration-500 block transform translate-y-[100%] group-hover:translate-y-0"
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: 'clamp(56px, 14vw, 92px)',
+                    lineHeight: '0.85',
+                    letterSpacing: '0.02em',
+                    color: '#F4F0E8',
+                  }}
+                >
+                  {link.name}
+                </span>
+              </div>
+              
+              <span className="text-[#FF4D1A] opacity-0 -translate-x-8 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-3xl ml-auto mb-2">
+                →
               </span>
             </a>
           ))}
