@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ChevronLeft } from 'lucide-react';
 import styles from './SidebarFilter.module.css';
 
@@ -16,6 +16,21 @@ export interface FilterConfig {
   conditions: string[];
   newArrivals: string[];
   availability: string[];
+}
+
+export interface ActiveFilters {
+  priceRanges: string[];
+  minPrice: string;
+  maxPrice: string;
+  deals: string[];
+  discounts: string[];
+  brands: string[];
+  flags: string[];
+  conditions: string[];
+  newArrivals: string[];
+  availability: string[];
+  category: string;
+  reviewStars: number | null;
 }
 
 const DEFAULT_CONFIG: FilterConfig = {
@@ -36,13 +51,25 @@ const DEFAULT_CONFIG: FilterConfig = {
 
 interface SidebarFilterProps {
   config?: Partial<FilterConfig>;
+  activeFilters: ActiveFilters;
+  onChange: (filters: ActiveFilters) => void;
 }
 
-export const SidebarFilter: React.FC<SidebarFilterProps> = ({ config: userConfig }) => {
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
-
+export const SidebarFilter: React.FC<SidebarFilterProps> = ({ config: userConfig, activeFilters, onChange }) => {
   const config = { ...DEFAULT_CONFIG, ...userConfig };
+
+  const handleToggleArrayItem = (key: keyof ActiveFilters, value: string) => {
+    const currentArray = activeFilters[key] as string[];
+    const newArray = currentArray.includes(value)
+      ? currentArray.filter(item => item !== value)
+      : [...currentArray, value];
+    
+    onChange({ ...activeFilters, [key]: newArray });
+  };
+
+  const handleSetCategory = (cat: string) => {
+    onChange({ ...activeFilters, category: cat });
+  };
 
   const renderStars = (filled: number) => {
     return (
@@ -60,12 +87,19 @@ export const SidebarFilter: React.FC<SidebarFilterProps> = ({ config: userConfig
   return (
     <aside className={styles.sidebar}>
       
-      {/* 1. Customer Reviews (Always static logic for 4 to 1 stars) */}
+      {/* 1. Customer Reviews */}
       <div className={styles.section}>
         <h3 className={styles.sectionTitle}>Customer Reviews</h3>
         <div className={styles.filterList}>
           {[4, 3, 2, 1].map((stars) => (
-            <button key={stars} className={styles.filterLink}>{renderStars(stars)}</button>
+            <button 
+              key={stars} 
+              className={styles.filterLink}
+              style={{ color: activeFilters.reviewStars === stars ? 'var(--orange)' : undefined }}
+              onClick={() => onChange({ ...activeFilters, reviewStars: activeFilters.reviewStars === stars ? null : stars })}
+            >
+              {renderStars(stars)}
+            </button>
           ))}
         </div>
       </div>
@@ -76,7 +110,14 @@ export const SidebarFilter: React.FC<SidebarFilterProps> = ({ config: userConfig
           <h3 className={styles.sectionTitle}>Price</h3>
           <div className={styles.filterList}>
             {config.priceRanges.map((range, idx) => (
-              <button key={idx} className={styles.filterLink}>{range}</button>
+              <button 
+                key={idx} 
+                className={styles.filterLink}
+                style={{ color: activeFilters.priceRanges.includes(range) ? 'var(--orange)' : undefined }}
+                onClick={() => handleToggleArrayItem('priceRanges', range)}
+              >
+                {range}
+              </button>
             ))}
           </div>
           <div className={styles.priceInputs}>
@@ -84,18 +125,18 @@ export const SidebarFilter: React.FC<SidebarFilterProps> = ({ config: userConfig
               type="text" 
               placeholder="Min" 
               className={styles.priceInput}
-              value={minPrice}
-              onChange={(e) => setMinPrice(e.target.value)}
+              value={activeFilters.minPrice}
+              onChange={(e) => onChange({ ...activeFilters, minPrice: e.target.value })}
             />
             <span style={{ color: '#666' }}>-</span>
             <input 
               type="text" 
               placeholder="Max" 
               className={styles.priceInput}
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
+              value={activeFilters.maxPrice}
+              onChange={(e) => onChange({ ...activeFilters, maxPrice: e.target.value })}
             />
-            <button className={styles.priceGoBtn}>Go</button>
+            <button className={styles.priceGoBtn} onClick={() => { /* triggers re-render via state */ }}>Go</button>
           </div>
         </div>
       )}
@@ -106,7 +147,14 @@ export const SidebarFilter: React.FC<SidebarFilterProps> = ({ config: userConfig
           <h3 className={styles.sectionTitle}>Deals & Discounts</h3>
           <div className={styles.filterList}>
             {config.deals.map((deal, idx) => (
-              <button key={idx} className={styles.filterLink}>{deal}</button>
+              <button 
+                key={idx} 
+                className={styles.filterLink}
+                style={{ color: activeFilters.deals.includes(deal) ? 'var(--orange)' : undefined }}
+                onClick={() => handleToggleArrayItem('deals', deal)}
+              >
+                {deal}
+              </button>
             ))}
           </div>
         </div>
@@ -118,7 +166,14 @@ export const SidebarFilter: React.FC<SidebarFilterProps> = ({ config: userConfig
           <h3 className={styles.sectionTitle}>Discount</h3>
           <div className={styles.filterList}>
             {config.discounts.map((discount, idx) => (
-              <button key={idx} className={styles.filterLink}>{discount}</button>
+              <button 
+                key={idx} 
+                className={styles.filterLink}
+                style={{ color: activeFilters.discounts.includes(discount) ? 'var(--orange)' : undefined }}
+                onClick={() => handleToggleArrayItem('discounts', discount)}
+              >
+                {discount}
+              </button>
             ))}
           </div>
         </div>
@@ -131,7 +186,12 @@ export const SidebarFilter: React.FC<SidebarFilterProps> = ({ config: userConfig
           <div className={styles.filterList}>
             {config.brands.map((brand, idx) => (
               <label key={idx} className={styles.filterItem}>
-                <input type="checkbox" className={styles.checkbox} />
+                <input 
+                  type="checkbox" 
+                  className={styles.checkbox} 
+                  checked={activeFilters.brands.includes(brand)}
+                  onChange={() => handleToggleArrayItem('brands', brand)}
+                />
                 {brand}
               </label>
             ))}
@@ -146,7 +206,12 @@ export const SidebarFilter: React.FC<SidebarFilterProps> = ({ config: userConfig
           <div className={styles.filterList}>
             {config.flags.map((flag, idx) => (
               <label key={idx} className={styles.filterItem}>
-                <input type="checkbox" className={styles.checkbox} />
+                <input 
+                  type="checkbox" 
+                  className={styles.checkbox} 
+                  checked={activeFilters.flags.includes(flag)}
+                  onChange={() => handleToggleArrayItem('flags', flag)}
+                />
                 {flag}
               </label>
             ))}
@@ -161,7 +226,12 @@ export const SidebarFilter: React.FC<SidebarFilterProps> = ({ config: userConfig
           <div className={styles.filterList}>
             {config.conditions.map((condition, idx) => (
               <label key={idx} className={styles.filterItem}>
-                <input type="checkbox" className={styles.checkbox} />
+                <input 
+                  type="checkbox" 
+                  className={styles.checkbox} 
+                  checked={activeFilters.conditions.includes(condition)}
+                  onChange={() => handleToggleArrayItem('conditions', condition)}
+                />
                 {condition}
               </label>
             ))}
@@ -175,7 +245,14 @@ export const SidebarFilter: React.FC<SidebarFilterProps> = ({ config: userConfig
           <h3 className={styles.sectionTitle}>New Arrivals</h3>
           <div className={styles.filterList}>
             {config.newArrivals.map((arrival, idx) => (
-              <button key={idx} className={styles.filterLink}>{arrival}</button>
+              <button 
+                key={idx} 
+                className={styles.filterLink}
+                style={{ color: activeFilters.newArrivals.includes(arrival) ? 'var(--orange)' : undefined }}
+                onClick={() => handleToggleArrayItem('newArrivals', arrival)}
+              >
+                {arrival}
+              </button>
             ))}
           </div>
         </div>
@@ -188,7 +265,12 @@ export const SidebarFilter: React.FC<SidebarFilterProps> = ({ config: userConfig
           <div className={styles.filterList}>
             {config.availability.map((avail, idx) => (
               <label key={idx} className={styles.filterItem}>
-                <input type="checkbox" className={styles.checkbox} />
+                <input 
+                  type="checkbox" 
+                  className={styles.checkbox}
+                  checked={activeFilters.availability.includes(avail)}
+                  onChange={() => handleToggleArrayItem('availability', avail)}
+                />
                 {avail}
               </label>
             ))}
@@ -201,12 +283,27 @@ export const SidebarFilter: React.FC<SidebarFilterProps> = ({ config: userConfig
         <div className={styles.section}>
           <h3 className={styles.sectionTitle}>Category</h3>
           <div className={styles.categoryTree}>
-            <div className={styles.catLevel1}>
+            <div 
+              className={styles.catLevel1} 
+              onClick={() => handleSetCategory('Any Department')}
+              style={{ color: activeFilters.category === 'Any Department' ? 'var(--orange)' : undefined }}
+            >
               <ChevronLeft size={14} /> {config.categories.level1}
             </div>
-            <div className={styles.catLevel2}>{config.categories.level2}</div>
+            <div 
+              className={styles.catLevel2}
+            >
+              {config.categories.level2}
+            </div>
             {config.categories.level3.map((cat, idx) => (
-              <div key={idx} className={styles.catLevel3}>{cat}</div>
+              <div 
+                key={idx} 
+                className={styles.catLevel3}
+                onClick={() => handleSetCategory(cat)}
+                style={{ color: activeFilters.category === cat ? 'var(--orange)' : undefined }}
+              >
+                {cat}
+              </div>
             ))}
           </div>
         </div>

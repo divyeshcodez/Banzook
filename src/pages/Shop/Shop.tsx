@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Search, ArrowRight } from 'lucide-react';
 import { PRODUCTS, type Product as ProductType } from '../../data/products';
 import { ProductModal } from '../../components/ProductModal/ProductModal';
-import { SidebarFilter } from '../../components/SidebarFilter/SidebarFilter';
+import { SidebarFilter, type ActiveFilters } from '../../components/SidebarFilter/SidebarFilter';
 import styles from './Shop.module.css';
 
 interface ShopProps {
@@ -48,19 +48,85 @@ export const ShopPage: React.FC<ShopProps> = () => {
   const [activeFilter, setActiveFilter] = useState<ShowroomFilter>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
   
+  // Sidebar Filter State
+  const [sidebarFilters, setSidebarFilters] = useState<ActiveFilters>({
+    priceRanges: [],
+    minPrice: '',
+    maxPrice: '',
+    deals: [],
+    discounts: [],
+    brands: [],
+    flags: [],
+    conditions: [],
+    newArrivals: [],
+    availability: [],
+    category: 'Any Department',
+    reviewStars: null,
+  });
+
   // Quick View Detail Modal State
   const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(null);
 
   // Filter Logic
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((prod) => {
-      // Category filter
+      // Category filter (Top Nav)
       if (activeFilter === 'TEES' && prod.category !== 'Tees') return false;
       if (activeFilter === 'HOODIES' && prod.category !== 'Hoodies') return false;
       if (activeFilter === 'OUTERWEAR' && prod.category !== 'Outerwear') return false;
       if (activeFilter === 'DROP 01' && prod.collection !== 'Drop 001') return false;
       if (activeFilter === 'NEW' && !prod.isNew) return false;
       if (activeFilter === 'ARCHIVE' && !prod.isLimited) return false;
+
+      // Sidebar Category
+      if (sidebarFilters.category !== 'Any Department' && sidebarFilters.category !== 'Apparel') {
+        if (sidebarFilters.category === 'T-Shirts' && prod.category !== 'Tees') return false;
+        if (sidebarFilters.category === 'Hoodies & Sweatshirts' && prod.category !== 'Hoodies') return false;
+        if (sidebarFilters.category === 'Outerwear' && prod.category !== 'Outerwear') return false;
+        if (sidebarFilters.category === 'Accessories' && prod.category !== 'Accessories') return false;
+        if (sidebarFilters.category === 'Bottoms' && prod.category !== 'Bottoms' as any) return false;
+      }
+
+      // Sidebar Price
+      let matchesPrice = true;
+      if (sidebarFilters.priceRanges.length > 0 || sidebarFilters.minPrice || sidebarFilters.maxPrice) {
+        matchesPrice = false;
+        
+        if (sidebarFilters.priceRanges.includes('Under ₹2,500') && prod.price < 2500) matchesPrice = true;
+        if (sidebarFilters.priceRanges.includes('₹2,500 - ₹7,000') && prod.price >= 2500 && prod.price <= 7000) matchesPrice = true;
+        if (sidebarFilters.priceRanges.includes('₹7,000 - ₹10,500') && prod.price > 7000 && prod.price <= 10500) matchesPrice = true;
+        if (sidebarFilters.priceRanges.includes('₹10,500 - ₹14,000') && prod.price > 10500 && prod.price <= 14000) matchesPrice = true;
+        if (sidebarFilters.priceRanges.includes('Over ₹14,000') && prod.price > 14000) matchesPrice = true;
+        
+        const minP = parseInt(sidebarFilters.minPrice);
+        const maxP = parseInt(sidebarFilters.maxPrice);
+        if (!isNaN(minP) && !isNaN(maxP)) {
+          if (prod.price >= minP && prod.price <= maxP) matchesPrice = true;
+        } else if (!isNaN(minP) && prod.price >= minP) {
+          matchesPrice = true;
+        } else if (!isNaN(maxP) && prod.price <= maxP) {
+          matchesPrice = true;
+        }
+      }
+      if (!matchesPrice) return false;
+
+      // Sidebar Availability (assuming we hide sold-out unless checked)
+      if (!sidebarFilters.availability.includes('Include Out of Stock') && prod.availability === 'sold-out') {
+        return false;
+      }
+
+      // Sidebar New Arrivals
+      if (sidebarFilters.newArrivals.length > 0 && !prod.isNew) {
+        return false;
+      }
+
+      // Missing data filters - if user selects these, mock returning 0 results since data doesn't exist
+      if (sidebarFilters.brands.length > 0) return false;
+      if (sidebarFilters.deals.length > 0) return false;
+      if (sidebarFilters.discounts.length > 0) return false;
+      if (sidebarFilters.conditions.length > 0) return false;
+      if (sidebarFilters.flags.length > 0) return false;
+      if (sidebarFilters.reviewStars !== null) return false;
 
       // Search query
       if (searchQuery.trim()) {
@@ -72,7 +138,7 @@ export const ShopPage: React.FC<ShopProps> = () => {
       }
       return true;
     });
-  }, [activeFilter, searchQuery]);
+  }, [activeFilter, searchQuery, sidebarFilters]);
 
   const handleOpenDetail = (product: ProductType) => {
     setSelectedProduct(product);
@@ -172,7 +238,7 @@ export const ShopPage: React.FC<ShopProps> = () => {
           <div className={styles.shopLayoutGrid}>
             {/* Sidebar Column */}
             <div className={styles.sidebarColumn}>
-              <SidebarFilter />
+              <SidebarFilter activeFilters={sidebarFilters} onChange={setSidebarFilters} />
             </div>
             
             {/* Main Products Column */}
