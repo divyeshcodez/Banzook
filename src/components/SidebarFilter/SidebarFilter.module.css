@@ -1,0 +1,206 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   SidebarFilter Styles
+   Dark mode Amazon-style faceted search
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.sidebar {
+  width: 100%;
+  padding-right: 1.5rem;
+  font-family: var(--font-body);
+}
+
+.section {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.sectionTitle {
+  font-family: var(--font-headline);
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+  color: #FFFFFF;
+  letter-spacing: 0.05em;
+}
+
+.filterList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.filterItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #A0A0A0;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  user-select: none;
+}
+
+.filterItem:hover {
+  color: #FFFFFF;
+}
+
+.filterLink {
+  color: #A0A0A0;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+}
+
+.filterLink:hover {
+  color: var(--orange);
+}
+
+/* Custom Checkbox */
+.checkbox {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  display: grid;
+  place-content: center;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.checkbox:checked {
+  background: var(--orange);
+  border-color: var(--orange);
+}
+
+.checkbox:checked::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  background-color: #000;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+/* Star Rating */
+.starRating {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.star {
+  color: #FFA41C;
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+}
+
+.starEmpty {
+  color: #555555;
+  width: 15px;
+  height: 15px;
+  fill: transparent;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.ratingText {
+  margin-left: 0.35rem;
+  font-size: 0.8rem;
+  color: #A0A0A0;
+}
+
+/* Price Range Inputs */
+.priceInputs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.priceInput {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  padding: 0.4rem 0.5rem;
+  width: 65px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.priceInput:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+
+.priceGoBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.priceGoBtn:hover {
+  background: #FFFFFF;
+  color: #000000;
+}
+
+/* Category Tree */
+.categoryTree {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.catLevel1 {
+  font-weight: 700;
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: -0.25rem;
+  cursor: pointer;
+}
+
+.catLevel1:hover {
+  color: var(--orange);
+}
+
+.catLevel2 {
+  font-weight: 700;
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  margin-left: 0.75rem;
+}
+
+.catLevel3 {
+  color: #A0A0A0;
+  font-size: 0.85rem;
+  margin-left: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.catLevel3:hover {
+  color: var(--orange);
+}

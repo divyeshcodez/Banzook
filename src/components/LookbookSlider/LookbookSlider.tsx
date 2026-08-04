@@ -65,7 +65,7 @@ export const LookbookSlider: React.FC = () => {
       >
         
         {/* Two-Column Layout */}
-        <div className="grid h-full w-full grid-cols-1 md:grid-cols-[48%_52%]">
+        <div className="grid h-full w-full grid-cols-1 md:grid-cols-2">
           
           {/* LEFT EDITORIAL PANEL */}
           <div className="flex flex-col justify-center h-full relative order-2 md:order-1 p-[32px] md:p-[72px]">

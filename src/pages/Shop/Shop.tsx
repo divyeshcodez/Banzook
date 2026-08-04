@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Search, ArrowRight } from 'lucide-react';
 import { PRODUCTS, type Product as ProductType } from '../../data/products';
 import { ProductModal } from '../../components/ProductModal/ProductModal';
+import { SidebarFilter } from '../../components/SidebarFilter/SidebarFilter';
 import styles from './Shop.module.css';
 
 interface ShopProps {
@@ -168,121 +169,130 @@ export const ShopPage: React.FC<ShopProps> = () => {
       {/* ── 4. Spatial Showroom Display System ────────────────────────────── */}
       <section className={styles.showroomDisplaySection}>
         <div className={styles.container}>
-          
-          {filteredProducts.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '6rem 0', color: '#666666' }}>
-              <h2 style={{ fontFamily: 'var(--font-headline)', fontSize: '1.75rem', marginBottom: '1rem', color: '#111111' }}>
-                NO PIECES MATCH YOUR SEARCH
-              </h2>
-              <p style={{ marginBottom: '2rem' }}>Try clearing filters or adjusting your search phrase.</p>
-              <button className="btn-primary" onClick={() => { setActiveFilter('ALL'); setSearchQuery(''); }}>
-                RESET SHOWROOM FILTERS
-              </button>
+          <div className={styles.shopLayoutGrid}>
+            {/* Sidebar Column */}
+            <div className={styles.sidebarColumn}>
+              <SidebarFilter />
             </div>
-          ) : (
-            <div className={styles.spatialLayoutGrid}>
-              
-              {/* Featured Large Module (Spans 8 columns) */}
-              {featuredHeroProduct && (
-                <div className={styles.heroModule} onClick={() => handleOpenDetail(featuredHeroProduct)}>
-                  <div className={styles.heroModuleMedia}>
-                    <img src={featuredHeroProduct.images[0]} alt={featuredHeroProduct.name} className={styles.moduleImg} />
-                    <img
-                      src={PRODUCT_MODEL_IMAGES[featuredHeroProduct.id]?.front || featuredHeroProduct.images[1]}
-                      alt={featuredHeroProduct.name}
-                      className={styles.moduleImgHover}
-                    />
-
-                    <div className={styles.sizeChipsRow}>
-                      {featuredHeroProduct.sizes.map((sz) => (
-                        <span key={sz} className={styles.sizeChip}>{sz}</span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                    <div>
-                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', fontWeight: 800, color: 'var(--orange)', letterSpacing: '0.12em' }}>
-                        FEATURED EXHIBIT // {featuredHeroProduct.collection}
-                      </span>
-                      <h3 style={{ fontFamily: 'var(--font-headline)', fontSize: '1.4rem', fontWeight: 900, color: '#111111', margin: '0.2rem 0' }}>
-                        {featuredHeroProduct.name}
-                      </h3>
-                    </div>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.25rem', fontWeight: 800, color: '#111111' }}>
-                      ₹{featuredHeroProduct.price.toLocaleString('en-IN')}
-                    </span>
-                  </div>
+            
+            {/* Main Products Column */}
+            <div className={styles.mainColumn}>
+              {filteredProducts.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '6rem 0', color: '#666666' }}>
+                  <h2 style={{ fontFamily: 'var(--font-headline)', fontSize: '1.75rem', marginBottom: '1rem', color: '#FFFFFF' }}>
+                    NO PIECES MATCH YOUR SEARCH
+                  </h2>
+                  <p style={{ marginBottom: '2rem' }}>Try clearing filters or adjusting your search phrase.</p>
+                  <button className="btn-primary" onClick={() => { setActiveFilter('ALL'); setSearchQuery(''); }}>
+                    RESET SHOWROOM FILTERS
+                  </button>
                 </div>
-              )}
+              ) : (
+                <div className={styles.spatialLayoutGrid}>
+                  
+                  {/* Featured Large Module (Spans 8 columns) */}
+                  {featuredHeroProduct && (
+                    <div className={styles.heroModule} onClick={() => handleOpenDetail(featuredHeroProduct)}>
+                      <div className={styles.heroModuleMedia}>
+                        <img src={featuredHeroProduct.images[0]} alt={featuredHeroProduct.name} className={styles.moduleImg} />
+                        <img
+                          src={PRODUCT_MODEL_IMAGES[featuredHeroProduct.id]?.front || featuredHeroProduct.images[1]}
+                          alt={featuredHeroProduct.name}
+                          className={styles.moduleImgHover}
+                        />
 
-              {/* Secondary Lookbook Module (Spans 4 columns) */}
-              {secondaryProducts[0] && (
-                <div className={styles.portraitModule} onClick={() => handleOpenDetail(secondaryProducts[0])}>
-                  <div className={styles.portraitModuleMedia}>
-                    <img src={secondaryProducts[0].images[0]} alt={secondaryProducts[0].name} className={styles.moduleImg} />
-                    <img
-                      src={PRODUCT_MODEL_IMAGES[secondaryProducts[0].id]?.front || secondaryProducts[0].images[1]}
-                      alt={secondaryProducts[0].name}
-                      className={styles.moduleImgHover}
-                    />
+                        <div className={styles.sizeChipsRow}>
+                          {featuredHeroProduct.sizes.map((sz) => (
+                            <span key={sz} className={styles.sizeChip}>{sz}</span>
+                          ))}
+                        </div>
+                      </div>
 
-                    <div className={styles.sizeChipsRow}>
-                      {secondaryProducts[0].sizes.map((sz) => (
-                        <span key={sz} className={styles.sizeChip}>{sz}</span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', fontWeight: 800, color: 'var(--orange)', letterSpacing: '0.1em' }}>
-                      {secondaryProducts[0].collection}
-                    </span>
-                    <h3 style={{ fontFamily: 'var(--font-headline)', fontSize: '1.1rem', fontWeight: 900, color: '#111111', margin: '0.2rem 0' }}>
-                      {secondaryProducts[0].name}
-                    </h3>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1rem', fontWeight: 800, color: '#555555' }}>
-                      ₹{secondaryProducts[0].price.toLocaleString('en-IN')}
-                    </span>
-                  </div>
-                </div>
-              )}
-
-              {/* Remaining Showroom Modules (Spans 6 columns each) */}
-              {secondaryProducts.slice(1).map((prod) => {
-                const hoverImg = PRODUCT_MODEL_IMAGES[prod.id]?.front || prod.images[1] || prod.images[0];
-                return (
-                  <div key={prod.id} className={styles.mediumModule} onClick={() => handleOpenDetail(prod)}>
-                    <div className={styles.mediumModuleMedia}>
-                      <img src={prod.images[0]} alt={prod.name} className={styles.moduleImg} />
-                      <img src={hoverImg} alt={prod.name} className={styles.moduleImgHover} />
-
-                      <div className={styles.sizeChipsRow}>
-                        {prod.sizes.map((sz) => (
-                          <span key={sz} className={styles.sizeChip}>{sz}</span>
-                        ))}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                        <div>
+                          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', fontWeight: 800, color: 'var(--orange)', letterSpacing: '0.12em' }}>
+                            FEATURED EXHIBIT // {featuredHeroProduct.collection}
+                          </span>
+                          <h3 style={{ fontFamily: 'var(--font-headline)', fontSize: '1.4rem', fontWeight: 900, color: '#111111', margin: '0.2rem 0' }}>
+                            {featuredHeroProduct.name}
+                          </h3>
+                        </div>
+                        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1.25rem', fontWeight: 800, color: '#111111' }}>
+                          ₹{featuredHeroProduct.price.toLocaleString('en-IN')}
+                        </span>
                       </div>
                     </div>
+                  )}
 
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  {/* Secondary Lookbook Module (Spans 4 columns) */}
+                  {secondaryProducts[0] && (
+                    <div className={styles.portraitModule} onClick={() => handleOpenDetail(secondaryProducts[0])}>
+                      <div className={styles.portraitModuleMedia}>
+                        <img src={secondaryProducts[0].images[0]} alt={secondaryProducts[0].name} className={styles.moduleImg} />
+                        <img
+                          src={PRODUCT_MODEL_IMAGES[secondaryProducts[0].id]?.front || secondaryProducts[0].images[1]}
+                          alt={secondaryProducts[0].name}
+                          className={styles.moduleImgHover}
+                        />
+
+                        <div className={styles.sizeChipsRow}>
+                          {secondaryProducts[0].sizes.map((sz) => (
+                            <span key={sz} className={styles.sizeChip}>{sz}</span>
+                          ))}
+                        </div>
+                      </div>
+
                       <div>
                         <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', fontWeight: 800, color: 'var(--orange)', letterSpacing: '0.1em' }}>
-                          {prod.collection}
+                          {secondaryProducts[0].collection}
                         </span>
                         <h3 style={{ fontFamily: 'var(--font-headline)', fontSize: '1.1rem', fontWeight: 900, color: '#111111', margin: '0.2rem 0' }}>
-                          {prod.name}
+                          {secondaryProducts[0].name}
                         </h3>
+                        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1rem', fontWeight: 800, color: '#555555' }}>
+                          ₹{secondaryProducts[0].price.toLocaleString('en-IN')}
+                        </span>
                       </div>
-                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1rem', fontWeight: 800, color: '#555555' }}>
-                        ₹{prod.price.toLocaleString('en-IN')}
-                      </span>
                     </div>
-                  </div>
-                );
-              })}
+                  )}
 
+                  {/* Remaining Showroom Modules (Spans 6 columns each) */}
+                  {secondaryProducts.slice(1).map((prod) => {
+                    const hoverImg = PRODUCT_MODEL_IMAGES[prod.id]?.front || prod.images[1] || prod.images[0];
+                    return (
+                      <div key={prod.id} className={styles.mediumModule} onClick={() => handleOpenDetail(prod)}>
+                        <div className={styles.mediumModuleMedia}>
+                          <img src={prod.images[0]} alt={prod.name} className={styles.moduleImg} />
+                          <img src={hoverImg} alt={prod.name} className={styles.moduleImgHover} />
+
+                          <div className={styles.sizeChipsRow}>
+                            {prod.sizes.map((sz) => (
+                              <span key={sz} className={styles.sizeChip}>{sz}</span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                          <div>
+                            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', fontWeight: 800, color: 'var(--orange)', letterSpacing: '0.1em' }}>
+                              {prod.collection}
+                            </span>
+                            <h3 style={{ fontFamily: 'var(--font-headline)', fontSize: '1.1rem', fontWeight: 900, color: '#111111', margin: '0.2rem 0' }}>
+                              {prod.name}
+                            </h3>
+                          </div>
+                          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '1rem', fontWeight: 800, color: '#555555' }}>
+                            ₹{prod.price.toLocaleString('en-IN')}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
+
+                </div>
+              )}
             </div>
-          )}
+          </div>
 
         </div>
       </section>

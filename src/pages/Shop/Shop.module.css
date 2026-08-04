@@ -265,6 +265,36 @@
   padding: 4rem 0 6rem;
 }
 
+.shopLayoutGrid {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.sidebarColumn {
+  position: sticky;
+  top: 120px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  /* Scrollbar styling for Webkit */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.sidebarColumn::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebarColumn::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.mainColumn {
+  width: 100%;
+}
+
 .spatialLayoutGrid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -622,6 +652,14 @@
 }
 
 @media (max-width: 1024px) {
+  .shopLayoutGrid {
+    grid-template-columns: 1fr;
+  }
+  .sidebarColumn {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+  }
   .heroModule, .portraitModule, .mediumModule {
     grid-column: span 12;
   }
