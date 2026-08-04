@@ -69,6 +69,48 @@ export const PRODUCTS: Product[] = [
     isNew: true,
     isLimited: true,
     description: 'Anarchist theme graphic tee in vintage black. Features "REBEL YOUTH" chest print and a detailed distressed classic statue print overlaid with an anarchy symbol on the back.'
+  },
+  {
+    id: 'prod-18',
+    name: 'BANZOOK HEAVYWEIGHT "VOID" HOODIE',
+    slug: 'banzook-void-hoodie',
+    price: 3499,
+    images: ['/images/tshirts/tshirt_legends.jpg', '/images/model_legends.png'],
+    category: 'Hoodies',
+    collection: 'Drop 002',
+    sizes: ['M', 'L', 'XL'],
+    availability: 'in-stock',
+    isNew: true,
+    isLimited: false,
+    description: '450GSM organic cotton hoodie. Features an oversized fit with dropped shoulders and a minimal tonal embroidered logo on the chest.'
+  },
+  {
+    id: 'prod-19',
+    name: 'BANZOOK TACTICAL UTILITY VEST',
+    slug: 'banzook-tactical-vest',
+    price: 4999,
+    images: ['/images/tshirts/tshirt_hotwheels.jpg', '/images/model_hotwheels.jpg'],
+    category: 'Outerwear',
+    collection: 'Archive',
+    sizes: ['L', 'XL'],
+    availability: 'sold-out',
+    isNew: false,
+    isLimited: true,
+    description: 'Military-inspired utility vest with 3D cargo pockets, matte black hardware, and a durable ripstop nylon construction.'
+  },
+  {
+    id: 'prod-20',
+    name: 'BANZOOK "CODE" SNAPBACK CAP',
+    slug: 'banzook-code-snapback',
+    price: 999,
+    images: ['/images/tshirts/tshirt_kindmind.jpg', '/images/model_kindmind.png'],
+    category: 'Accessories',
+    collection: 'Essentials',
+    sizes: ['OS'],
+    availability: 'in-stock',
+    isNew: true,
+    isLimited: false,
+    description: 'Classic 6-panel snapback cap featuring the Banzook "CODE" rubber patch logo on the front and an adjustable strap.'
   }
 ];
 
