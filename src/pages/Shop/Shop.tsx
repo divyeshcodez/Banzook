@@ -120,13 +120,54 @@ export const ShopPage: React.FC<ShopProps> = () => {
         return false;
       }
 
-      // Missing data filters - if user selects these, mock returning 0 results since data doesn't exist
-      if (sidebarFilters.brands.length > 0) return false;
-      if (sidebarFilters.deals.length > 0) return false;
-      if (sidebarFilters.discounts.length > 0) return false;
-      if (sidebarFilters.conditions.length > 0) return false;
-      if (sidebarFilters.flags.length > 0) return false;
-      if (sidebarFilters.reviewStars !== null) return false;
+      // Sidebar Top Brands
+      if (sidebarFilters.brands.length > 0 && !sidebarFilters.brands.includes(prod.brand)) {
+        return false;
+      }
+
+      // Sidebar Item Condition
+      if (sidebarFilters.conditions.length > 0 && !sidebarFilters.conditions.includes(prod.condition)) {
+        return false;
+      }
+
+      // Sidebar Deals & Discounts
+      if (sidebarFilters.deals.length > 0) {
+        if (!prod.deals || !sidebarFilters.deals.some(deal => prod.deals?.includes(deal))) {
+          return false;
+        }
+      }
+
+      // Sidebar Discount Percentage
+      // For example, '10% Off or more', '25% Off or more'
+      if (sidebarFilters.discounts.length > 0) {
+        let meetsDiscount = false;
+        const prodDiscount = prod.discount || 0;
+        for (const discLabel of sidebarFilters.discounts) {
+          const requiredMatch = discLabel.match(/(\d+)%/);
+          if (requiredMatch) {
+            const requiredDiscount = parseInt(requiredMatch[1], 10);
+            if (prodDiscount >= requiredDiscount) {
+              meetsDiscount = true;
+              break;
+            }
+          }
+        }
+        if (!meetsDiscount) return false;
+      }
+
+      // Sidebar Order Options (Flags) like 'Eligible for Pay On Delivery'
+      if (sidebarFilters.flags.length > 0) {
+        if (!prod.flags || !sidebarFilters.flags.some(flag => prod.flags?.includes(flag))) {
+          return false;
+        }
+      }
+
+      // Sidebar Customer Reviews (Stars)
+      if (sidebarFilters.reviewStars !== null) {
+        if (prod.reviewStars < sidebarFilters.reviewStars) {
+          return false;
+        }
+      }
 
       // Search query
       if (searchQuery.trim()) {
