@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BANZOOK | Admin Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;600;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #09090B;
+      --surface: #111;
+      --text: #F8F7F5;
+      --accent: #FF4D1A;
+      --border: rgba(255,255,255,0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    /* --- PIN LOGIN SCREEN --- */
+    #login-screen {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--bg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .brand { font-family: 'Space Grotesk', sans-serif; font-size: 3rem; letter-spacing: 0.2em; margin-bottom: 2rem; color: #fff; }
+    .pin-input {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: #fff;
+      font-size: 1.5rem;
+      padding: 1rem 2rem;
+      text-align: center;
+      letter-spacing: 0.5em;
+      width: 300px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .pin-input:focus { border-color: var(--accent); }
+    .error-msg { color: var(--accent); margin-top: 1rem; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em; opacity: 0; transition: opacity 0.3s; }
+    
+    /* --- DASHBOARD --- */
+    #dashboard {
+      display: none;
+      padding: 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; border-bottom: 1px solid var(--border); padding-bottom: 2rem; }
+    .header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; letter-spacing: 0.1em; }
+    .nav-tabs { display: flex; gap: 2rem; }
+    .tab {
+      background: none; border: none; color: rgba(255,255,255,0.5); font-family: 'Inter', sans-serif; font-weight: 800;
+      font-size: 0.9rem; letter-spacing: 0.15em; cursor: pointer; padding-bottom: 0.5rem; transition: all 0.3s;
+      border-bottom: 2px solid transparent;
+    }
+    .tab.active { color: #fff; border-bottom: 2px solid var(--accent); }
+    .tab:hover { color: #fff; }
+
+    .section { display: none; }
+    .section.active { display: block; }
+    
+    /* Tables */
+    .data-table {
+      width: 100%; border-collapse: collapse; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+    }
+    .data-table th, .data-table td {
+      padding: 1.25rem 1.5rem; text-align: left; border-bottom: 1px solid var(--border);
+    }
+    .data-table th {
+      font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; color: rgba(255,255,255,0.4);
+      text-transform: uppercase; background: rgba(0,0,0,0.2);
+    }
+    .data-table td { font-size: 0.9rem; color: #ccc; }
+    .data-table tr:hover { background: rgba(255,255,255,0.02); }
+    
+    .status-badge {
+      display: inline-block; padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+      background: rgba(255,255,255,0.1); color: #fff;
+    }
+    .status-in-transit { background: rgba(255, 165, 0, 0.2); color: orange; }
+    .status-delivered { background: rgba(0, 255, 0, 0.15); color: #4ade80; }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div id="login-screen">
+    <div class="brand">BANZOOK</div>
+    <input type="password" id="pin-input" class="pin-input" placeholder="ENTER PIN" autocomplete="off">
+    <div id="error-msg" class="error-msg">ACCESS DENIED</div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard">
+    <div class="header">
+      <h1>ADMIN DOSSIER</h1>
+      <div class="nav-tabs">
+        <button class="tab active" onclick="switchTab('orders')">ORDERS</button>
+        <button class="tab" onclick="switchTab('users')">USERS</button>
+      </div>
+    </div>
+    
+    <div id="loading" style="text-align: center; color: var(--accent); letter-spacing: 0.2em; font-weight: 800; padding: 4rem;">DECRYPTING DATABASE...</div>
+
+    <!-- ORDERS SECTION -->
+    <div id="orders-section" class="section active">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Items</th>
+            <th>Total</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="orders-tbody">
+          <!-- Dynamically populated -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- USERS SECTION -->
+    <div id="users-section" class="section">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody id="users-tbody">
+          <!-- Dynamically populated -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCh50lChAC-KqWrWwTKcAQDvtlBXtOWI6s",
+      authDomain: "banzookky.firebaseapp.com",
+      projectId: "banzookky",
+      storageBucket: "banzookky.firebasestorage.app",
+      messagingSenderId: "267074199036",
+      appId: "1:267074199036:web:216b413a7bf65fabce2679"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // --- PIN LOGIC ---
+    const pinInput = document.getElementById('pin-input');
+    const errorMsg = document.getElementById('error-msg');
+    
+    pinInput.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
+        if (pinInput.value === '777') {
+          document.getElementById('login-screen').style.display = 'none';
+          document.getElementById('dashboard').style.display = 'block';
+          fetchData();
+        } else {
+          errorMsg.style.opacity = '1';
+          pinInput.value = '';
+          setTimeout(() => errorMsg.style.opacity = '0', 2000);
+        }
+      }
+    });
+
+    // --- TAB LOGIC ---
+    window.switchTab = (tabName) => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      
+      document.querySelector(`button[onclick="switchTab('${tabName}')"]`).classList.add('active');
+      document.getElementById(`${tabName}-section`).classList.add('active');
+    };
+
+    // --- FETCH DATA ---
+    async function fetchData() {
+      const loading = document.getElementById('loading');
+      try {
+        // Fetch Orders
+        const ordersSnapshot = await getDocs(query(collection(db, "orders"), orderBy("date", "desc")));
+        const ordersTbody = document.getElementById('orders-tbody');
+        ordersTbody.innerHTML = '';
+        
+        ordersSnapshot.forEach((doc) => {
+          const data = doc.data();
+          const itemsStr = (data.items || []).map(i => `${i.quantity}x ${i.name} (${i.size})`).join('<br>');
+          const date = new Date(data.date).toLocaleDateString('en-GB');
+          
+          let statusClass = 'status-in-transit';
+          if(data.status?.toLowerCase() === 'delivered') statusClass = 'status-delivered';
+
+          ordersTbody.innerHTML += `
+            <tr>
+              <td style="font-family:monospace; color:#fff;">${doc.id}</td>
+              <td>${date}</td>
+              <td>
+                <div style="color:#fff; font-weight:600; margin-bottom:4px;">${data.name || 'GUEST'}</div>
+                <div style="font-size:0.8rem;">${data.email || ''}<br>${data.phone || ''}</div>
+              </td>
+              <td style="font-size:0.8rem; line-height:1.4;">${itemsStr}</td>
+              <td style="color:var(--accent); font-weight:800;">₹${data.total || 0}</td>
+              <td><span class="status-badge ${statusClass}">${data.status || 'PROCESSING'}</span></td>
+            </tr>
+          `;
+        });
+
+        // Fetch Users
+        const usersSnapshot = await getDocs(collection(db, "users"));
+        const usersTbody = document.getElementById('users-tbody');
+        usersTbody.innerHTML = '';
+        
+        usersSnapshot.forEach((doc) => {
+          const data = doc.data();
+          usersTbody.innerHTML += `
+            <tr>
+              <td style="font-family:monospace;">${doc.id}</td>
+              <td style="color:#fff; font-weight:600;">${data.name || 'UNKNOWN'}</td>
+              <td>${data.email || '-'}</td>
+              <td>${data.phone || '-'}</td>
+              <td style="max-width:300px;">${data.address || '-'}</td>
+            </tr>
+          `;
+        });
+
+        loading.style.display = 'none';
+
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        loading.innerHTML = "ERROR: COULD NOT FETCH DATA. CHECK FIRESTORE RULES.";
+        loading.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>
