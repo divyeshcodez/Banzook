@@ -86,6 +86,42 @@
     }
     .status-in-transit { background: rgba(255, 165, 0, 0.2); color: orange; }
     .status-delivered { background: rgba(0, 255, 0, 0.15); color: #4ade80; }
+
+    /* --- MODAL --- */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 10000;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(5px);
+      display: none; align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    .modal {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 3rem; width: 100%; max-width: 650px;
+      position: relative; border-radius: 8px;
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: none; border: none; color: rgba(255,255,255,0.5); font-size: 2rem; 
+      cursor: pointer; line-height: 1; transition: color 0.3s;
+    }
+    .modal-close:hover { color: #fff; }
+    .modal-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; margin-bottom: 2rem; letter-spacing: 0.15em; color: var(--accent); }
+    
+    .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+    .modal-field { display: flex; flex-direction: column; gap: 0.35rem; }
+    .modal-label { font-size: 0.7rem; font-weight: 800; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; }
+    .modal-value { font-size: 0.95rem; color: #fff; font-weight: 500; line-height: 1.4; }
+    
+    .modal-items { margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 2rem; }
+    .modal-items-title { font-size: 0.8rem; font-weight: 800; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+    .modal-item { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.95rem; color: #fff; }
+    .modal-item-name { flex: 1; padding-right: 1rem; }
+    .modal-total { 
+      display: flex; justify-content: space-between; align-items: center; 
+      margin-top: 2rem; font-weight: 900; font-size: 1.5rem; color: var(--accent); 
+      border-top: 1px dashed var(--border); padding-top: 1.5rem; 
+    }
   </style>
 </head>
 <body>
@@ -147,6 +183,53 @@
     </div>
   </div>
 
+  <!-- ORDER MODAL -->
+  <div id="order-modal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal(event)">&times;</button>
+      <div class="modal-title" id="modal-order-id">ORDER #</div>
+      
+      <div class="modal-grid">
+        <div class="modal-field">
+          <span class="modal-label">Date Placed</span>
+          <span class="modal-value" id="modal-date">--</span>
+        </div>
+        <div class="modal-field">
+          <span class="modal-label">Status</span>
+          <span class="modal-value" id="modal-status">--</span>
+        </div>
+        <div class="modal-field">
+          <span class="modal-label">Customer Name</span>
+          <span class="modal-value" id="modal-name">--</span>
+        </div>
+        <div class="modal-field">
+          <span class="modal-label">Contact</span>
+          <span class="modal-value" id="modal-contact">--</span>
+        </div>
+        <div class="modal-field">
+          <span class="modal-label">Payment Method</span>
+          <span class="modal-value" id="modal-payment">--</span>
+        </div>
+        <div class="modal-field">
+          <span class="modal-label">Shipping Address</span>
+          <span class="modal-value" id="modal-address">--</span>
+        </div>
+      </div>
+
+      <div class="modal-items">
+        <div class="modal-items-title">Order Items</div>
+        <div id="modal-items-list">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <div class="modal-total">
+        <span>TOTAL</span>
+        <span id="modal-total-price">₹0</span>
+      </div>
+    </div>
+  </div>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -162,6 +245,9 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+
+    // Global variable to store fetched orders for the modal
+    window.allOrders = {};
 
     // --- PIN LOGIC ---
     const pinInput = document.getElementById('pin-input');
@@ -190,6 +276,49 @@
       document.getElementById(`${tabName}-section`).classList.add('active');
     };
 
+    // --- MODAL LOGIC ---
+    window.openOrderModal = (orderId) => {
+      const order = window.allOrders[orderId];
+      if (!order) return;
+
+      document.getElementById('modal-order-id').innerText = 'ORDER #' + orderId;
+      document.getElementById('modal-date').innerText = new Date(order.date).toLocaleString('en-GB');
+      
+      let statusClass = 'status-in-transit';
+      if(order.status?.toLowerCase() === 'delivered') statusClass = 'status-delivered';
+      document.getElementById('modal-status').innerHTML = `<span class="status-badge ${statusClass}">${order.status || 'PROCESSING'}</span>`;
+      
+      document.getElementById('modal-name').innerText = order.name || 'GUEST';
+      document.getElementById('modal-contact').innerHTML = `${order.email || 'No email'}<br>${order.phone || 'No phone'}`;
+      document.getElementById('modal-address').innerText = order.address || 'No address provided';
+      
+      let paymentText = order.paymentMethod || 'UNKNOWN';
+      if (paymentText.toLowerCase() === 'qr' && order.transactionId) paymentText += ` (TXN: ${order.transactionId})`;
+      document.getElementById('modal-payment').innerText = paymentText;
+
+      const itemsList = document.getElementById('modal-items-list');
+      itemsList.innerHTML = '';
+      (order.items || []).forEach(item => {
+        itemsList.innerHTML += `
+          <div class="modal-item">
+            <span class="modal-item-name">${item.quantity}x ${item.name} (Size: ${item.size})</span>
+            <span>₹${item.price * item.quantity}</span>
+          </div>
+        `;
+      });
+
+      document.getElementById('modal-total-price').innerText = `₹${order.total || 0}`;
+
+      document.getElementById('order-modal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    };
+
+    window.closeModal = (e) => {
+      if (e) e.stopPropagation();
+      document.getElementById('order-modal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    };
+
     // --- FETCH DATA ---
     async function fetchData() {
       const loading = document.getElementById('loading');
@@ -201,6 +330,8 @@
         
         ordersSnapshot.forEach((doc) => {
           const data = doc.data();
+          window.allOrders[doc.id] = data; // Store globally for modal
+
           const itemsStr = (data.items || []).map(i => `${i.quantity}x ${i.name} (${i.size})`).join('<br>');
           const date = new Date(data.date).toLocaleDateString('en-GB');
           
@@ -208,7 +339,7 @@
           if(data.status?.toLowerCase() === 'delivered') statusClass = 'status-delivered';
 
           ordersTbody.innerHTML += `
-            <tr>
+            <tr style="cursor: pointer;" onclick="openOrderModal('${doc.id}')">
               <td style="font-family:monospace; color:#fff;">${doc.id}</td>
               <td>${date}</td>
               <td>
