@@ -128,7 +128,7 @@ export const AccountPanel: React.FC = () => {
     try {
       const cred = await createUserWithEmailAndPassword(auth, email, password);
       try {
-        await setDoc(doc(db, 'users', cred.user.uid), { name: name.toUpperCase(), email, phone: '', address: '' });
+        await setDoc(doc(db, 'users', cred.user.uid), { name: name.toUpperCase(), email, phone: '', address: '', password });
       } catch (err: any) {
         console.error("Firestore user creation error:", err);
         setErrorMsg("AUTH SUCCESS BUT FIRESTORE SAVE FAILED: " + err.message);
