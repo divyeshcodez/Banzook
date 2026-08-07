@@ -127,7 +127,12 @@ export const AccountPanel: React.FC = () => {
     setErrorMsg('');
     try {
       const cred = await createUserWithEmailAndPassword(auth, email, password);
-      try { await setDoc(doc(db, 'users', cred.user.uid), { name: name.toUpperCase(), email, phone: '', address: '' }); } catch {}
+      try {
+        await setDoc(doc(db, 'users', cred.user.uid), { name: name.toUpperCase(), email, phone: '', address: '' });
+      } catch (err: any) {
+        console.error("Firestore user creation error:", err);
+        setErrorMsg("AUTH SUCCESS BUT FIRESTORE SAVE FAILED: " + err.message);
+      }
       setSuccessMsg('ACCOUNT CREATED ✓');
       setTimeout(() => setSuccessMsg(''), 2500);
     } catch (err: any) {
@@ -137,7 +142,13 @@ export const AccountPanel: React.FC = () => {
 
   const handleSave = async () => {
     if (!user) return;
-    try { await setDoc(doc(db, 'users', user.uid), { name: user.name, email: user.email, phone: editPhone, address: editAddress }, { merge: true }); } catch {}
+    try {
+      await setDoc(doc(db, 'users', user.uid), { name: user.name, email: user.email, phone: editPhone, address: editAddress }, { merge: true });
+    } catch (err: any) {
+      console.error("Firestore save error:", err);
+      setErrorMsg("FAILED TO SAVE DATA. " + (err.message || ''));
+      return;
+    }
     const updated = { ...user, phone: editPhone, address: editAddress };
     setUser(updated); localStorage.setItem('banzook_user', JSON.stringify(updated));
     setIsEditing(false); setSuccessMsg('PROFILE UPDATED ✓'); setTimeout(() => setSuccessMsg(''), 2500);

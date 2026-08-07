@@ -359,10 +359,11 @@
 
 .coImageTag {
   font-family:var(--font-mono); font-size:0.65rem; font-weight:800;
-  color:rgba(255,255,255,0.7); letter-spacing:0.2em; text-transform:uppercase;
+  color:#FFF; letter-spacing:0.2em; text-transform:uppercase;
   border:1px solid rgba(255,255,255,0.25);
-  padding:0.25rem 0.75rem;
-  background:rgba(0,0,0,0.3);
+  padding:0.35rem 0.85rem;
+  background:rgba(17,17,17,0.85);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
 }
 
 .coImageProduct {

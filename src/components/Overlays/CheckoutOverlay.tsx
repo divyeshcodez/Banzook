@@ -114,8 +114,9 @@ export const CheckoutOverlay: React.FC = () => {
     try {
       const ref = await addDoc(collection(db, 'orders'), payload);
       setOrderSuccess(ref.id); clearCart();
-    } catch {
-      setOrderSuccess('BAN-' + Math.floor(100000 + Math.random() * 900000)); clearCart();
+    } catch (err: any) {
+      console.error("Order save error:", err);
+      alert("Failed to save order to Firebase: " + (err.message || 'Check Firestore rules'));
     } finally { setIsOrdering(false); }
   };
 
