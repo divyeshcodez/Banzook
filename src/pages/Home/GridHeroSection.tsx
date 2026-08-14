@@ -20,46 +20,53 @@ export const GridHeroSection: React.FC = () => {
          <div className="text-[15vw] font-black font-condensed tracking-tighter text-[#FF4D1A] transform -rotate-6 translate-x-1/4 opacity-10 select-none">BANZOOK</div>
       </div>
 
-      {/* Main Hero Content - Perfectly Centered */}
+      {/* Main Hero Content - Perfectly Centered Block */}
       <div className="relative z-10 w-full flex-1 flex flex-col justify-center items-center px-4 pt-32 pb-16 min-h-[80vh]">
         
-        {/* WE DON'T CHASE */}
-        <div className="flex flex-col md:flex-row items-center justify-center text-[clamp(3.5rem,8vw,7rem)] font-black text-white font-condensed leading-[0.9] tracking-tighter w-full text-center">
-          <span>WE DON'T&nbsp;</span>
-          <div className="relative inline-block transform -rotate-2 mt-2 md:mt-0">
-            <div className="absolute inset-0 bg-[#FF4D1A] rounded-sm shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)]"></div>
-            <span className="relative z-10 px-4 md:px-6 py-0 md:py-1 text-[#0B0B0C] block tracking-tighter">CHASE</span>
+        {/* The Text Block (Left aligned internally, centered externally) */}
+        <div className="flex flex-col items-start font-black text-white font-condensed text-[clamp(3rem,8vw,7rem)] leading-[0.85] tracking-tighter uppercase">
+          
+          {/* WE DON'T CHASE */}
+          <div className="flex flex-col md:flex-row items-start md:items-center">
+            <span>WE DON'T&nbsp;</span>
+            <div className="relative inline-block transform -rotate-2 mt-2 md:mt-0 ml-1">
+              <div className="absolute inset-0 bg-[#FF4D1A] shadow-[3px_3px_0px_0px_rgba(255,255,255,0.15)] rounded-sm"></div>
+              <span className="relative z-10 px-4 md:px-5 py-1 text-[#0B0B0C] block">CHASE</span>
+            </div>
           </div>
-        </div>
 
-        {/* TRENDS. WE CREATE */}
-        <div className="mt-4 md:mt-6 text-[clamp(3.5rem,8vw,7rem)] font-black text-white font-condensed leading-[0.9] tracking-tighter text-center">
-          <span className="text-transparent" style={{ WebkitTextStroke: '2px white' }}>TRENDS.&nbsp;</span>
-          <span>WE CREATE</span>
-        </div>
+          {/* TRENDS. */}
+          <div className="mt-4 md:mt-5 text-transparent" style={{ WebkitTextStroke: 'clamp(1px, 0.2vw, 2px) white' }}>
+            TRENDS.
+          </div>
 
-        {/* STATEMENTS. */}
-        <div className="relative mt-4 md:mt-6 flex justify-center items-center">
-          <div className="text-[clamp(3.5rem,8vw,7rem)] font-black text-[#FF4D1A] font-condensed leading-[0.9] tracking-tighter text-center">
+          {/* WE CREATE */}
+          <div className="mt-4 md:mt-5">
+            WE CREATE
+          </div>
+
+          {/* STATEMENTS. */}
+          <div className="relative mt-4 md:mt-5 text-[#FF4D1A] flex items-center">
             STATEMENTS.
+            {/* Orange Arrow Graphic */}
+            <div className="absolute -right-6 md:-right-16 top-[-30%] w-[50px] md:w-[80px] text-[#FF4D1A] hidden md:block">
+              <svg viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto transform rotate-[15deg]">
+                <path d="M2 15C15 5 40 2 55 25" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M45 25L55 25L50 15" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
           </div>
-          {/* Orange Arrow Graphic */}
-          <div className="absolute -right-8 md:-right-16 lg:-right-24 top-[-20%] w-[60px] md:w-[80px] text-[#FF4D1A]">
-            <svg viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-              <path d="M2 15C15 5 40 2 55 25" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M45 25L55 25L50 15" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
+
         </div>
 
         {/* Supporting Text */}
-        <p className="mt-8 md:mt-12 text-[#F4F0E8] text-sm md:text-base lg:text-lg font-medium tracking-wide text-center max-w-sm md:max-w-md mx-auto leading-relaxed">
+        <p className="mt-10 md:mt-12 text-[#F4F0E8] text-sm md:text-base lg:text-lg font-medium tracking-wide text-center max-w-sm md:max-w-md mx-auto leading-relaxed opacity-90">
           Streetwear that speaks your mindset.<br/>
           Designed to stand out. Built to last.
         </p>
 
         {/* CTA Button */}
-        <button className="mt-8 md:mt-12 group flex items-center justify-center gap-3 border border-[#FF4D1A] rounded-full px-8 py-3 hover:bg-[#FF4D1A] transition-colors duration-300">
+        <button className="mt-8 md:mt-10 group flex items-center justify-center gap-3 border border-[#FF4D1A] bg-[#FF4D1A]/5 rounded-full px-8 py-3.5 hover:bg-[#FF4D1A] transition-all duration-300">
           <span className="text-[#FF4D1A] group-hover:text-black font-bold tracking-widest text-xs uppercase transition-colors">SHOP NOW</span>
           <span className="text-[#FF4D1A] group-hover:text-black transition-transform group-hover:translate-x-1">→</span>
         </button>
