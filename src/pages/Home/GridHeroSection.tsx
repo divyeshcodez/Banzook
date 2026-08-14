@@ -74,39 +74,39 @@ export const GridHeroSection: React.FC = () => {
 
       {/* Feature Strip - Pushed to Bottom */}
       <div className="w-full border-t border-[rgba(255,255,255,0.1)] bg-[#080808] relative z-20 mt-auto">
-        <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-[rgba(255,255,255,0.1)] w-full justify-items-center">
+        <div className="w-full max-w-5xl mx-auto px-4 py-5 md:py-6 text-center flex justify-center">
+          <div className="flex flex-col md:flex-row justify-center items-center divide-y md:divide-y-0 md:divide-x divide-[rgba(255,255,255,0.1)] w-full md:w-auto">
             
             {/* Feature 1 */}
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 py-4 md:py-0 w-full">
+            <div className="flex items-center justify-center gap-3 md:gap-4 py-4 md:py-0 md:px-10 lg:px-16 w-full md:w-auto">
               <div className="text-[#FF4B1F] shrink-0 drop-shadow-[0_0_8px_rgba(255,75,31,0.3)]">
-                <Sparkles size={28} strokeWidth={1.5} />
+                <Sparkles size={24} strokeWidth={1.5} />
               </div>
-              <div className="text-center md:text-left">
-                <h4 className="text-white font-bold text-xs md:text-sm tracking-wider uppercase mb-1">LIMITED EDITION</h4>
-                <p className="text-[#A39E98] text-[10px] md:text-xs font-medium">New Drops Only</p>
+              <div className="text-left">
+                <h4 className="text-white font-bold text-[11px] md:text-sm tracking-widest uppercase mb-0.5">LIMITED EDITION</h4>
+                <p className="text-[#A39E98] text-[9px] md:text-xs font-medium">New Drops Only</p>
               </div>
             </div>
 
             {/* Feature 2 */}
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 py-4 md:py-0 w-full">
+            <div className="flex items-center justify-center gap-3 md:gap-4 py-4 md:py-0 md:px-10 lg:px-16 w-full md:w-auto">
               <div className="text-[#FF4B1F] shrink-0 drop-shadow-[0_0_8px_rgba(255,75,31,0.3)]">
-                <ShieldCheck size={28} strokeWidth={1.5} />
+                <ShieldCheck size={24} strokeWidth={1.5} />
               </div>
-              <div className="text-center md:text-left">
-                <h4 className="text-white font-bold text-xs md:text-sm tracking-wider uppercase mb-1">PREMIUM QUALITY</h4>
-                <p className="text-[#A39E98] text-[10px] md:text-xs font-medium">Built To Last</p>
+              <div className="text-left">
+                <h4 className="text-white font-bold text-[11px] md:text-sm tracking-widest uppercase mb-0.5">PREMIUM QUALITY</h4>
+                <p className="text-[#A39E98] text-[9px] md:text-xs font-medium">Built To Last</p>
               </div>
             </div>
 
             {/* Feature 3 */}
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 py-4 md:py-0 w-full">
+            <div className="flex items-center justify-center gap-3 md:gap-4 py-4 md:py-0 md:px-10 lg:px-16 w-full md:w-auto">
               <div className="text-[#FF4B1F] shrink-0 drop-shadow-[0_0_8px_rgba(255,75,31,0.3)]">
-                <RefreshCcw size={28} strokeWidth={1.5} />
+                <RefreshCcw size={24} strokeWidth={1.5} />
               </div>
-              <div className="text-center md:text-left">
-                <h4 className="text-white font-bold text-xs md:text-sm tracking-wider uppercase mb-1">EASY RETURNS</h4>
-                <p className="text-[#A39E98] text-[10px] md:text-xs font-medium">Hassle Free</p>
+              <div className="text-left">
+                <h4 className="text-white font-bold text-[11px] md:text-sm tracking-widest uppercase mb-0.5">EASY RETURNS</h4>
+                <p className="text-[#A39E98] text-[9px] md:text-xs font-medium">Hassle Free</p>
               </div>
             </div>
 
