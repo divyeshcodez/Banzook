@@ -1,12 +1,12 @@
 import React from 'react';
-import { Truck, Sparkles, ShieldCheck, RefreshCcw } from 'lucide-react';
+import { Sparkles, ShieldCheck, RefreshCcw } from 'lucide-react';
 
 export const GridHeroSection: React.FC = () => {
   return (
     <section className="relative w-full bg-[#080808] flex flex-col justify-between items-center text-white overflow-hidden min-h-screen">
-      
+
       {/* Background Graffiti / Texture (Subtle) */}
-      <div 
+      <div
         className="absolute inset-0 pointer-events-none opacity-[0.03]"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E")`
@@ -14,18 +14,18 @@ export const GridHeroSection: React.FC = () => {
       />
 
       <div className="absolute inset-0 pointer-events-none opacity-5 flex flex-col justify-around items-center overflow-hidden z-0">
-         {/* Subtle background text as graffiti */}
-         <div className="text-[14vw] font-black font-condensed tracking-normal text-white transform -rotate-12 translate-x-1/2 opacity-10 select-none">BUILT DIFFERENT</div>
-         <div className="text-[14vw] font-black font-condensed tracking-normal text-white transform rotate-6 -translate-x-1/3 opacity-10 select-none" style={{ WebkitTextStroke: '2px white', color: 'transparent' }}>CREATE STATEMENTS</div>
-         <div className="text-[16vw] font-black font-condensed tracking-normal text-[#FF4B1F] transform -rotate-6 translate-x-1/4 opacity-10 select-none">BANZOOK</div>
+        {/* Subtle background text as graffiti */}
+        <div className="text-[14vw] font-black font-condensed tracking-normal text-white transform -rotate-12 translate-x-1/2 opacity-10 select-none">BUILT DIFFERENT</div>
+        <div className="text-[14vw] font-black font-condensed tracking-normal text-white transform rotate-6 -translate-x-1/3 opacity-10 select-none" style={{ WebkitTextStroke: '2px white', color: 'transparent' }}>CREATE STATEMENTS</div>
+        <div className="text-[16vw] font-black font-condensed tracking-normal text-[#FF4B1F] transform -rotate-6 translate-x-1/4 opacity-10 select-none">BANZOOK</div>
       </div>
 
       {/* Main Hero Content - Perfectly Centered Block */}
       <div className="relative z-10 w-full flex-1 flex flex-col justify-center items-center px-4 pt-32 pb-16 min-h-[80vh]">
-        
+
         {/* The Text Block (Left aligned internally, centered externally) */}
         <div className="flex flex-col items-start font-black text-white font-condensed text-[clamp(3.5rem,9vw,8rem)] leading-[0.9] tracking-normal uppercase relative z-10">
-          
+
           {/* WE DON'T CHASE */}
           <div className="flex flex-col md:flex-row items-start md:items-center">
             <span>WE DON'T&nbsp;</span>
@@ -60,7 +60,7 @@ export const GridHeroSection: React.FC = () => {
 
         {/* Supporting Text */}
         <p className="mt-12 md:mt-16 text-[#A39E98] text-sm md:text-base lg:text-lg font-medium tracking-wide text-center max-w-sm md:max-w-md mx-auto leading-relaxed relative z-10">
-          Streetwear that speaks your mindset.<br/>
+          Streetwear that speaks your mindset.<br />
           Designed to stand out. Built to last.
         </p>
 
@@ -73,58 +73,47 @@ export const GridHeroSection: React.FC = () => {
       </div>
 
       {/* Feature Strip - Pushed to Bottom */}
-      <div className="w-full border-t border-[rgba(255,255,255,0.1)] bg-[#0B0B0C] relative z-20 mt-auto">
+      <div className="w-full border-t border-[rgba(255,255,255,0.1)] bg-[#080808] relative z-20 mt-auto">
         <div className="w-full max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4 divide-x-0 md:divide-x divide-[rgba(255,255,255,0.1)]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-[rgba(255,255,255,0.1)] w-full justify-items-center">
             
             {/* Feature 1 */}
-            <div className="flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start gap-4 md:px-6">
-              <div className="text-[#FF4D1A] shrink-0">
-                <Truck size={28} strokeWidth={1.5} />
-              </div>
-              <div className="text-center md:text-left">
-                <h4 className="text-white font-bold text-xs md:text-sm tracking-wider uppercase mb-1">FREE SHIPPING</h4>
-                <p className="text-gray-400 text-[10px] md:text-xs font-medium">Above ₹2,999</p>
-              </div>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start gap-4 md:px-6">
-              <div className="text-[#FF4D1A] shrink-0">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 py-4 md:py-0 w-full">
+              <div className="text-[#FF4B1F] shrink-0 drop-shadow-[0_0_8px_rgba(255,75,31,0.3)]">
                 <Sparkles size={28} strokeWidth={1.5} />
               </div>
               <div className="text-center md:text-left">
                 <h4 className="text-white font-bold text-xs md:text-sm tracking-wider uppercase mb-1">LIMITED EDITION</h4>
-                <p className="text-gray-400 text-[10px] md:text-xs font-medium">New Drops Only</p>
+                <p className="text-[#A39E98] text-[10px] md:text-xs font-medium">New Drops Only</p>
               </div>
             </div>
 
-            {/* Feature 3 */}
-            <div className="flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start gap-4 md:px-6">
-              <div className="text-[#FF4D1A] shrink-0">
+            {/* Feature 2 */}
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 py-4 md:py-0 w-full">
+              <div className="text-[#FF4B1F] shrink-0 drop-shadow-[0_0_8px_rgba(255,75,31,0.3)]">
                 <ShieldCheck size={28} strokeWidth={1.5} />
               </div>
               <div className="text-center md:text-left">
                 <h4 className="text-white font-bold text-xs md:text-sm tracking-wider uppercase mb-1">PREMIUM QUALITY</h4>
-                <p className="text-gray-400 text-[10px] md:text-xs font-medium">Built To Last</p>
+                <p className="text-[#A39E98] text-[10px] md:text-xs font-medium">Built To Last</p>
               </div>
             </div>
 
-            {/* Feature 4 */}
-            <div className="flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start gap-4 md:px-6">
-              <div className="text-[#FF4D1A] shrink-0">
+            {/* Feature 3 */}
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 py-4 md:py-0 w-full">
+              <div className="text-[#FF4B1F] shrink-0 drop-shadow-[0_0_8px_rgba(255,75,31,0.3)]">
                 <RefreshCcw size={28} strokeWidth={1.5} />
               </div>
               <div className="text-center md:text-left">
                 <h4 className="text-white font-bold text-xs md:text-sm tracking-wider uppercase mb-1">EASY RETURNS</h4>
-                <p className="text-gray-400 text-[10px] md:text-xs font-medium">Hassle Free</p>
+                <p className="text-[#A39E98] text-[10px] md:text-xs font-medium">Hassle Free</p>
               </div>
             </div>
 
           </div>
         </div>
       </div>
-      
+
     </section>
   );
 };
