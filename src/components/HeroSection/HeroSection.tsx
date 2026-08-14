@@ -140,11 +140,11 @@ const BANZOOK_DROPS: DropItem[] = [
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onCtaClick }) => {
   const [activeIndex, setActiveIndex] = useState(2); // Billie Converse at index 2
-  const [cursorPos, setCursorPos] = useState({ x: -200, y: -200 });
   const [isCursorVisible, setIsCursorVisible] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const cursorBadgeRef = useRef<HTMLDivElement>(null);
 
   const centerModelRef = useRef<HTMLDivElement>(null);
   const leftSupportRef = useRef<HTMLDivElement>(null);
@@ -157,11 +157,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onCtaClick }) => {
 
   // Global Mouse Move Listener for Circular Cursor Badge
   useEffect(() => {
+    let ticking = false;
     const handleMouseMove = (e: MouseEvent) => {
-      setCursorPos({ x: e.clientX, y: e.clientY });
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (cursorBadgeRef.current) {
+            cursorBadgeRef.current.style.left = `${e.clientX}px`;
+            cursorBadgeRef.current.style.top = `${e.clientY}px`;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
@@ -288,7 +298,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onCtaClick }) => {
 
   return (
     <section id="hero" ref={containerRef} className={styles.hero}>
-      
+
       {/* Background Canvas Grid */}
       <div className={styles.bgCanvas}>
         <div className={styles.bgGrid} />
@@ -296,8 +306,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onCtaClick }) => {
 
       {/* Circular Hover Cursor Badge ("OPEN THE PROJECT") */}
       <div
+        ref={cursorBadgeRef}
         className={`${styles.cursorBadge} ${isCursorVisible ? styles.cursorBadgeVisible : ''}`}
-        style={{ left: `${cursorPos.x}px`, top: `${cursorPos.y}px` }}
+        style={{ left: '-200px', top: '-200px' }}
       >
         <span>OPEN</span>
         <span>THE PROJECT</span>
@@ -359,7 +370,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onCtaClick }) => {
 
       {/* Bottom Double-Ruler Ticks & Horizontal Scroll Track System */}
       <div className={styles.bottomCarouselContainer}>
-        
+
         {/* Top Ruler Track of Ticks */}
         <div className={styles.rulerTrackContainer}>
           <div className={styles.rulerLine} />

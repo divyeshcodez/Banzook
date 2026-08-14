@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 interface CustomCursorProps {
   label?: string;
 }
 
 export const CustomCursor: React.FC<CustomCursorProps> = ({ label = 'OFFCUT // PATTERN #42' }) => {
-  const [pos, setPos] = useState({ x: -200, y: -200 });
+  const cursorRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -22,8 +22,14 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({ label = 'OFFCUT // P
     const handleMouseMove = (e: MouseEvent) => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setPos({ x: e.clientX, y: e.clientY });
-          if (!isVisible) setIsVisible(true);
+          if (cursorRef.current) {
+            cursorRef.current.style.left = `${e.clientX}px`;
+            cursorRef.current.style.top = `${e.clientY}px`;
+          }
+          setIsVisible((prev) => {
+            if (!prev) return true;
+            return prev;
+          });
           ticking = false;
         });
         ticking = true;
@@ -41,17 +47,18 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({ label = 'OFFCUT // P
       window.removeEventListener('mousemove', handleMouseMove);
       document.body.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [isVisible]);
+  }, []);
 
   if (!isVisible) return null;
 
   return (
     <div 
+      ref={cursorRef}
       className="custom-cursor-label"
       aria-hidden="true"
       style={{ 
-        left: `${pos.x}px`, 
-        top: `${pos.y}px` 
+        left: `-200px`, 
+        top: `-200px` 
       }}
     >
       <span>{label}</span>

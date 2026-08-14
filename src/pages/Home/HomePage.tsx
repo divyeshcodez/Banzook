@@ -1,5 +1,7 @@
 import React from 'react';
-import { LookbookSlider } from '../../components/LookbookSlider/LookbookSlider';
+import { GridHeroSection } from './GridHeroSection';
+import { JourneySection } from './JourneySection';
+import { ShopCollectionSection } from './ShopCollectionSection';
 
 interface HomePageProps {
   onNavigateToShop: () => void;
@@ -8,7 +10,9 @@ interface HomePageProps {
 export const HomePage: React.FC<HomePageProps> = () => {
   return (
     <div className="bg-[#0B0B0C] min-h-screen text-white w-full flex flex-col">
-      <LookbookSlider />
+      <GridHeroSection />
+      <JourneySection />
+      <ShopCollectionSection />
     </div>
   );
 };

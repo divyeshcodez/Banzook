@@ -16,7 +16,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isHoveringMenu, setIsHoveringMenu] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { cartCount, setIsCartOpen, setIsSearchOpen, setIsAccountOpen } = useCart();
 
   useEffect(() => {
@@ -24,12 +23,12 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
-    
+
     // Listen for auth state changes
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setIsAuthenticated(!!user);
+    const unsubscribe = onAuthStateChanged(auth, () => {
+      // Do nothing, just to keep the auth listener if needed
     });
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       unsubscribe();
@@ -42,16 +41,16 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
     } else {
       document.body.style.overflow = 'unset';
     }
-    
-    return () => { 
-      document.body.style.overflow = 'unset'; 
+
+    return () => {
+      document.body.style.overflow = 'unset';
     };
   }, [isMobileMenuOpen]);
 
   const handleNavClick = (page: string, e: React.MouseEvent) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-    
+
     if (page === 'signin') {
       setIsAccountOpen(true);
       return;
@@ -64,11 +63,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
 
   const navLinks = [
     { name: 'HOME', id: 'home' },
-    { name: 'NEW DROP', id: 'drops' },
     { name: 'SHOP', id: 'shop' },
-    { name: 'LOOKBOOK', id: 'lookbook' },
-    { name: 'OUR STORY', id: 'about' },
-    { name: isAuthenticated ? 'ACCOUNT' : 'SIGN IN', id: 'signin' }
+    { name: 'COLLECTIONS', id: 'collections' },
+    { name: 'ABOUT', id: 'about' },
+    { name: 'CONTACT', id: 'contact' }
   ];
 
   return (
@@ -81,9 +79,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
         className="fixed top-0 w-full z-[1000] flex flex-col"
       >
         {/* MAIN NAVBAR */}
-        <header 
+        <header
           className="w-full flex items-center transition-all duration-300"
-          style={{ 
+          style={{
             height: isScrolled ? '78px' : '110px',
             backgroundColor: isScrolled ? 'rgba(11,11,13,0.96)' : '#0B0B0D',
             backdropFilter: isScrolled ? 'blur(18px)' : 'none',
@@ -91,34 +89,27 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
           }}
         >
           {/* Container padding is 0 70px on desktop, 0 22px on mobile */}
-          <div className="w-full px-[22px] md:px-[70px] grid grid-cols-[auto_1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center h-full">
-            
+          <div className="w-full px-[32px] md:px-[90px] grid grid-cols-[auto_1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center h-full">
+
             {/* LEFT: Logo */}
-            <div className="flex justify-start items-center">
+            <div className="flex justify-start items-center pl-10 md:pl-16">
               <style>{`
                 .banzook-logo-text {
-                  transition: letter-spacing 0.5s cubic-bezier(0.22,1,0.36,1), color 0.3s ease;
+                  transition: color 0.3s ease, text-shadow 0.3s ease;
                 }
                 .logo-group:hover .banzook-logo-text {
-                  letter-spacing: 0.22em !important;
                   color: #FF4D1A;
                   text-shadow: 0 0 20px rgba(255, 77, 26, 0.4);
                 }
-                .logo-accent {
-                  transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
-                  transform-origin: center;
-                }
-                .logo-group:hover .logo-accent {
-                  transform: scaleY(1.3);
-                }
               `}</style>
-              <motion.a 
-                href="#home" 
+              <motion.a
+                href="#home"
                 onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleNavClick('home', e)}
                 className="flex items-center gap-[12px] logo-group focus:outline-none"
-                style={{ 
-                  transform: isScrolled ? 'scale(0.95)' : 'scale(1)', 
-                  transformOrigin: 'left center', 
+                style={{
+                  marginLeft: '40px',
+                  transform: isScrolled ? 'scale(0.95)' : 'scale(1)',
+                  transformOrigin: 'left center',
                   transition: 'transform 0.3s ease',
                   textDecoration: 'none'
                 }}
@@ -126,105 +117,69 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
               >
-                {/* Orange Rectangle Accent */}
-                <div className="w-[8px] h-[30px] bg-[#FF4D1A] logo-accent" />
-                
-                {/* Logo Text & Subtitle */}
+                {/* Logo Text */}
                 <div className="flex flex-col">
-                  <span 
-                    className="text-[#F4F0E8] uppercase leading-none banzook-logo-text text-[22px] md:text-[30px]"
-                    style={{ 
-                      fontFamily: "'Space Grotesk', sans-serif", 
-                      fontWeight: 700, 
-                      letterSpacing: '0.18em' 
+                  <span
+                    className="text-[#F4F0E8] uppercase leading-none banzook-logo-text text-[32px] md:text-[40px] pl-2"
+                    style={{
+                      fontFamily: "Impact, 'Archivo Black', sans-serif",
+                      fontWeight: 900,
+                      letterSpacing: '0.01em',
+                      transform: 'scaleY(1.05)',
+                      transformOrigin: 'bottom'
                     }}
                   >
                     BANZOOK
-                  </span>
-                  <span 
-                    className="mt-[4px] uppercase leading-none"
-                    style={{ 
-                      fontFamily: "'Inter', sans-serif", 
-                      fontSize: '8px',
-                      fontWeight: 500,
-                      letterSpacing: '0.25em',
-                      color: 'rgba(255,255,255,0.40)'
-                    }}
-                  >
-                    EST. 2026 / MUMBAI
                   </span>
                 </div>
               </motion.a>
             </div>
 
             {/* CENTER: Navigation (Desktop Only) */}
-            <nav className="hidden md:flex items-center justify-center gap-[48px]">
-              {navLinks.map((link, i) => {
-                const isActive = currentPage === link.id || (link.id === 'lookbook' && false); // Adjust active logic as needed
+            <nav className="hidden md:flex justify-center items-center gap-[32px]">
+              {navLinks.map((link) => {
+                const isActive = currentPage === link.id || (link.id === 'home' && currentPage === 'home');
                 return (
-                  <motion.a
+                  <a
                     key={link.id}
                     href={`#${link.id}`}
-                    onClick={(e) => handleNavClick(link.id, e)}
-                    className="relative group py-2 flex flex-col items-center focus:outline-none"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 + (i * 0.05) }}
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: '12px',
-                      fontWeight: 700,
-                      letterSpacing: '0.16em',
-                      color: isActive ? '#FFFFFF' : 'rgba(255,255,255,0.55)',
-                      textTransform: 'uppercase'
-                    }}
+                    onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleNavClick(link.id, e)}
+                    className="group relative focus:outline-none transition-colors duration-300"
+                    style={{ textDecoration: 'none' }}
                   >
-                    <span className="group-hover:text-white transition-colors duration-300">
+                    <span
+                      className={`transition-colors duration-300 ${isActive ? 'text-[#FF4D1A]' : 'text-[#F4F0E8] group-hover:text-[#FF4D1A]'}`}
+                      style={{
+                        fontFamily: "'Inter', sans-serif",
+                        fontSize: '12px',
+                        fontWeight: 800,
+                        letterSpacing: '0.15em',
+                        textTransform: 'uppercase'
+                      }}
+                    >
                       {link.name}
                     </span>
-                    
-                    {/* Animated Underline Container */}
-                    <div className="absolute -bottom-1 h-[2px] w-[28px] overflow-hidden flex justify-center">
-                      <span 
-                        className="absolute h-full bg-[#FF4D1A] transition-all duration-300 ease-out"
-                        style={{
-                          width: '100%',
-                          transform: isActive ? 'translateX(0)' : 'translateX(-101%)'
-                        }}
-                      />
-                      {/* Hover Effect Line */}
-                      <span 
-                        className={`absolute h-full bg-[#FF4D1A] transition-transform duration-300 ease-out ${isActive ? 'hidden' : ''}`}
-                        style={{
-                          width: '100%',
-                          transform: 'translateX(-101%)'
-                        }}
-                      />
-                      <style>{`
-                        a:hover div span:last-child {
-                          transform: translateX(0) !important;
-                        }
-                      `}</style>
-                    </div>
-                  </motion.a>
+                    {isActive && (
+                      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#FF4D1A] rounded-full" />
+                    )}
+                  </a>
                 );
               })}
             </nav>
-
             {/* RIGHT: Actions */}
             <div className="flex justify-end items-center gap-[12px] md:gap-[24px]">
               {/* Search */}
-              <button 
+              <button
                 onClick={() => setIsSearchOpen(true)}
-                className="text-white hover:text-[#FF4D1A] transition-colors focus:outline-none flex items-center justify-center hidden md:flex"
+                className="text-white hover:text-[#FF4D1A] transition-colors focus:outline-none flex items-center justify-center hidden md:flex cursor-pointer"
               >
                 <Search size={20} strokeWidth={2} />
               </button>
-              
+
               {/* Bag Button */}
-              <button 
+              <button
                 onClick={() => setIsCartOpen(true)}
-                className="group flex items-center justify-center transition-all duration-300 focus:outline-none rounded-[4px] border-none outline-none"
+                className="group flex items-center justify-center transition-all duration-300 focus:outline-none rounded-[4px] border-none outline-none cursor-pointer"
                 style={{
                   width: '90px',
                   height: '38px',
@@ -237,7 +192,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
                   e.currentTarget.style.background = '#F4F0E8';
                 }}
               >
-                <span 
+                <span
                   className="text-[#0B0B0D] group-hover:text-white transition-colors duration-300"
                   style={{
                     fontFamily: "'Inter', sans-serif",
@@ -250,27 +205,28 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
                   BAG {String(cartCount).padStart(2, '0')}
                 </span>
               </button>
-              
+
               {/* Custom 3-Line Hamburger Menu */}
-              <button 
+              <button
                 onClick={() => setIsMobileMenuOpen(true)}
                 onMouseEnter={() => setIsHoveringMenu(true)}
                 onMouseLeave={() => setIsHoveringMenu(false)}
-                className="text-[#F4F0E8] hover:text-[#FF4D1A] transition-colors focus:outline-none flex flex-col justify-between items-end w-[32px] h-[14px] bg-transparent border-none outline-none p-0 ml-2"
+                className="text-[#F4F0E8] hover:text-[#FF4D1A] transition-colors focus:outline-none flex flex-col justify-between items-end w-[32px] h-[14px] bg-transparent border-none outline-none p-0 ml-2 cursor-pointer"
               >
-                <div 
+                <div
                   className="h-[2px] bg-current transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] origin-right"
                   style={{ width: '100%' }}
                 />
-                <div 
+                <div
                   className="h-[2px] bg-current transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] origin-right"
                   style={{ width: isHoveringMenu ? '60%' : '100%' }}
                 />
-                <div 
+                <div
                   className="h-[2px] bg-current transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] origin-right"
                   style={{ width: isHoveringMenu ? '100%' : '100%' }}
                 />
               </button>
+
             </div>
           </div>
         </header>
@@ -279,7 +235,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
         <div className="w-full h-[30px] bg-[#FF4D1A] overflow-hidden flex items-center relative">
           <div className="whitespace-nowrap flex" style={{ animation: 'ticker-scroll 25s linear infinite' }}>
             {Array(4).fill('NEW DROP 01 — BUILT DIFFERENT — FREE SHIPPING ABOVE ₹2,999 — LIMITED EDITION — ').map((text, i) => (
-              <span 
+              <span
                 key={i}
                 className="inline-block px-4"
                 style={{
@@ -305,46 +261,45 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
       </motion.div>
 
       {/* MENU BACKDROP DIMMER */}
-      <div 
-        className={`fixed inset-0 z-[1999] bg-black/60 backdrop-blur-sm transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
+      <div
+        className={`fixed inset-0 z-[1999] bg-black/60 backdrop-blur-sm transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          }`}
         onClick={() => setIsMobileMenuOpen(false)}
       />
 
       {/* LEFT DRAWER MENU */}
-      <div 
-        className={`fixed top-0 left-0 bottom-0 w-full md:w-[500px] z-[2000] bg-[#09090B] border-r border-[rgba(255,255,255,0.08)] flex flex-col p-[32px] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+      <div
+        className={`fixed top-0 left-0 bottom-0 w-full md:w-[500px] z-[2000] bg-[#09090B] border-r border-[rgba(255,255,255,0.08)] flex flex-col p-[32px] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
       >
         <div className="flex justify-between items-center mb-16 h-[60px]">
           <div className="flex items-center gap-[12px]">
-            <div className="w-[8px] h-[30px] bg-[#FF4D1A]" />
             <div className="flex flex-col">
-              <span 
+              <span
                 className="text-[#F4F0E8] uppercase leading-none"
-                style={{ 
-                  fontFamily: "'Space Grotesk', sans-serif", 
-                  fontSize: '24px',
-                  fontWeight: 700, 
-                  letterSpacing: '0.18em' 
+                style={{
+                  fontFamily: "Impact, 'Archivo Black', sans-serif",
+                  fontSize: '32px',
+                  fontWeight: 900,
+                  letterSpacing: '0.01em',
+                  transform: 'scaleY(1.05)',
+                  transformOrigin: 'bottom'
                 }}
               >
                 BANZOOK
               </span>
             </div>
           </div>
-          
-          <button 
-            onClick={() => setIsMobileMenuOpen(false)} 
+
+          <button
+            onClick={() => setIsMobileMenuOpen(false)}
             className="text-white hover:text-[#FF4D1A] transition-colors flex flex-col justify-center items-center w-[30px] h-[30px] relative focus:outline-none"
           >
             <div className="w-[30px] h-[2px] bg-current absolute rotate-45 transition-transform" />
             <div className="w-[30px] h-[2px] bg-current absolute -rotate-45 transition-transform" />
           </button>
         </div>
-        
+
         <nav className="flex flex-col h-full overflow-y-auto mt-4 pb-12">
           {navLinks.map((link, i) => (
             <a
@@ -400,7 +355,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
                   {link.name}
                 </span>
               </div>
-              
+
               <span className="text-[#FF4D1A] opacity-0 -translate-x-8 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-3xl ml-auto mb-2">
                 →
               </span>

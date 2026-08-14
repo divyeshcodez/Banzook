@@ -1,10 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-background: #F8F7F5;
+  --color-foreground: #111111;
+  --color-primary: #FF4D1A;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-condensed: "Oswald", "Anton", "Impact", sans-serif;
+}
 
 body {
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow-x: clip;
   background-color: #0B0B0C;
 }
 
@@ -14,8 +19,6 @@ main {
 }
 
 /* OFFCUT Production Design System & Global Styles */
-@tailwind utilities;
-
 /* OFFCUT Production Design System & Global Styles */
 :root {
   /* OFFCUT Brand Colors */
@@ -51,7 +54,7 @@ html, body {
   background-color: var(--bg-offcut);
   color: var(--text-bone);
   font-family: var(--font-body);
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
 }
 

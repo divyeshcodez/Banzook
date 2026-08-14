@@ -32,8 +32,8 @@ function AppContent() {
     <div className="bg-[#0B0B0C] text-white min-h-screen w-full relative">
       <IntroExperience onEnterComplete={() => {}} />
       
-      {/* Noise Grain Overlay */}
-      <div className="fixed inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay z-0" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }} aria-hidden="true" />
+      {/* Noise Grain Overlay (Optimized for performance) */}
+      <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-0 bg-repeat" style={{ backgroundImage: 'url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAABZWVlpaWl2dnZ+fn6Kioqenp4I4n5BAAAABnRSTlMAAAAAAABupgeOAAAAwklEQVR4AWMAghSRAyEEU1sYhUAFiRkYgQwmBkYGA4YghlADBiYGxgQGlmCGIKYgBhYmBvYAhoCGMKYgBuYIhtCGMKYgBnYmBvcAhrCGMKYgBlYmBh8gQ1hDGCOYmBmYQBjIGsIYwRTBDOaQhrCmMHEzgTGEM1BDWDmYmJgYTAAFIYyhDGHiZgJjCGcIawgTNzMwARmCGMKawozNBGIMYQphDWFiZGBiCGcIYwhrCBMjA3MIawozFBMzM7AhjCkYQxoAAN/3i56x+B8eAAAAAElFTkSuQmCC")' }} aria-hidden="true" />
 
       {/* Fixed Top Navbar */}
       <Navbar 

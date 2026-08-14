@@ -1,700 +1,498 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   BANZOOK — THE DIGITAL STREETWEAR SHOWROOM (SHOP PAGE)
-   Design System: Warm off-white canvas (#F8F7F5), Pitch Black (#000000), 
-   BANZOOK Orange (#FF4D00), Archivo Black + IBM Plex Mono typography
+   BANZOOK — SHOP (CATALOG)
+   Design System: Premium Streetwear Editorial E-Commerce
    ═══════════════════════════════════════════════════════════════════════════ */
 
-.shopShowroom {
-  background-color: #0B0B0D;
+.shopPage {
+  background-color: #0B0B0C;
   color: #F4F0E8;
   min-height: 100vh;
-  padding-top: 5rem; /* Navbar offset */
+  padding-top: 6rem; /* Navbar offset */
   position: relative;
   overflow-x: hidden;
-  font-family: var(--font-body);
+  font-family: 'Inter', sans-serif;
 }
 
 .container {
-  max-width: 1440px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 2.5rem;
+  padding: 0 2rem;
   width: 100%;
 }
 
-/* ── 1. Shop Entrance Banner ──────────────────────────────────────────────── */
-.showroomEntry {
-  padding: 3.5rem 0 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.entryMetaRow {
+/* ── HEADER ───────────────────────────────────────────────────────────── */
+.shopHeader {
+  padding: 2rem 0;
+  border-bottom: 1px solid #2A2A27;
+  margin-bottom: 3rem;
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
-.entryBadge {
-  background: #FFFFFF;
-  color: #000000;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  padding: 0.35rem 0.85rem;
+.headerLeft h1 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
   text-transform: uppercase;
-  border-radius: 2px;
-}
-
-.entrySubtext {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--orange);
-  letter-spacing: 0.15em;
-  font-weight: 700;
-}
-
-.entryTitle {
-  font-family: var(--font-headline);
-  font-size: clamp(3rem, 7vw, 5.5rem);
-  font-weight: 900;
-  line-height: 0.92;
   letter-spacing: -0.03em;
-  text-transform: uppercase;
   color: #FFFFFF;
-  margin-bottom: 1.25rem;
+  margin: 0 0 0.5rem 0;
+  line-height: 1;
 }
 
-.entryDesc {
-  font-size: 1.05rem;
+.headerSubtitle {
   color: #A0A0A0;
-  max-width: 600px;
-  line-height: 1.6;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
 }
 
-/* ── 2. The Drop Wall Hero Area ───────────────────────────────────────────── */
-.dropWallSection {
-  padding: 3rem 0;
-}
-
-.dropWallCard {
-  position: relative;
-  width: 100%;
-  height: 520px;
-  background: #000000;
-  color: #FFFFFF;
-  border-radius: 0px;
-  overflow: hidden;
+.headerRight {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 4rem;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+  gap: 2rem;
 }
 
-.dropWallBgImg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  opacity: 0.65;
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+.productCount {
+  font-size: 0.85rem;
+  color: #888;
+  font-family: monospace;
+  letter-spacing: 0.1em;
 }
 
-.dropWallCard:hover .dropWallBgImg {
-  transform: scale(1.04);
-  opacity: 0.75;
-}
-
-.dropWallContent {
-  position: relative;
-  z-index: 10;
-  max-width: 550px;
-}
-
-.dropWallTag {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 800;
-  color: var(--orange);
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
-  display: block;
-}
-
-.dropWallHeadline {
-  font-family: var(--font-headline);
-  font-size: clamp(2.5rem, 5vw, 4.25rem);
-  font-weight: 900;
-  line-height: 0.95;
-  text-transform: uppercase;
-  margin-bottom: 1.25rem;
-  color: #FFFFFF;
-}
-
-.dropWallText {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 2rem;
-}
-
-.dropWallBtn {
-  background: #FFFFFF;
-  color: #000000;
-  border: none;
-  font-family: var(--font-headline);
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0.15em;
-  padding: 0.9rem 2rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.dropWallBtn:hover {
-  background: var(--orange);
-  color: #FFFFFF;
-  transform: translateY(-2px);
-}
-
-/* ── 3. Showroom Dedicated Category Filter Bar ────────────────────────────── */
-.showroomNavSection {
-  position: sticky;
-  top: 5rem;
-  z-index: 80;
-  background: rgba(11, 11, 13, 0.95);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1rem 0;
-}
-
-.navRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.categoriesGroup {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  overflow-x: auto;
-  padding-bottom: 0.2rem;
-}
-
-.categoryBtn {
+.sortSelect {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #A0A0A0;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  padding: 0.5rem 1.1rem;
-  border-radius: 9999px;
+  border: 1px solid #2A2A27;
+  color: #F4F0E8;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-family: monospace;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.25s ease;
-  white-space: nowrap;
-}
-
-.categoryBtn:hover {
-  border-color: #FFFFFF;
-  color: #FFFFFF;
-}
-
-.categoryBtnActive {
-  background: #FFFFFF !important;
-  color: #000000 !important;
-  border-color: #FFFFFF !important;
-  font-weight: 800;
-}
-
-.searchSortGroup {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.searchInputWrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.searchInput {
-  background: #111111;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #FFFFFF;
-  padding: 0.5rem 1rem 0.5rem 2.2rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
   outline: none;
-  width: 200px;
-  border-radius: 9999px;
-  transition: all 0.25s ease;
 }
 
-.searchInput::placeholder {
-  color: #888888;
+.sortSelect:focus {
+  border-color: #FF4D1A;
 }
 
-.searchInput:focus {
-  border-color: #FFFFFF;
-  width: 240px;
+.mobileFilterBtn {
+  display: none;
+  background: #FF4D1A;
+  color: #000;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-family: monospace;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.searchIcon {
-  position: absolute;
-  left: 0.75rem;
-  color: #888888;
-  pointer-events: none;
+@media (max-width: 1024px) {
+  .headerRight {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+  .mobileFilterBtn {
+    display: block;
+  }
 }
 
-/* ── 4. Spatial Showroom Art-Directed Layout ──────────────────────────────── */
-.showroomDisplaySection {
-  padding: 4rem 0 6rem;
-}
-
-.shopLayoutGrid {
+/* ── LAYOUT GRID ──────────────────────────────────────────────────────── */
+.mainLayout {
   display: grid;
   grid-template-columns: 260px 1fr;
-  gap: 3rem;
-  align-items: start;
+  gap: 4rem;
+  padding-bottom: 6rem;
 }
 
-.sidebarColumn {
-  position: sticky;
-  top: 120px;
-  max-height: calc(100vh - 120px);
-  overflow-y: auto;
-  /* Scrollbar styling for Webkit */
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+@media (max-width: 1024px) {
+  .mainLayout {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    display: none;
+  }
+  .sidebar.mobileOpen {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #0B0B0C;
+    z-index: 100;
+    padding: 6rem 2rem 2rem;
+    overflow-y: auto;
+  }
 }
 
-.sidebarColumn::-webkit-scrollbar {
-  width: 4px;
-}
-
-.sidebarColumn::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-}
-
-.mainColumn {
-  width: 100%;
-}
-
-.spatialLayoutGrid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 2.5rem 2rem;
-  align-items: start;
-}
-
-/* Featured Large Module (Spans 8 cols) */
-.heroModule {
-  grid-column: span 8;
-  background: #111111;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1.5rem;
-  cursor: pointer;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.heroModule:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-}
-
-.heroModuleMedia {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: #000000;
-  overflow: hidden;
-  margin-bottom: 1.25rem;
-}
-
-/* Secondary Modules (Spans 4 cols) */
-.portraitModule {
-  grid-column: span 4;
-  background: #111111;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1.5rem;
-  cursor: pointer;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.portraitModule:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-}
-
-.portraitModuleMedia {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  background: #000000;
-  overflow: hidden;
-  margin-bottom: 1.25rem;
-}
-
-/* Medium Modules (Spans 6 cols) */
-.mediumModule {
-  grid-column: span 6;
-  background: #111111;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1.5rem;
-  cursor: pointer;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.mediumModule:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-}
-
-.mediumModuleMedia {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  background: #000000;
-  overflow: hidden;
-  margin-bottom: 1.25rem;
-}
-
-.moduleImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  transition: transform 0.8s ease, opacity 0.5s ease;
-}
-
-.moduleImgHover {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  opacity: 0;
-  transition: opacity 0.5s ease, transform 0.8s ease;
-}
-
-.heroModule:hover .moduleImgHover,
-.portraitModule:hover .moduleImgHover,
-.mediumModule:hover .moduleImgHover {
-  opacity: 1;
-  transform: scale(1.03);
-}
-
-.sizeChipsRow {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
+/* ── SIDEBAR FILTERS ──────────────────────────────────────────────────── */
+.sidebarHeader {
   display: flex;
-  gap: 0.35rem;
-  z-index: 10;
-}
-
-.sizeChip {
-  background: rgba(0, 0, 0, 0.85);
-  color: #FFFFFF;
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  font-weight: 800;
-  padding: 0.25rem 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-/* ── 5. The BANZOOK Constellation Interactive Section ────────────────────── */
-.constellationSection {
-  background: #000000;
-  color: #FFFFFF;
-  padding: 6rem 0;
-  position: relative;
-  margin: 4rem 0;
-  overflow: hidden;
-}
-
-.constellationHeader {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.constellationTag {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 800;
-  color: var(--orange);
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 0.75rem;
-}
-
-.constellationTitle {
-  font-family: var(--font-headline);
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.constellationCanvas {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.5rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.constellationNode {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 2rem;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  position: relative;
-}
-
-.constellationNode:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: var(--orange);
-  transform: scale(1.03);
-}
-
-.nodeTag {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--orange);
-  letter-spacing: 0.15em;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.nodeTitle {
-  font-family: var(--font-headline);
-  font-size: 1.2rem;
-  font-weight: 900;
-  margin-bottom: 1rem;
-}
-
-.nodeImg {
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  margin-bottom: 1rem;
-}
-
-.nodePrice {
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #CCCCCC;
-}
-
-/* ── 6. Editorial Detail Modal Drawer ─────────────────────────────────────── */
-.modalOverlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(10px);
-  z-index: 300;
-  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #2A2A27;
+  padding-bottom: 1rem;
 }
 
-.modalContent {
-  position: relative;
-  background: #0B0B0D;
-  color: #FFFFFF;
-  width: 100%;
-  max-width: 980px;
-  max-height: 90vh;
-  overflow-y: auto;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 3rem;
-  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.7);
+.sidebarHeader h2 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  margin: 0;
 }
 
-.modalCloseBtn {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+.clearAllBtn {
   background: none;
   border: none;
+  color: #FF4D1A;
+  font-family: monospace;
+  font-size: 0.75rem;
   cursor: pointer;
-  color: #FFFFFF;
+  padding: 0;
 }
 
-.modalGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-}
-
-.modalMediaWrapper {
-  position: relative;
-  aspect-ratio: 3 / 4;
-  background: #000000;
-  overflow: hidden;
-}
-
-.modalImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.toggle3dBtn {
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #000000;
-  color: #FFFFFF;
-  border: none;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  padding: 0.6rem 1.2rem;
-  cursor: pointer;
-  border-radius: 9999px;
-}
-
-.modalDetails {
-  display: flex;
-  flex-direction: column;
-}
-
-.modalCollectionTag {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: var(--orange);
-  letter-spacing: 0.15em;
-  margin-bottom: 0.5rem;
-}
-
-.modalTitle {
-  font-family: var(--font-headline);
-  font-size: 2.2rem;
-  font-weight: 900;
-  line-height: 1.05;
-  margin-bottom: 0.75rem;
-}
-
-.modalPrice {
-  font-family: var(--font-mono);
-  font-size: 1.35rem;
-  font-weight: 800;
-  margin-bottom: 1.75rem;
-  color: #FFFFFF;
-}
-
-.modalDescription {
-  font-size: 0.9rem;
-  line-height: 1.65;
-  color: #A0A0A0;
+.filterGroup {
   margin-bottom: 2rem;
+  border-bottom: 1px solid #1A1A1A;
+  padding-bottom: 1.5rem;
 }
 
-.sizeSelectionGroup {
+.filterGroupTitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #FFF;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.filterList {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.sizeLabel {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 800;
+.filterCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #A0A0A0;
+  transition: color 0.2s;
+}
+
+.filterCheckbox:hover {
+  color: #FFF;
+}
+
+.filterCheckbox input {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #444;
+  border-radius: 2px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.filterCheckbox input:checked {
+  background: #FF4D1A;
+  border-color: #FF4D1A;
+}
+
+.filterCheckbox input:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid #000;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.filterChipsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filterChip {
+  background: transparent;
+  border: 1px solid #444;
+  color: #A0A0A0;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.75rem;
+  font-family: monospace;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterChip:hover {
+  border-color: #FFF;
+  color: #FFF;
+}
+
+.filterChip.active {
+  background: #FFF;
+  color: #000;
+  border-color: #FFF;
+}
+
+/* ── PRODUCT GRID ─────────────────────────────────────────────────────── */
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem 2rem;
+}
+
+@media (max-width: 1400px) {
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .productGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── PRODUCT CARD ─────────────────────────────────────────────────────── */
+.productCard {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.productCard:hover {
+  transform: translateY(-4px);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background-color: #111111;
+  border: 1px solid #2A2A27;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  transition: border-color 0.3s;
+}
+
+.productCard:hover .imageWrapper {
+  border-color: rgba(255, 77, 26, 0.5); /* Subtle orange border on hover */
+}
+
+.productImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.productImgHover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: scale(1.05);
+}
+
+.productCard:hover .productImg {
+  opacity: 0;
+}
+
+.productCard:hover .productImgHover {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.badges {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.badge {
+  background: #FFF;
+  color: #000;
+  font-family: monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  text-transform: uppercase;
   letter-spacing: 0.1em;
+}
+
+.badge.new {
+  background: #FF4D1A;
+  color: #000;
+}
+
+/* Hover UI Overlay */
+.hoverOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 20;
+}
+
+.productCard:hover .hoverOverlay {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .sizePills {
   display: flex;
   gap: 0.5rem;
+  justify-content: center;
 }
 
 .sizePill {
-  flex: 1;
+  width: 28px;
+  height: 28px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-family: monospace;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s;
+}
+
+.sizePill:hover {
+  background: #FFF;
+  color: #000;
+}
+
+.quickAddBtn {
+  width: 100%;
   padding: 0.75rem;
-  background: transparent;
-  color: #A0A0A0;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  font-family: var(--font-mono);
-  font-weight: 800;
-  font-size: 0.85rem;
+  background: #FFF;
+  color: #000;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.2s;
 }
 
-.sizePillActive {
-  background: #FFFFFF;
-  color: #000000;
-  border-color: #FFFFFF;
+.quickAddBtn:hover {
+  background: #FF4D1A;
 }
 
-@media (max-width: 1024px) {
-  .shopLayoutGrid {
-    grid-template-columns: 1fr;
-  }
-  .sidebarColumn {
-    position: static;
-    max-height: none;
-    overflow-y: visible;
-  }
-  .heroModule, .portraitModule, .mediumModule {
-    grid-column: span 12;
-  }
-  .modalGrid {
-    grid-template-columns: 1fr;
-  }
-  .constellationCanvas {
-    grid-template-columns: 1fr;
-  }
+/* Product Info */
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
-@media (max-width: 768px) {
-  .heroSection {
-    padding: 6rem 1.5rem 3rem;
-  }
-  .heroTitle {
-    font-size: 3rem;
-  }
-  .filtersToolbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .searchInput {
-    width: 100%;
-  }
-  .searchInput:focus {
-    width: 100%;
-  }
-  .constellationTitle {
-    font-size: 2.2rem;
-  }
-  .modalContent {
-    padding: 1.5rem;
-  }
-  .modalTitle {
-    font-size: 1.6rem;
-  }
+.collectionLabel {
+  color: #FF4D1A;
+  font-family: monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.productName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #F4F0E8;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.price {
+  font-family: monospace;
+  font-size: 1rem;
+  color: #A0A0A0;
+}
+
+/* ── NO RESULTS ───────────────────────────────────────────────────────── */
+.noResults {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 6rem 0;
+}
+
+.noResults h2 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.noResults p {
+  color: #A0A0A0;
+  margin-bottom: 2rem;
+}
+
+.noResults button {
+  background: transparent;
+  border: 1px solid #FF4D1A;
+  color: #FF4D1A;
+  padding: 0.75rem 2rem;
+  font-family: monospace;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.noResults button:hover {
+  background: #FF4D1A;
+  color: #000;
 }
