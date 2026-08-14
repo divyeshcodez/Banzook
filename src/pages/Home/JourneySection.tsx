@@ -10,6 +10,7 @@ const JOURNEY_STEPS = [
     quote: 'We don\'t follow trends, we build foundations.',
     bubble: 'Initial sketches from the Tokyo studio',
     image: '/images/model_brokensystem.png',
+    productId: 1,
   },
   {
     step: '02',
@@ -19,6 +20,7 @@ const JOURNEY_STEPS = [
     quote: 'Weight is the ultimate luxury.',
     bubble: 'Sourced directly from Okayama',
     image: '/images/model_hotwheels.jpg',
+    productId: null,
   },
   {
     step: '03',
@@ -28,6 +30,7 @@ const JOURNEY_STEPS = [
     quote: 'Every seam serves a purpose.',
     bubble: 'Drop shoulder, cropped body. The signature fit.',
     image: '/images/model_kindmind.png',
+    productId: 3,
   },
   {
     step: '04',
@@ -37,6 +40,7 @@ const JOURNEY_STEPS = [
     quote: 'Aged to perfection before day one.',
     bubble: 'Vintage wash formula #04',
     image: '/images/model_legends.png',
+    productId: null,
   },
   {
     step: '05',
@@ -46,6 +50,7 @@ const JOURNEY_STEPS = [
     quote: 'Limited to 500 units globally!',
     bubble: 'Hand numbered certificate included',
     image: '/images/model_nosmoking_front.jpg',
+    productId: 2,
   }
 ];
 
@@ -126,7 +131,22 @@ export const JourneySection: React.FC = () => {
                   </p>
                   
                   <button 
-                    onClick={() => document.getElementById('shop-collection')?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() => {
+                      const targetId = step.productId ? `product-${step.productId}` : 'shop-collection';
+                      const element = document.getElementById(targetId);
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        if (step.productId) {
+                          element.style.transition = 'box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out';
+                          element.style.boxShadow = '0 0 0 2px #FF4B1F, 0 0 40px rgba(255, 75, 31, 0.4)';
+                          element.style.transform = 'scale(1.02)';
+                          setTimeout(() => {
+                            element.style.boxShadow = '';
+                            element.style.transform = '';
+                          }, 1500);
+                        }
+                      }
+                    }}
                     className={`mt-12 group flex items-center justify-center gap-4 bg-transparent transition-all duration-300 ${isEven ? '' : 'flex-row-reverse'}`}
                   >
                     <span className="text-white group-hover:text-[#FF4B1F] text-xs font-bold tracking-widest uppercase transition-colors">Explore Piece</span>

@@ -72,6 +72,7 @@ export const ShopCollectionSection: React.FC = () => {
           {PRODUCTS.map((product) => (
             <div 
                key={product.id} 
+               id={`product-${product.id}`}
                className="bg-[#161616] rounded-2xl p-5 border border-[#2A2A27] flex flex-col group transition-colors w-full"
             >
                
