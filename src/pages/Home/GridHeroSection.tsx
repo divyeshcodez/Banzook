@@ -65,9 +65,9 @@ export const GridHeroSection: React.FC = () => {
         </p>
 
         {/* CTA Button */}
-        <button className="mt-8 md:mt-10 relative z-10 group flex items-center justify-center gap-3 border border-[#FF4B1F] bg-transparent rounded-full px-8 py-3.5 hover:bg-[#FF4B1F] hover:shadow-[0_0_20px_rgba(255,75,31,0.4)] transition-all duration-300">
-          <span className="text-[#FF4B1F] group-hover:text-black font-bold tracking-widest text-xs uppercase transition-colors">SHOP NOW</span>
-          <span className="text-[#FF4B1F] group-hover:text-black transition-transform group-hover:translate-x-1">→</span>
+        <button className="mt-12 md:mt-16 relative z-10 group flex items-center justify-center gap-5 border-[1.5px] border-[#FF4B1F] bg-transparent rounded-[32px] px-10 py-4 shadow-[0_0_8px_rgba(255,75,31,0.2)] hover:bg-[#FF4B1F] hover:shadow-[0_0_15px_rgba(255,75,31,0.35)] transition-all duration-300">
+          <span className="text-[#FF4B1F] group-hover:text-black font-black font-condensed tracking-[0.25em] text-sm uppercase transition-colors">SHOP NOW</span>
+          <span className="text-[#FF4B1F] group-hover:text-black text-lg transition-transform group-hover:translate-x-1.5 leading-none mt-[-2px]">→</span>
         </button>
 
       </div>
