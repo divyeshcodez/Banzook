@@ -74,11 +74,11 @@ export const GridHeroSection: React.FC = () => {
 
       {/* Feature Strip - Pushed to Bottom */}
       <div className="w-full border-t border-[rgba(255,255,255,0.1)] bg-[#080808] relative z-20 mt-auto">
-        <div className="w-full max-w-5xl mx-auto px-4 py-5 md:py-6 text-center flex justify-center">
-          <div className="flex flex-col md:flex-row justify-center items-center divide-y md:divide-y-0 md:divide-x divide-[rgba(255,255,255,0.1)] w-full md:w-auto">
+        <div className="w-full max-w-7xl mx-auto px-4 py-5 md:py-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[rgba(255,255,255,0.1)] w-full">
             
             {/* Feature 1 */}
-            <div className="flex items-center justify-center gap-3 md:gap-4 py-4 md:py-0 md:px-10 lg:px-16 w-full md:w-auto">
+            <div className="flex items-center justify-center gap-3 md:gap-4 py-4 md:py-0 w-full">
               <div className="text-[#FF4B1F] shrink-0 drop-shadow-[0_0_8px_rgba(255,75,31,0.3)]">
                 <Sparkles size={24} strokeWidth={1.5} />
               </div>
@@ -89,7 +89,7 @@ export const GridHeroSection: React.FC = () => {
             </div>
 
             {/* Feature 2 */}
-            <div className="flex items-center justify-center gap-3 md:gap-4 py-4 md:py-0 md:px-10 lg:px-16 w-full md:w-auto">
+            <div className="flex items-center justify-center gap-3 md:gap-4 py-4 md:py-0 w-full">
               <div className="text-[#FF4B1F] shrink-0 drop-shadow-[0_0_8px_rgba(255,75,31,0.3)]">
                 <ShieldCheck size={24} strokeWidth={1.5} />
               </div>
@@ -100,7 +100,7 @@ export const GridHeroSection: React.FC = () => {
             </div>
 
             {/* Feature 3 */}
-            <div className="flex items-center justify-center gap-3 md:gap-4 py-4 md:py-0 md:px-10 lg:px-16 w-full md:w-auto">
+            <div className="flex items-center justify-center gap-3 md:gap-4 py-4 md:py-0 w-full">
               <div className="text-[#FF4B1F] shrink-0 drop-shadow-[0_0_8px_rgba(255,75,31,0.3)]">
                 <RefreshCcw size={24} strokeWidth={1.5} />
               </div>
