@@ -16,7 +16,7 @@
 .container {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 4rem; /* Increased horizontal padding */
   width: 100%;
 }
 
@@ -102,8 +102,8 @@
 .mainLayout {
   display: grid;
   grid-template-columns: 260px 1fr;
-  gap: 4rem;
-  padding-bottom: 6rem;
+  gap: 8rem; /* Drastically increased gap between filters and grid */
+  padding-bottom: 12rem; /* Massive bottom breathing room */
 }
 
 @media (max-width: 1024px) {
@@ -253,7 +253,7 @@
 .productGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3rem 2rem;
+  gap: 6rem 4rem; /* Increased vertical and horizontal gaps between products */
 }
 
 @media (max-width: 1400px) {
@@ -296,7 +296,7 @@
   border: 1px solid #2A2A27;
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 1.25rem;
+  margin-bottom: 2.5rem; /* More breathing room between image and product title */
   transition: border-color 0.3s;
 }
 

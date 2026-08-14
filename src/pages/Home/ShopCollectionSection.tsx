@@ -43,12 +43,12 @@ export const ShopCollectionSection: React.FC = () => {
   };
 
   return (
-    <section id="shop-collection" className="bg-[#111111] text-white mt-10 md:mt-[60px] lg:mt-20 pt-24 md:pt-32 lg:pt-40 pb-24 md:pb-32 w-full relative overflow-hidden flex flex-col items-center">
+    <section id="shop-collection" className="bg-[#111111] text-white mt-10 md:mt-[60px] lg:mt-20 pt-32 md:pt-48 lg:pt-64 pb-32 md:pb-48 w-full relative overflow-hidden flex flex-col items-center">
       
       <div className="w-full max-w-7xl mx-auto px-6 md:px-8 relative z-10">
         
         {/* Header Area */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-20 gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 md:mb-32 gap-8">
           <div className="max-w-2xl text-left">
             <div className="flex items-center gap-2 text-[#FF4D1A] text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-5">
               CURATED. LIMITED. EXCLUSIVE.
@@ -68,7 +68,7 @@ export const ShopCollectionSection: React.FC = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16 w-full">
           {PRODUCTS.map((product) => (
             <div 
                key={product.id} 
