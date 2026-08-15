@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { b2bCategories, B2BCategory } from '../../data/b2bData';
+import { b2bCategories } from '../../data/b2bData';
+import type { B2BCategory } from '../../data/b2bData';
 import { B2BConfigurator } from './B2BConfigurator';
 import styles from './B2B.module.css';
 

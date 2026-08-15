@@ -47,7 +47,7 @@ function AppContent() {
       {/* Single Viewport Interactive Visual Index Canvas Homepage */}
       <main>
         {currentPage === 'home' && (
-          <HomePage onNavigateToShop={() => handleNavigate('shop')} />
+          <HomePage onNavigateToShop={() => handleNavigate('shop')} onNavigateToB2B={() => handleNavigate('b2b')} />
         )}
 
         {currentPage === 'shop' && (

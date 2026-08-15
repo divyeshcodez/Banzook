@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './Footer.module.css';
 
 interface FooterProps {
-  currentPage?: 'home' | 'shop' | 'drops' | 'about';
-  onPageChange?: (page: 'home' | 'shop' | 'drops' | 'about') => void;
+  currentPage?: 'home' | 'shop' | 'drops' | 'about' | 'b2b';
+  onPageChange?: (page: 'home' | 'shop' | 'drops' | 'about' | 'b2b') => void;
   onNavigate?: (sectionId: string) => void;
   onOpenHelp?: (tab: 'returns' | 'size-guide' | 'faq') => void;
 }
@@ -17,7 +17,7 @@ export const Footer: React.FC<FooterProps> = ({ currentPage, onPageChange, onNav
       onOpenHelp(tab);
     }
   };
-  const handleLinkClick = (page: 'home' | 'shop' | 'drops' | 'about', sectionId?: string, e?: React.MouseEvent) => {
+  const handleLinkClick = (page: 'home' | 'shop' | 'drops' | 'about' | 'b2b', sectionId?: string, e?: React.MouseEvent) => {
     if (e) e.preventDefault();
     if (onPageChange) {
       onPageChange(page);

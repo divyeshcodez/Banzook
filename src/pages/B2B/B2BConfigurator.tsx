@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { B2BCategory } from '../../data/b2bData';
+import type { B2BCategory } from '../../data/b2bData';
 import styles from './B2B.module.css';
 
 interface ConfiguratorProps {
@@ -26,7 +26,7 @@ export const B2BConfigurator: React.FC<ConfiguratorProps> = ({ product }) => {
   const [customization, setCustomization] = useState<string>('');
   const [frontDesign, setFrontDesign] = useState('');
   const [backDesign, setBackDesign] = useState('');
-  const [sleeveDesign, setSleeveDesign] = useState('');
+  // const [sleeveDesign, setSleeveDesign] = useState('');
   
   const [orgName, setOrgName] = useState('');
   const [contactPerson, setContactPerson] = useState('');
