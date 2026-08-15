@@ -7,8 +7,8 @@ import { motion } from 'framer-motion';
 
 interface NavbarProps {
   onNavigate?: (sectionId: string) => void;
-  currentPage?: 'home' | 'shop' | 'drops' | 'about';
-  onPageChange?: (page: 'home' | 'shop' | 'drops' | 'about') => void;
+  currentPage?: 'home' | 'shop' | 'drops' | 'about' | 'b2b';
+  onPageChange?: (page: 'home' | 'shop' | 'drops' | 'about' | 'b2b') => void;
   onOpenHelp?: (tab: any) => void;
 }
 
@@ -56,7 +56,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
       return;
     }
 
-    if (onPageChange && ['home', 'shop', 'drops', 'about'].includes(page)) {
+    if (onPageChange && ['home', 'shop', 'drops', 'about', 'b2b'].includes(page)) {
       onPageChange(page as any);
     }
   };
@@ -66,6 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
     { name: 'SHOP', id: 'shop' },
     { name: 'COLLECTIONS', id: 'collections' },
     { name: 'ABOUT', id: 'about' },
+    { name: 'BULK ORDERS', id: 'b2b' },
     { name: 'CONTACT', id: 'contact' }
   ];
 

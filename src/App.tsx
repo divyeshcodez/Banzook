@@ -4,6 +4,7 @@ import { HomePage } from './pages/Home/HomePage';
 import { ShopPage as Shop } from './pages/Shop/Shop';
 import { DropsPage as Drops } from './pages/Drops/Drops';
 import { AboutPage as About } from './pages/About/About';
+import { B2BPage } from './pages/B2B/B2BPage';
 import { Footer } from './components/Footer/Footer';
 import { SearchOverlay } from './components/Overlays/SearchOverlay';
 import { AccountPanel } from './components/Overlays/AccountPanel';
@@ -15,13 +16,13 @@ import { Check } from 'lucide-react';
 import { IntroExperience } from './components/IntroExperience/IntroExperience';
 
 function AppContent() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'shop' | 'drops' | 'about'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'shop' | 'drops' | 'about' | 'b2b'>('home');
   const [helpTab, setHelpTab] = useState<'returns' | 'size-guide' | 'faq' | null>(null);
   const { toastMessage, toastVisible } = useCart();
 
   const handleNavigate = (page: string) => {
-    if (page === 'home' || page === 'shop' || page === 'drops' || page === 'about') {
-      setCurrentPage(page as 'home' | 'shop' | 'drops' | 'about');
+    if (page === 'home' || page === 'shop' || page === 'drops' || page === 'about' || page === 'b2b') {
+      setCurrentPage(page as 'home' | 'shop' | 'drops' | 'about' | 'b2b');
     } else {
       setCurrentPage('shop');
     }
@@ -59,6 +60,10 @@ function AppContent() {
 
         {currentPage === 'about' && (
           <About onNavigateToShop={() => handleNavigate('shop')} />
+        )}
+
+        {currentPage === 'b2b' && (
+          <B2BPage />
         )}
       </main>
 
