@@ -67,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onPageChan
     { name: 'COLLECTIONS', id: 'collections' },
     { name: 'ABOUT', id: 'about' },
     { name: 'BULK ORDERS', id: 'b2b' },
-    { name: 'CONTACT', id: 'contact' }
+    { name: 'LOGIN', id: 'signin' }
   ];
 
   return (
