@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-page: #F5F4F1;
+    --card-white: #FFFFFF;
+    --text-primary: #111111;
+    --text-muted: #666660;
+    --accent-clay: #A35843;
+    --border-subtle: #E2E0D8;
+    --border-dark: #111111;
+  }
+
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Monospace typography for labels, nav, meta tags, and prices */
+  .font-mono-banzook {
+    font-family: 'Space Mono', 'JetBrains Mono', monospace;
+  }
+
+  .font-display {
+    font-family: 'Archivo', 'Inter', sans-serif;
+  }
+}
+
+/* Infinite Marquee animations */
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-left 24s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee-slow {
+  display: flex;
+  width: max-content;
+  animation: marquee-left 32s linear infinite;
+}
+
+/* Hide scrollbar for clean horizontal rows */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom crisp flat border utilities */
+.border-banzook {
+  border: 1px solid #111111;
+}
+
+.border-banzook-subtle {
+  border: 1px solid #E2E0D8;
+}
+
+/* Focus styles */
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 1.5px solid #111111;
+  outline-offset: 2px;
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Banzook",
+  "description": "Minimalist clothing brand e-commerce storefront for Banzook. Quality-over-noise apparel, genderless streetwear essentials, curated drops, fit quiz, and clean flat aesthetic.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
