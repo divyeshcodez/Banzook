@@ -142,7 +142,7 @@ export function App() {
     const rawSubtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const discountAmount = appliedPromoCode === 'BANZOOK15' ? rawSubtotal * 0.15 : 0;
     const finalSubtotal = rawSubtotal - discountAmount;
-    const shippingFee = finalSubtotal >= 100 || cartItems.length === 0 ? 0 : 9;
+    const shippingFee = cartItems.length === 0 ? 0 : 99;
     const grandTotal = finalSubtotal + shippingFee;
 
     const fallbackId = `BZ-${Math.floor(10000 + Math.random() * 90000)}`;

@@ -114,7 +114,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
                 <div className="flex items-center gap-3">
                   <span className="text-xs font-bold text-[#111111]">
-                    ${product.price}
+                    ₹{product.price.toLocaleString('en-IN')}
                   </span>
                   <div className="w-7 h-7 rounded-full border border-[#111111] flex items-center justify-center bg-[#F5F4F1]">
                     <Eye className="w-3.5 h-3.5 text-[#111111]" />

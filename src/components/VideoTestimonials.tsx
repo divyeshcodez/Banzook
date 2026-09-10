@@ -89,7 +89,7 @@ export const VideoTestimonials: React.FC<VideoTestimonialsProps> = ({
                           {item.taggedProductName}
                         </div>
                         <div className="text-[10px] font-mono-banzook text-[#A35843]">
-                          ${item.taggedProductPrice}
+                          ₹{item.taggedProductPrice.toLocaleString('en-IN')}
                         </div>
                       </div>
                     </div>

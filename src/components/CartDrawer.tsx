@@ -34,7 +34,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   const discountRate = appliedPromoCode === 'BANZOOK15' ? 0.15 : 0;
   const discountAmount = rawSubtotal * discountRate;
   const finalSubtotal = rawSubtotal - discountAmount;
-  const shippingFee = items.length === 0 ? 0 : 9;
+  const shippingFee = items.length === 0 ? 0 : 99;
   const grandTotal = finalSubtotal + shippingFee;
 
   const handleApplyPromo = (e: React.FormEvent) => {
@@ -150,7 +150,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
                       {/* Price */}
                       <div className="text-xs font-bold text-[#111111]">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        ₹{Math.round(item.price * item.quantity).toLocaleString('en-IN')}
                       </div>
                     </div>
 
@@ -192,21 +192,21 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               <div className="space-y-1 text-xs border-t border-neutral-200 pt-3">
                 <div className="flex justify-between text-[#666660]">
                   <span>Subtotal</span>
-                  <span>${rawSubtotal.toFixed(2)}</span>
+                  <span>₹{Math.round(rawSubtotal).toLocaleString('en-IN')}</span>
                 </div>
                 {discountAmount > 0 && (
                   <div className="flex justify-between text-emerald-700 font-bold">
                     <span>Discount ({appliedPromoCode})</span>
-                    <span>-${discountAmount.toFixed(2)}</span>
+                    <span>-₹{Math.round(discountAmount).toLocaleString('en-IN')}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-[#666660]">
-                  <span>Standard Shipping</span>
-                  <span>{shippingFee === 0 ? 'FREE' : `$${shippingFee.toFixed(2)}`}</span>
+                  <span>Standard Express Shipping</span>
+                  <span>₹{shippingFee.toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between text-sm font-bold text-[#111111] pt-2 border-t border-neutral-200">
                   <span>Estimated Total</span>
-                  <span>${grandTotal.toFixed(2)}</span>
+                  <span>₹{Math.round(grandTotal).toLocaleString('en-IN')}</span>
                 </div>
               </div>
 
@@ -215,7 +215,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 onClick={onCheckout}
                 className="w-full py-3 rounded-full bg-[#111111] text-white hover:bg-neutral-800 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-colors"
               >
-                <span>CHECKOUT · ${grandTotal.toFixed(2)}</span>
+                <span>CHECKOUT · ₹{Math.round(grandTotal).toLocaleString('en-IN')}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
 

@@ -104,7 +104,7 @@ export const LifestyleCarousel: React.FC<LifestyleCarouselProps> = ({
                     className="p-2.5 rounded-xl border border-neutral-200 hover:border-[#111111] bg-[#F5F4F1] flex items-center justify-between text-xs font-mono-banzook cursor-pointer transition-colors"
                   >
                     <span className="font-medium text-[#111111] truncate">{piece.name}</span>
-                    <span className="text-[#A35843] font-bold shrink-0 ml-2">${piece.price}</span>
+                    <span className="text-[#A35843] font-bold shrink-0 ml-2">₹{piece.price.toLocaleString('en-IN')}</span>
                   </div>
                 ))}
               </div>

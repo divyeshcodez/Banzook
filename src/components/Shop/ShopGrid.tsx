@@ -128,11 +128,11 @@ export const ShopGrid: React.FC<ShopGridProps> = ({ onAddToCart, onQuickView }) 
                     <div className="text-right flex-shrink-0 flex flex-col items-end">
                       {hasSale && (
                         <span className="text-[10px] font-mono-banzook text-[#666660] line-through">
-                          ${product.originalPrice}
+                          ₹{product.originalPrice.toLocaleString('en-IN')}
                         </span>
                       )}
                       <span className={`text-sm font-mono-banzook font-bold ${hasSale ? 'text-[#1D3557]' : 'text-[#111111]'}`}>
-                        ${product.price}
+                        ₹{product.price.toLocaleString('en-IN')}
                       </span>
                     </div>
                   </div>

@@ -78,11 +78,11 @@ export const BundleBuilderModal: React.FC<BundleBuilderModalProps> = ({ product,
             <div className="flex flex-col items-start md:items-end shrink-0">
               {product.originalPrice && (
                 <div className="font-mono-banzook text-sm text-[#666660] line-through mb-1">
-                  ${product.originalPrice.toFixed(2)}
+                  ₹{product.originalPrice.toLocaleString('en-IN')}
                 </div>
               )}
               <div className="font-display font-bold text-3xl text-[#111111]">
-                ${product.price.toFixed(2)}
+                ₹{product.price.toLocaleString('en-IN')}
               </div>
               <div className="font-mono-banzook text-[10px] text-[#666660] mt-1">
                 Tax included.
@@ -204,7 +204,7 @@ export const BundleBuilderModal: React.FC<BundleBuilderModalProps> = ({ product,
             }`}
           >
             {selectedItems.length === REQUIRED_ITEMS 
-              ? `CHOOSE UR SIZE — $${product.price.toFixed(2)}` 
+              ? `CHOOSE UR SIZE — ₹${product.price.toLocaleString('en-IN')}` 
               : `SELECT ${REQUIRED_ITEMS - selectedItems.length} MORE ITEMS`}
           </button>
           

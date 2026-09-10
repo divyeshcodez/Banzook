@@ -169,12 +169,12 @@ export const BestSellers: React.FC<BestSellersProps> = ({
                     {product.originalPrice ? (
                       <div className="flex items-center gap-1.5">
                         <span className="line-through text-[#666660] font-normal text-xs">
-                          ${product.originalPrice}
+                          ₹{product.originalPrice.toLocaleString('en-IN')}
                         </span>
-                        <span>${product.price}</span>
+                        <span>₹{product.price.toLocaleString('en-IN')}</span>
                       </div>
                     ) : (
-                      <span>${product.price}</span>
+                      <span>₹{product.price.toLocaleString('en-IN')}</span>
                     )}
                   </div>
                 </div>

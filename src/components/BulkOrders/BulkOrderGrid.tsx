@@ -102,9 +102,9 @@ export const BulkOrderGrid: React.FC<BulkOrderGridProps> = ({ products, onQuickV
                 </h3>
                 <div className="flex flex-col items-end gap-1 shrink-0 text-xs">
                   {product.originalPrice && (
-                    <span className="text-[#666660] line-through">${product.originalPrice}</span>
+                    <span className="text-[#666660] line-through">₹{product.originalPrice.toLocaleString('en-IN')}</span>
                   )}
-                  <span className="font-bold text-[#A35843]">${product.price}</span>
+                  <span className="font-bold text-[#A35843]">₹{product.price.toLocaleString('en-IN')}</span>
                 </div>
               </div>
               

@@ -358,11 +358,11 @@ export const FitQuizModal: React.FC<FitQuizModalProps> = ({
                       </h4>
                       <div className="flex items-center gap-3 pt-1">
                         <span className="font-display font-bold text-lg text-[#111111]">
-                          ${recommendedProduct.price}
+                          ₹{recommendedProduct.price.toLocaleString('en-IN')}
                         </span>
                         {recommendedProduct.originalPrice && (
                           <span className="line-through text-xs font-mono-banzook text-[#666660]">
-                            ${recommendedProduct.originalPrice}
+                            ₹{recommendedProduct.originalPrice.toLocaleString('en-IN')}
                           </span>
                         )}
                         <span className="text-[11px] font-mono-banzook font-bold text-[#E65F2B] bg-[#E65F2B]/10 px-2 py-0.5 rounded-md">

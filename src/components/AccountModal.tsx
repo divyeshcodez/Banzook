@@ -685,14 +685,14 @@ export const AccountModal: React.FC<AccountModalProps> = ({
                                 <span className="text-neutral-700">
                                   {item.quantity}x {item.name} ({item.size})
                                 </span>
-                                <span className="font-medium text-neutral-900">${item.price * item.quantity}</span>
+                                <span className="font-medium text-neutral-900">₹{Math.round(item.price * item.quantity).toLocaleString('en-IN')}</span>
                               </div>
                             ))}
                           </div>
 
                           <div className="border-t border-neutral-200 pt-2 flex items-center justify-between font-semibold text-neutral-900">
                             <span>Total</span>
-                            <span>${order.total}</span>
+                            <span>₹{Math.round(order.total).toLocaleString('en-IN')}</span>
                           </div>
                         </div>
                       ))}

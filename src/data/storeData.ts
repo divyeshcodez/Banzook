@@ -6,7 +6,7 @@ export const PRODUCTS: Product[] = [
     name: 'Heavyweight Boxy Tee',
     tagline: '280 GSM Organic Carded Cotton',
     category: 'tops',
-    price: 58,
+    price: 1499,
     rating: 4.9,
     reviewCount: 312,
     image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80',
@@ -20,11 +20,11 @@ export const PRODUCTS: Product[] = [
       { name: 'Sage Gray', hex: '#7A847A' }
     ],
     sizes: [
-      { size: 'XS', label: 'XS — Boxy 38"', price: 58, inStock: true },
-      { size: 'S', label: 'S — Boxy 40"', price: 58, inStock: true },
-      { size: 'M', label: 'M — Boxy 42"', price: 58, inStock: true },
-      { size: 'L', label: 'L — Boxy 44"', price: 58, inStock: true },
-      { size: 'XL', label: 'XL — Boxy 47"', price: 58, inStock: true }
+      { size: 'XS', label: 'XS — Boxy 38"', price: 1499, inStock: true },
+      { size: 'S', label: 'S — Boxy 40"', price: 1499, inStock: true },
+      { size: 'M', label: 'M — Boxy 42"', price: 1499, inStock: true },
+      { size: 'L', label: 'L — Boxy 44"', price: 1499, inStock: true },
+      { size: 'XL', label: 'XL — Boxy 47"', price: 1499, inStock: true }
     ],
     fabricDetails: '100% GOTS-certified organic cotton, 280 GSM heavyweight jersey. Pre-shrunk with enzyme wash for an ultra-clean drape.',
     fit: 'Relaxed, drop-shoulder silhouette with a structured collar that never sags.',
@@ -34,7 +34,7 @@ export const PRODUCTS: Product[] = [
       'High 1.25" bound ribbed collar',
       'Twin-needle drop shoulder seam',
       'Pre-washed to eliminate post-laundering shrinkage',
-      'Knit, cut, and sewn in Los Angeles'
+      'Engineered for daily rotation'
     ],
     isBestseller: true,
     isNew: true,
@@ -45,7 +45,7 @@ export const PRODUCTS: Product[] = [
     name: 'Wide-Leg Pleated Trouser',
     tagline: 'Japanese Washed Cotton Twill',
     category: 'bottoms',
-    price: 145,
+    price: 2999,
     rating: 4.8,
     reviewCount: 184,
     image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=800&q=80',
@@ -58,11 +58,11 @@ export const PRODUCTS: Product[] = [
       { name: 'Dark Olive', hex: '#3E423A' }
     ],
     sizes: [
-      { size: '28', label: '28 / 30L', price: 145, inStock: true },
-      { size: '30', label: '30 / 31L', price: 145, inStock: true },
-      { size: '32', label: '32 / 32L', price: 145, inStock: true },
-      { size: '34', label: '34 / 32L', price: 145, inStock: true },
-      { size: '36', label: '36 / 32L', price: 145, inStock: false }
+      { size: '28', label: '28 / 30L', price: 2999, inStock: true },
+      { size: '30', label: '30 / 31L', price: 2999, inStock: true },
+      { size: '32', label: '32 / 32L', price: 2999, inStock: true },
+      { size: '34', label: '34 / 32L', price: 2999, inStock: true },
+      { size: '36', label: '36 / 32L', price: 2999, inStock: false }
     ],
     fabricDetails: '100% Japanese compact long-staple cotton twill, 310 GSM. High-density weave with a peach-skin matte touch.',
     fit: 'High-rise, relaxed through the thigh with gentle forward pleats falling into a fluid, straight wide leg.',
@@ -83,7 +83,7 @@ export const PRODUCTS: Product[] = [
     name: 'Loopback Pullover Hoodie',
     tagline: '480 GSM French Terry Fleece',
     category: 'tops',
-    price: 130,
+    price: 3299,
     rating: 4.9,
     reviewCount: 420,
     image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80',
@@ -96,10 +96,10 @@ export const PRODUCTS: Product[] = [
       { name: 'Terracotta Earth', hex: '#A35843' }
     ],
     sizes: [
-      { size: 'S', label: 'S — Chest 42"', price: 130, inStock: true },
-      { size: 'M', label: 'M — Chest 45"', price: 130, inStock: true },
-      { size: 'L', label: 'L — Chest 48"', price: 130, inStock: true },
-      { size: 'XL', label: 'XL — Chest 51"', price: 130, inStock: true }
+      { size: 'S', label: 'S — Chest 42"', price: 3299, inStock: true },
+      { size: 'M', label: 'M — Chest 45"', price: 3299, inStock: true },
+      { size: 'L', label: 'L — Chest 48"', price: 3299, inStock: true },
+      { size: 'XL', label: 'XL — Chest 51"', price: 3299, inStock: true }
     ],
     fabricDetails: '480 GSM dense loopback French terry. Zero drawstrings for a clean, architectural neckline.',
     fit: 'Subtly oversized body with structured drop shoulders and snug 3" ribbed waistband that sits naturally on the hips.',
@@ -120,8 +120,8 @@ export const PRODUCTS: Product[] = [
     name: 'Minimalist Wool Bomber',
     tagline: '700 GSM Recycled Melton Wool',
     category: 'outerwear',
-    price: 240,
-    originalPrice: 280,
+    price: 5999,
+    originalPrice: 6999,
     rating: 5.0,
     reviewCount: 96,
     image: 'https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=800&q=80',
@@ -133,10 +133,10 @@ export const PRODUCTS: Product[] = [
       { name: 'Onyx Navy', hex: '#1A202C' }
     ],
     sizes: [
-      { size: 'S', label: 'S (36-38)', price: 240, inStock: true },
-      { size: 'M', label: 'M (39-41)', price: 240, inStock: true },
-      { size: 'L', label: 'L (42-44)', price: 240, inStock: true },
-      { size: 'XL', label: 'XL (45-47)', price: 240, inStock: false }
+      { size: 'S', label: 'S (36-38)', price: 5999, inStock: true },
+      { size: 'M', label: 'M (39-41)', price: 5999, inStock: true },
+      { size: 'L', label: 'L (42-44)', price: 5999, inStock: true },
+      { size: 'XL', label: 'XL (45-47)', price: 5999, inStock: false }
     ],
     fabricDetails: '70% post-consumer recycled Melton wool, 30% organic nylon for abrasion resistance. Lined with smooth cupro-cotton twill.',
     fit: 'Modern boxy fit with slightly shortened body length designed for balanced layering over oversized hoodies and knitwear.',
@@ -157,7 +157,7 @@ export const PRODUCTS: Product[] = [
     name: 'Relaxed Twill Pant',
     tagline: 'Garment-Dyed 9oz Cotton Twill',
     category: 'bottoms',
-    price: 135,
+    price: 2799,
     rating: 4.8,
     reviewCount: 220,
     image: 'https://images.unsplash.com/photo-1517445312882-bc9910d016b7?auto=format&fit=crop&w=800&q=80',
@@ -170,10 +170,10 @@ export const PRODUCTS: Product[] = [
       { name: 'Sediment Brown', hex: '#635348' }
     ],
     sizes: [
-      { size: 'S (30)', label: 'S (Waist 30")', price: 135, inStock: true },
-      { size: 'M (32)', label: 'M (Waist 32")', price: 135, inStock: true },
-      { size: 'L (34)', label: 'L (Waist 34")', price: 135, inStock: true },
-      { size: 'XL (36)', label: 'XL (Waist 36")', price: 135, inStock: true }
+      { size: 'S (30)', label: 'S (Waist 30")', price: 2799, inStock: true },
+      { size: 'M (32)', label: 'M (Waist 32")', price: 2799, inStock: true },
+      { size: 'L (34)', label: 'L (Waist 34")', price: 2799, inStock: true },
+      { size: 'XL (36)', label: 'XL (Waist 36")', price: 2799, inStock: true }
     ],
     fabricDetails: '100% long-staple cotton, vintage stone-washed for softened texture and authentic drape.',
     fit: 'Straight leg with a gentle taper, mid-rise with interior drawstring elastic combo.',
@@ -193,7 +193,7 @@ export const PRODUCTS: Product[] = [
     name: 'Technical Oversized Mac Coat',
     tagline: 'Water-Repellent 3-Layer Shell',
     category: 'outerwear',
-    price: 260,
+    price: 6499,
     rating: 4.9,
     reviewCount: 78,
     image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80',
@@ -205,9 +205,9 @@ export const PRODUCTS: Product[] = [
       { name: 'Onyx', hex: '#141414' }
     ],
     sizes: [
-      { size: 'S', label: 'S (Unisex 36-39)', price: 260, inStock: true },
-      { size: 'M', label: 'M (Unisex 40-43)', price: 260, inStock: true },
-      { size: 'L', label: 'L (Unisex 44-47)', price: 260, inStock: true }
+      { size: 'S', label: 'S (Unisex 36-39)', price: 6499, inStock: true },
+      { size: 'M', label: 'M (Unisex 40-43)', price: 6499, inStock: true },
+      { size: 'L', label: 'L (Unisex 44-47)', price: 6499, inStock: true }
     ],
     fabricDetails: '100% recycled nylon with non-fluorinated DWR waterproof coating. Breathable microporous back membrane.',
     fit: 'Generous A-line silhouette with articulated raglan sleeves for easy layering over blazers and heavy sweaters.',
@@ -227,7 +227,7 @@ export const PRODUCTS: Product[] = [
     name: 'Structured Poplin Overshirt',
     tagline: '200 GSM High-Density Cotton',
     category: 'tops',
-    price: 110,
+    price: 2499,
     rating: 4.8,
     reviewCount: 145,
     image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
@@ -240,10 +240,10 @@ export const PRODUCTS: Product[] = [
       { name: 'Desert Sand', hex: '#D2C8BA' }
     ],
     sizes: [
-      { size: 'S', label: 'S — Boxy 42"', price: 110, inStock: true },
-      { size: 'M', label: 'M — Boxy 45"', price: 110, inStock: true },
-      { size: 'L', label: 'L — Boxy 48"', price: 110, inStock: true },
-      { size: 'XL', label: 'XL — Boxy 51"', price: 110, inStock: true }
+      { size: 'S', label: 'S — Boxy 42"', price: 2499, inStock: true },
+      { size: 'M', label: 'M — Boxy 45"', price: 2499, inStock: true },
+      { size: 'L', label: 'L — Boxy 48"', price: 2499, inStock: true },
+      { size: 'XL', label: 'XL — Boxy 51"', price: 2499, inStock: true }
     ],
     fabricDetails: 'Compact 2-ply high-count cotton poplin with a crisp, matte hand-feel.',
     fit: 'Square-cut silhouette with straight hem and dropped armholes. Worn open over tees or buttoned solo.',
@@ -263,7 +263,7 @@ export const PRODUCTS: Product[] = [
     name: 'Heavy Ribbed Merino Beanie',
     tagline: '100% Extra-Fine Merino Wool',
     category: 'accessories',
-    price: 45,
+    price: 999,
     rating: 4.9,
     reviewCount: 380,
     image: 'https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?auto=format&fit=crop&w=800&q=80',
@@ -275,7 +275,7 @@ export const PRODUCTS: Product[] = [
       { name: 'Muted Clay', hex: '#A35843' }
     ],
     sizes: [
-      { size: 'O/S', label: 'One Size (Universal Stretch)', price: 45, inStock: true }
+      { size: 'O/S', label: 'One Size (Universal Stretch)', price: 999, inStock: true }
     ],
     fabricDetails: '100% non-mulesed extrafine merino wool, 7-gauge fisherman rib.',
     fit: 'Structured crown that can be worn cuffed or slightly slouchy.',
@@ -294,7 +294,7 @@ export const PRODUCTS: Product[] = [
     name: 'Architectural Canvas Tote',
     tagline: '16oz Heavyweight Cotton Duck',
     category: 'accessories',
-    price: 65,
+    price: 1499,
     rating: 4.9,
     reviewCount: 160,
     image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80',
@@ -305,7 +305,7 @@ export const PRODUCTS: Product[] = [
       { name: 'Washed Black', hex: '#212120' }
     ],
     sizes: [
-      { size: 'O/S', label: '24L Capacity (Fits 16" Laptop)', price: 65, inStock: true }
+      { size: 'O/S', label: '24L Capacity (Fits 16" Laptop)', price: 1499, inStock: true }
     ],
     fabricDetails: '16oz unbleached organic cotton duck canvas with reinforced stress bar-tacks.',
     fit: 'Structured standing base with dual length handles for hand carry or shoulder drape.',
@@ -325,30 +325,30 @@ export const PRODUCTS: Product[] = [
     name: 'The Core Uniform Set (3-Piece)',
     tagline: 'Boxy Tee + Twill Pant + Loopback Hoodie',
     category: 'bundles',
-    price: 275,
-    originalPrice: 333,
+    price: 6499,
+    originalPrice: 7597,
     rating: 5.0,
     reviewCount: 215,
     image: 'https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&w=800&q=80',
-    badge: 'SAVE $58',
+    badge: 'SAVE ₹1,098',
     badgeType: 'limited',
     colors: [
       { name: 'Monochrome Set', hex: '#1F1F1E' },
       { name: 'Earth Neutral Set', hex: '#D7D0C5' }
     ],
     sizes: [
-      { size: 'S Set', label: 'All Pieces Size S', price: 275, inStock: true },
-      { size: 'M Set', label: 'All Pieces Size M', price: 275, inStock: true },
-      { size: 'L Set', label: 'All Pieces Size L', price: 275, inStock: true },
-      { size: 'XL Set', label: 'All Pieces Size XL', price: 275, inStock: true }
+      { size: 'S Set', label: 'All Pieces Size S', price: 6499, inStock: true },
+      { size: 'M Set', label: 'All Pieces Size M', price: 6499, inStock: true },
+      { size: 'L Set', label: 'All Pieces Size L', price: 6499, inStock: true },
+      { size: 'XL Set', label: 'All Pieces Size XL', price: 6499, inStock: true }
     ],
     fabricDetails: 'Complete 3-piece capsule crafted from 100% GOTS organic cotton & Japanese twill.',
     fit: 'Curated cohesive oversized fit designed to pair seamlessly.',
     description: 'The foundational wardrobe system. Includes the Heavyweight Boxy Tee, Relaxed Twill Pant, and Loopback Pullover Hoodie at a bundle price.',
     details: [
-      'Includes 1x Heavyweight Boxy Tee ($58 value)',
-      'Includes 1x Relaxed Twill Pant ($135 value)',
-      'Includes 1x Loopback Hoodie ($130 value)',
+      'Includes 1x Heavyweight Boxy Tee (₹1,499 value)',
+      'Includes 1x Relaxed Twill Pant (₹2,799 value)',
+      'Includes 1x Loopback Hoodie (₹3,299 value)',
       'Packed in recycled organic cotton dust bag'
     ],
     isBestseller: true,
@@ -360,8 +360,8 @@ export const PRODUCTS: Product[] = [
     name: 'Essentials 3-Pack',
     tagline: '3 Heavyweight Tees, Mixed Colors',
     category: 'bundles',
-    price: 145,
-    originalPrice: 174,
+    price: 3799,
+    originalPrice: 4497,
     rating: 4.9,
     reviewCount: 412,
     image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=800&q=80',
@@ -370,9 +370,9 @@ export const PRODUCTS: Product[] = [
     badgeType: 'limited',
     colors: [{ name: 'Mixed Basics', hex: '#666666' }],
     sizes: [
-      { size: 'S', label: 'Size S (All)', price: 145, inStock: true },
-      { size: 'M', label: 'Size M (All)', price: 145, inStock: true },
-      { size: 'L', label: 'Size L (All)', price: 145, inStock: true }
+      { size: 'S', label: 'Size S (All)', price: 3799, inStock: true },
+      { size: 'M', label: 'Size M (All)', price: 3799, inStock: true },
+      { size: 'L', label: 'Size L (All)', price: 3799, inStock: true }
     ],
     fabricDetails: '3x 280 GSM organic cotton tees.',
     fit: 'Boxy drop-shoulder silhouette.',
@@ -387,15 +387,15 @@ export const PRODUCTS: Product[] = [
     name: 'Team Hoodie Set',
     tagline: '5x 480 GSM French Terry Hoodies',
     category: 'bundles',
-    price: 550,
-    originalPrice: 650,
+    price: 13999,
+    originalPrice: 16495,
     rating: 5.0,
     reviewCount: 28,
     image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80',
     badge: 'TEAM PACK',
     badgeType: 'core',
     colors: [{ name: 'Bulk Mix', hex: '#222222' }],
-    sizes: [{ size: 'Mixed', label: 'Mixed Sizes (Specify at Checkout)', price: 550, inStock: true }],
+    sizes: [{ size: 'Mixed', label: 'Mixed Sizes (Specify at Checkout)', price: 13999, inStock: true }],
     fabricDetails: '5x Heavyweight loopback hoodies.',
     fit: 'Oversized structured fit.',
     description: 'Outfit your team or crew. Five hoodies at a wholesale-tier discount.',
@@ -409,15 +409,15 @@ export const PRODUCTS: Product[] = [
     name: 'Basics Bundle Duo',
     tagline: 'Tee + Twill Pant',
     category: 'bundles',
-    price: 165,
-    originalPrice: 193,
+    price: 3799,
+    originalPrice: 4298,
     rating: 4.8,
     reviewCount: 156,
     image: 'https://images.unsplash.com/photo-1517445312882-bc9910d016b7?auto=format&fit=crop&w=800&q=80',
     badge: 'CORE DUO',
     badgeType: 'bestseller',
     colors: [{ name: 'Neutral', hex: '#EDE8DF' }],
-    sizes: [{ size: 'M/32', label: 'Top M / Bottom 32', price: 165, inStock: true }],
+    sizes: [{ size: 'M/32', label: 'Top M / Bottom 32', price: 3799, inStock: true }],
     fabricDetails: 'Organic cotton top, Japanese twill bottom.',
     fit: 'Relaxed all around.',
     description: 'The two foundational pieces you need to start building your wardrobe.',
@@ -431,15 +431,15 @@ export const PRODUCTS: Product[] = [
     name: 'Layering Set',
     tagline: 'Tee + Overshirt + Jacket',
     category: 'bundles',
-    price: 360,
-    originalPrice: 428,
+    price: 8499,
+    originalPrice: 9997,
     rating: 5.0,
     reviewCount: 45,
     image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
     badge: 'SAVE 15%',
     badgeType: 'limited',
     colors: [{ name: 'Mixed', hex: '#333' }],
-    sizes: [{ size: 'M', label: 'Size M (All)', price: 360, inStock: true }],
+    sizes: [{ size: 'M', label: 'Size M (All)', price: 8499, inStock: true }],
     fabricDetails: 'Varied weights for complete seasonal layering.',
     fit: 'Engineered to fit perfectly over each other.',
     description: 'The complete upper-body system. Three layers designed to work individually or stacked.',
@@ -453,15 +453,15 @@ export const PRODUCTS: Product[] = [
     name: 'Mini Wardrobe Starter Kit',
     tagline: '5 Core Items',
     category: 'bundles',
-    price: 490,
-    originalPrice: 580,
+    price: 11999,
+    originalPrice: 13795,
     rating: 4.9,
     reviewCount: 89,
     image: 'https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&w=800&q=80',
     badge: 'BEST VALUE',
     badgeType: 'core',
     colors: [{ name: 'Capsule Colors', hex: '#EBE7DF' }],
-    sizes: [{ size: 'Custom', label: 'Select Sizes (In Cart)', price: 490, inStock: true }],
+    sizes: [{ size: 'Custom', label: 'Select Sizes (In Cart)', price: 11999, inStock: true }],
     fabricDetails: 'Complete wardrobe rotation.',
     fit: 'Standard Banzook relaxed fits.',
     description: 'Everything you need for a 5-day rotation. 2 tees, 1 pant, 1 hoodie, 1 overshirt.',
@@ -475,15 +475,15 @@ export const PRODUCTS: Product[] = [
     name: 'Group Order Pack',
     tagline: '10+ Units, Max Discount',
     category: 'bundles',
-    price: 950,
-    originalPrice: 1300,
+    price: 22999,
+    originalPrice: 28999,
     rating: 5.0,
     reviewCount: 12,
     image: 'https://images.unsplash.com/photo-1576566036402-2d8c01a4bc58?auto=format&fit=crop&w=800&q=80',
     badge: 'WHOLESALE',
     badgeType: 'new',
     colors: [{ name: 'Assorted', hex: '#111111' }],
-    sizes: [{ size: 'Mixed', label: 'Provide Breakdown via Email', price: 950, inStock: true }],
+    sizes: [{ size: 'Mixed', label: 'Provide Breakdown via Email', price: 22999, inStock: true }],
     fabricDetails: 'Assorted heavy cottons.',
     fit: 'Universal block.',
     description: 'Stocking up for a retreat, crew, or staff? Get our deepest per-unit discount.',
@@ -497,13 +497,13 @@ export const PRODUCTS: Product[] = [
     name: 'Core Basics Ritual',
     tagline: '2 Tees + 1 Tote',
     category: 'bundles',
-    price: 150,
-    originalPrice: 181,
+    price: 3899,
+    originalPrice: 4497,
     rating: 4.7,
     reviewCount: 230,
     image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80',
     colors: [{ name: 'Mixed', hex: '#635348' }],
-    sizes: [{ size: 'L', label: 'Tees (L)', price: 150, inStock: true }],
+    sizes: [{ size: 'L', label: 'Tees (L)', price: 3899, inStock: true }],
     fabricDetails: 'Canvas + Cotton.',
     fit: 'Standard',
     description: 'The weekend farmers market uniform. Heavy canvas tote and two reliable tees.',
@@ -539,19 +539,19 @@ export const PRODUCTS: Product[] = [
     name: 'Best Sellers Sample Pack',
     tagline: 'Top 4 Items + 20% Off',
     category: 'bundles',
-    price: 435,
-    originalPrice: 545,
+    price: 9999,
+    originalPrice: 12296,
     rating: 4.9,
     reviewCount: 340,
     image: 'https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&w=800&q=80',
     badge: 'POPULAR',
     badgeType: 'bestseller',
     colors: [{ name: 'Core Colors', hex: '#161616' }],
-    sizes: [{ size: 'M', label: 'M (All)', price: 435, inStock: true }],
+    sizes: [{ size: 'M', label: 'M (All)', price: 9999, inStock: true }],
     fabricDetails: 'Our four most reviewed fabrics.',
     fit: 'Signature block fits.',
     description: 'New to Banzook? Get our 4 highest-rated items at a special introductory discount.',
-    details: ['4 iconic items', 'Save over $100'],
+    details: ['4 iconic items', 'Save over ₹2,200'],
     isBestseller: true,
     isNew: false,
     unisex: true
@@ -628,9 +628,9 @@ export const LIFESTYLE_OUTFITS: LifestyleOutfit[] = [
     description: 'Pairing our high-density Structured Poplin Overshirt with the Wide-Leg Pleated Trouser creates clean geometry that reads sharp while offering complete movement flexibility.',
     image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80',
     keyPieces: [
-      { name: 'Structured Poplin Overshirt', price: 110, productId: 'oversized-poplin-overshirt' },
-      { name: 'Wide-Leg Pleated Trouser', price: 145, productId: 'wide-leg-pleated-trouser' },
-      { name: 'Architectural Canvas Tote', price: 65, productId: 'organic-canvas-daily-tote' }
+      { name: 'Structured Poplin Overshirt', price: 2499, productId: 'oversized-poplin-overshirt' },
+      { name: 'Wide-Leg Pleated Trouser', price: 2999, productId: 'wide-leg-pleated-trouser' },
+      { name: 'Architectural Canvas Tote', price: 1499, productId: 'organic-canvas-daily-tote' }
     ],
     modelDetails: 'Model is 6\'1" wearing Size M tops and Size 32 bottoms.'
   },
@@ -642,9 +642,9 @@ export const LIFESTYLE_OUTFITS: LifestyleOutfit[] = [
     description: 'Built for morning coffee walks, gallery visits, and long afternoons. Our 480 GSM Loopback Hoodie combined with the Relaxed Twill Pant creates a structured silhouette that never looks sloppy.',
     image: 'https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&w=1200&q=80',
     keyPieces: [
-      { name: 'Loopback Pullover Hoodie', price: 130, productId: 'heavyweight-loopback-hoodie' },
-      { name: 'Relaxed Twill Pant', price: 135, productId: 'relaxed-japanese-twill-pant' },
-      { name: 'Heavy Ribbed Merino Beanie', price: 45, productId: 'heavyweight-ribbed-beanie' }
+      { name: 'Loopback Pullover Hoodie', price: 3299, productId: 'heavyweight-loopback-hoodie' },
+      { name: 'Relaxed Twill Pant', price: 2799, productId: 'relaxed-japanese-twill-pant' },
+      { name: 'Heavy Ribbed Merino Beanie', price: 999, productId: 'heavyweight-ribbed-beanie' }
     ],
     modelDetails: 'Model is 5\'10" wearing Size L in all pieces.'
   },
@@ -656,9 +656,9 @@ export const LIFESTYLE_OUTFITS: LifestyleOutfit[] = [
     description: 'From airport security lines to unpredictable cabin temperatures, layer the Minimalist Wool Bomber over the Heavyweight Boxy Tee for effortless transit versatility.',
     image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80',
     keyPieces: [
-      { name: 'Minimalist Wool Bomber', price: 240, productId: 'minimalist-wool-bomber' },
-      { name: 'Heavyweight Boxy Tee', price: 58, productId: 'heavyweight-boxy-tee' },
-      { name: 'Architectural Canvas Tote', price: 65, productId: 'organic-canvas-daily-tote' }
+      { name: 'Minimalist Wool Bomber', price: 5999, productId: 'minimalist-wool-bomber' },
+      { name: 'Heavyweight Boxy Tee', price: 1499, productId: 'heavyweight-boxy-tee' },
+      { name: 'Architectural Canvas Tote', price: 1499, productId: 'organic-canvas-daily-tote' }
     ],
     modelDetails: 'Model is 5\'11" wearing Size S tops and Size 30 bottoms.'
   }
@@ -685,7 +685,7 @@ export const PRESS_QUOTES: PressQuote[] = [
   },
   {
     id: 'press-4',
-    quote: '"Banzook’s 480 GSM hoodie feels like armor against fast fashion. Worth every single penny."',
+    quote: '"Banzook’s 480 GSM hoodie feels like armor against fast fashion. Worth every single rupee."',
     outlet: 'HYPEBEAST',
     authorOrDate: 'Uniform Review'
   }
@@ -700,7 +700,7 @@ export const UGC_STYLE_CHECKS: UGCStyleCheck[] = [
     caption: 'True to size, so comfortable. The collar on this 280 GSM tee does not budge even after continuous cycles.',
     taggedProductId: 'heavyweight-boxy-tee',
     taggedProductName: 'Heavyweight Boxy Tee in Raw Chalk',
-    taggedProductPrice: 58,
+    taggedProductPrice: 1499,
     taggedProductImage: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=300&q=80',
     stats: '6\'0" • Wears Size L',
     fitVerdict: 'Boxy drop-shoulder cut, perfectly balanced'
@@ -713,7 +713,7 @@ export const UGC_STYLE_CHECKS: UGCStyleCheck[] = [
     caption: 'The pleats hold their razor crease effortlessly. Wore them straight from the studio to dinner with zero wrinkling.',
     taggedProductId: 'wide-leg-pleated-trouser',
     taggedProductName: 'Wide-Leg Pleated Trouser in Sand Taupe',
-    taggedProductPrice: 145,
+    taggedProductPrice: 2999,
     taggedProductImage: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=300&q=80',
     stats: '5\'8" • Wears Size 30',
     fitVerdict: 'High-rise with clean fluid break'
@@ -726,7 +726,7 @@ export const UGC_STYLE_CHECKS: UGCStyleCheck[] = [
     caption: 'No strings, no logos. The crossover hood stands erect and the French terry weight is substantial.',
     taggedProductId: 'heavyweight-loopback-hoodie',
     taggedProductName: 'Loopback Pullover Hoodie in Matte Ink',
-    taggedProductPrice: 130,
+    taggedProductPrice: 3299,
     taggedProductImage: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=300&q=80',
     stats: '6\'2" • Wears Size XL',
     fitVerdict: 'Subtly oversized with snug waistband'
@@ -739,7 +739,7 @@ export const UGC_STYLE_CHECKS: UGCStyleCheck[] = [
     caption: 'Heavyweight Melton wool that keeps its shape even in freezing wind. The cupro lining is silky smooth.',
     taggedProductId: 'minimalist-wool-bomber',
     taggedProductName: 'Minimalist Wool Bomber in Espresso',
-    taggedProductPrice: 240,
+    taggedProductPrice: 5999,
     taggedProductImage: 'https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=300&q=80',
     stats: '5\'9" • Wears Size M',
     fitVerdict: 'Structured boxy fit, great for layering'
@@ -749,35 +749,35 @@ export const UGC_STYLE_CHECKS: UGCStyleCheck[] = [
 export const INSTAGRAM_POSTS: InstagramPost[] = [
   {
     id: 'ig-1',
-    handle: '@banzook.la',
+    handle: '@banzook.in',
     image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=500&q=80',
-    caption: 'Drop 04 — Heavyweight Carded Cottons & Washed Twill. Cut and sewn in Los Angeles.',
+    caption: 'Drop 04 — Heavyweight Carded Cottons & Washed Twill.',
     productTagged: 'Heavyweight Boxy Tee'
   },
   {
     id: 'ig-2',
-    handle: '@banzook.la',
+    handle: '@banzook.in',
     image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=500&q=80',
     caption: 'Zero clutter. Quality over noise. Dressed for the way you move.',
     productTagged: 'Wide-Leg Pleated Trouser'
   },
   {
     id: 'ig-3',
-    handle: '@banzook.la',
+    handle: '@banzook.in',
     image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=500&q=80',
     caption: '700 GSM Melton wool. Built for longevity, engineered without logos.',
     productTagged: 'Minimalist Wool Bomber'
   },
   {
     id: 'ig-4',
-    handle: '@banzook.la',
+    handle: '@banzook.in',
     image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=500&q=80',
     caption: 'The everyday uniform. 3 pieces that rotate indefinitely.',
     productTagged: 'The Core Uniform Set'
   },
   {
     id: 'ig-5',
-    handle: '@banzook.la',
+    handle: '@banzook.in',
     image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=500&q=80',
     caption: 'Studio fitting sessions. Raw chalk and charcoal slub tones.',
     productTagged: 'Relaxed Twill Pant'
@@ -929,7 +929,7 @@ export const FIT_QUIZ_QUESTIONS: FitQuizQuestion[] = [
         desc: 'Get the complete synchronized capsule in our signature raw chalk & charcoal palette.',
         recommendedProductId: 'core-uniform-bundle',
         badge: '📦 COMPLETE KIT',
-        metric: 'Save $65 Instantly'
+        metric: 'Save ₹1,098 Instantly'
       }
     ]
   }
