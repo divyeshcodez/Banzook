@@ -88,14 +88,14 @@ export const Hero: React.FC<HeroProps> = ({
               </div>
               <div className="space-y-1">
                 <span className="text-[10px] font-mono-banzook text-[#A35843] uppercase tracking-wider font-semibold">
-                  RISK-FREE IN-HOME TRIAL
+                  ALL SALES FINAL
                 </span>
                 <h2 className="font-display font-bold text-xl sm:text-2xl text-[#111111] tracking-tight">
-                  Free returns, always.
+                  No returns or exchanges.
                 </h2>
               </div>
               <p className="text-xs text-[#666660] leading-relaxed">
-                Try any piece at home for 30 days. Frictionless size exchanges with prepaid recyclable return labels included in every parcel.
+                Please review your order carefully before purchasing. Once sold, items cannot be exchanged or returned.
               </p>
             </div>
 

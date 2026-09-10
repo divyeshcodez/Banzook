@@ -12,7 +12,6 @@ import { QuoteSlider } from './components/QuoteSlider';
 import { LifestyleCarousel } from './components/LifestyleCarousel';
 import { MarqueeCTAStrip } from './components/MarqueeCTAStrip';
 import { PressQuoteSlider } from './components/PressQuoteSlider';
-import { VideoTestimonials } from './components/VideoTestimonials';
 import { EmailSignup } from './components/EmailSignup';
 import { InstagramGrid } from './components/InstagramGrid';
 import { Footer } from './components/Footer';
@@ -25,6 +24,11 @@ import { SearchModal } from './components/SearchModal';
 import { SizeGuideModal } from './components/SizeGuideModal';
 import { AccountModal } from './components/AccountModal';
 import { CheckoutSuccessModal } from './components/CheckoutSuccessModal';
+import { ShopPage } from './pages/ShopPage';
+import { AboutPage } from './pages/AboutPage';
+import { BulkOrdersPage } from './pages/BulkOrdersPage';
+import { BundleBuilderModal } from './components/BulkOrders/BundleBuilderModal';
+import { InfoPage } from './pages/InfoPage';
 
 export function App() {
   // Cart State with LocalStorage
@@ -43,6 +47,7 @@ export function App() {
 
   // Navigation / Filter State
   const [activeCategoryFilter, setActiveCategoryFilter] = useState<string>('all');
+  const [currentRoute, setCurrentRoute] = useState<string>('home');
 
   // Modal Visibility States
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -55,6 +60,7 @@ export function App() {
   
   // Quick View Product
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const [bundleBuilderProduct, setBundleBuilderProduct] = useState<Product | null>(null);
 
   // Sync Cart to LocalStorage
   useEffect(() => {
@@ -175,12 +181,18 @@ export function App() {
         onOpenSizeGuide={() => setIsSizeGuideOpen(true)}
         onOpenAccount={() => setIsAccountOpen(true)}
         onNavigateCategory={handleNavigateCategory}
+        onNavigate={(route) => {
+          setCurrentRoute(route as 'home' | 'shop' | 'about');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
       />
 
       {/* MAIN BODY FLOW */}
       <main className="flex-1">
         
-        {/* 3. HERO: TWO-PANEL SPLIT */}
+        {currentRoute === 'home' ? (
+          <>
+            {/* 3. HERO: TWO-PANEL SPLIT */}
         <Hero
           onShopNewArrivals={() => handleNavigateCategory('new')}
           onOpenQuiz={() => setIsQuizOpen(true)}
@@ -217,12 +229,6 @@ export function App() {
         {/* 9. PRESS QUOTE SECTION (GQ, HIGHSNOBIETY, KINFOLK, HYPEBEAST) */}
         <PressQuoteSlider />
 
-        {/* 10. UGC / VIDEO STYLE CHECKS */}
-        <VideoTestimonials
-          onAddToCart={(p, size) => handleAddToCart(p, size)}
-          onQuickView={(p) => setQuickViewProduct(p)}
-        />
-
         {/* 11. EMAIL SIGNUP (GET 15% OFF) */}
         <EmailSignup
           onCouponClaimed={(code) => {
@@ -231,7 +237,32 @@ export function App() {
         />
 
         {/* 12. INSTAGRAM GRID (@BANZOOK.LA) */}
-        <InstagramGrid />
+            <InstagramGrid />
+          </>
+        ) : currentRoute === 'shop' ? (
+          <ShopPage 
+            onAddToCart={handleAddToCart}
+            onQuickView={(p) => setQuickViewProduct(p)}
+            onOpenQuiz={() => setIsQuizOpen(true)}
+          />
+        ) : currentRoute === 'about' ? (
+          <AboutPage />
+        ) : currentRoute === 'bulk-orders' ? (
+          <BulkOrdersPage 
+            onAddToCart={handleAddToCart}
+            onOpenBundle={(p) => setBundleBuilderProduct(p)}
+          />
+        ) : currentRoute === 'faq' ? (
+          <InfoPage title="FAQ" content="Coming Soon. We are working hard to gather the most frequently asked questions." />
+        ) : currentRoute === 'returns' ? (
+          <InfoPage title="Returns" content="All Sales Final. No Returns or Exchanges.\nPlease review your order carefully before purchasing. Once sold, items cannot be exchanged or returned." />
+        ) : currentRoute === 'shipping' ? (
+          <InfoPage title="Shipping" content="We offer free shipping on orders over $100.\nStandard shipping takes 3-5 business days." />
+        ) : currentRoute === 'care-guide' ? (
+          <InfoPage title="Care Guide" content="Machine wash cold with like colors. Tumble dry low. Do not bleach. Cool iron if needed." />
+        ) : currentRoute === 'policies' ? (
+          <InfoPage title="Store Policies" content="All sales are final. Please review your items carefully before checkout." />
+        ) : null}
 
       </main>
 
@@ -240,6 +271,10 @@ export function App() {
         onNavigateCategory={handleNavigateCategory}
         onOpenSizeGuide={() => setIsSizeGuideOpen(true)}
         onOpenQuiz={() => setIsQuizOpen(true)}
+        onNavigate={(route) => {
+          setCurrentRoute(route);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
       />
 
       {/* MODALS & DRAWERS */}
@@ -263,6 +298,13 @@ export function App() {
           setIsSizeGuideOpen(true);
         }}
       />
+
+      {bundleBuilderProduct && (
+        <BundleBuilderModal 
+          product={bundleBuilderProduct} 
+          onClose={() => setBundleBuilderProduct(null)} 
+        />
+      )}
 
       <FitQuizModal
         isOpen={isQuizOpen}

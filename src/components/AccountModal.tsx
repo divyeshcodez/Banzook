@@ -86,12 +86,6 @@ export const AccountModal: React.FC<AccountModalProps> = ({ isOpen, onClose }) =
                 </div>
               </div>
 
-              <div className="text-center pt-2">
-                <span className="text-[11px] text-[#666660]">Need an exchange or return label?</span>
-                <button className="text-[11px] text-[#A35843] font-bold block mx-auto underline cursor-pointer mt-1">
-                  Start 30-Day Frictionless Return
-                </button>
-              </div>
             </div>
           )}
 

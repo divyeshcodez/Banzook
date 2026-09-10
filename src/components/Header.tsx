@@ -9,6 +9,7 @@ interface HeaderProps {
   onOpenSizeGuide: () => void;
   onOpenAccount: () => void;
   onNavigateCategory: (category: string) => void;
+  onNavigate?: (route: string) => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -18,15 +19,17 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenQuiz,
   onOpenSizeGuide,
   onOpenAccount,
-  onNavigateCategory
+  onNavigateCategory,
+  onNavigate
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
     { label: 'SHOP', category: 'all' },
+    { label: 'ABOUT', category: 'about' },
     { label: 'NEW', category: 'new' },
     { label: 'BEST SELLERS', category: 'bestsellers' },
-    { label: 'BUNDLES', category: 'bundles' }
+    { label: 'BULK ORDERS', category: 'bundles' }
   ];
 
   return (
@@ -47,7 +50,18 @@ export const Header: React.FC<HeaderProps> = ({
             {navLinks.map((link) => (
               <button
                 key={link.label}
-                onClick={() => onNavigateCategory(link.category)}
+                onClick={() => {
+                  if (link.label === 'SHOP') {
+                    onNavigate?.('shop');
+                  } else if (link.label === 'ABOUT') {
+                    onNavigate?.('about');
+                  } else if (link.label === 'BULK ORDERS') {
+                    onNavigate?.('bulk-orders');
+                  } else {
+                    onNavigate?.('home');
+                    onNavigateCategory(link.category);
+                  }
+                }}
                 className="hover:text-[#A35843] transition-colors cursor-pointer relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#111111] hover:after:w-full after:transition-all"
               >
                 {link.label}
@@ -63,12 +77,18 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* CENTER: MINIMALIST WORDMARK LOGO */}
-        <div className="flex flex-col items-center justify-center lg:w-1/3 text-center cursor-pointer" onClick={() => onNavigateCategory('all')}>
+        <div 
+          className="flex flex-col items-center justify-center lg:w-1/3 text-center cursor-pointer" 
+          onClick={() => {
+            onNavigate?.('home');
+            onNavigateCategory('all');
+          }}
+        >
           <span className="font-display font-extrabold text-2xl sm:text-3xl tracking-[-0.04em] text-[#111111] leading-none uppercase select-none">
             BANZOOK
           </span>
           <span className="text-[9px] font-mono-banzook text-[#666660] tracking-[0.25em] uppercase mt-1">
-            EST. LOS ANGELES
+            Speak in prints
           </span>
         </div>
 
@@ -120,7 +140,16 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 key={link.label}
                 onClick={() => {
-                  onNavigateCategory(link.category);
+                  if (link.label === 'SHOP') {
+                    onNavigate?.('shop');
+                  } else if (link.label === 'ABOUT') {
+                    onNavigate?.('about');
+                  } else if (link.label === 'BULK ORDERS') {
+                    onNavigate?.('bulk-orders');
+                  } else {
+                    onNavigate?.('home');
+                    onNavigateCategory(link.category);
+                  }
                   setMobileMenuOpen(false);
                 }}
                 className="block w-full text-left py-2 border-b border-neutral-200 text-[#111111] hover:text-[#A35843] transition-colors"

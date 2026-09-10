@@ -29,7 +29,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       )
     : PRODUCTS.slice(0, 4);
 
-  const quickSearches = ['Heavyweight Tee', 'Wide-Leg Pleated', 'Loopback Hoodie', 'Wool Bomber', 'Bundles'];
+  const quickSearches = ['Heavyweight Tee', 'Wide-Leg Pleated', 'Loopback Hoodie', 'Wool Bomber', 'Bulk Orders'];
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto flex items-start justify-center pt-20 p-4 bg-black/60 backdrop-blur-xs font-mono-banzook">

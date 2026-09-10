@@ -1,6 +1,6 @@
 import React from 'react';
 import { INSTAGRAM_POSTS } from '../data/storeData';
-import { Instagram, ArrowUpRight } from 'lucide-react';
+import { Camera as Instagram, ArrowUpRight } from 'lucide-react';
 
 export const InstagramGrid: React.FC = () => {
   return (

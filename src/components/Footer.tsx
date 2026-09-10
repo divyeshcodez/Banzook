@@ -1,238 +1,89 @@
 import React from 'react';
-import { ArrowUp, Globe } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 interface FooterProps {
-  onNavigateCategory: (category: string) => void;
+  onNavigateCategory: (cat: string) => void;
   onOpenSizeGuide: () => void;
   onOpenQuiz: () => void;
+  onNavigate?: (route: string) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({
-  onNavigateCategory,
+export const Footer: React.FC<FooterProps> = ({ 
+  onNavigateCategory, 
   onOpenSizeGuide,
-  onOpenQuiz
+  onOpenQuiz,
+  onNavigate
 }) => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
-    <footer className="border-t border-[#111111] bg-[#111111] text-[#F5F4F1] pt-16 pb-12 font-mono-banzook">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <footer className="w-full bg-[#F5F4F1] border-t border-[#111111] py-16">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* 4 COLUMNS GRID */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 text-xs">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
           
-          {/* COLUMN 1: SHOP */}
-          <div className="space-y-4">
-            <h4 className="font-bold text-white uppercase tracking-widest text-[11px] border-b border-neutral-800 pb-2">
-              SHOP
-            </h4>
-            <ul className="space-y-2.5 text-neutral-400">
-              <li>
-                <button
-                  onClick={() => onNavigateCategory('new')}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  New Arrivals
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigateCategory('bestsellers')}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  Best Sellers
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigateCategory('tops')}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  Tops &amp; Tees
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigateCategory('bottoms')}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  Bottoms &amp; Trousers
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigateCategory('outerwear')}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  Outerwear
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigateCategory('bundles')}
-                  className="hover:text-white transition-colors cursor-pointer text-[#A35843]"
-                >
-                  Core Bundles (Save $)
-                </button>
-              </li>
-            </ul>
-          </div>
-
-          {/* COLUMN 2: HELP */}
-          <div className="space-y-4">
-            <h4 className="font-bold text-white uppercase tracking-widest text-[11px] border-b border-neutral-800 pb-2">
-              HELP
-            </h4>
-            <ul className="space-y-2.5 text-neutral-400">
-              <li>
-                <button
-                  onClick={onOpenSizeGuide}
-                  className="hover:text-white transition-colors cursor-pointer text-left"
-                >
-                  Size &amp; Fit Guide
-                </button>
-              </li>
-              <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  Shipping &amp; Delivery
-                </span>
-              </li>
-              <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  30-Day Free Returns
-                </span>
-              </li>
-              <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  Track Your Order
-                </span>
-              </li>
-              <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  Contact Support
-                </span>
-              </li>
-            </ul>
-          </div>
-
-          {/* COLUMN 3: LEARN */}
-          <div className="space-y-4">
-            <h4 className="font-bold text-white uppercase tracking-widest text-[11px] border-b border-neutral-800 pb-2">
-              LEARN
-            </h4>
-            <ul className="space-y-2.5 text-neutral-400">
-              <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  About Banzook
-                </span>
-              </li>
-              <li>
-                <button
-                  onClick={onOpenQuiz}
-                  className="hover:text-white transition-colors cursor-pointer text-left"
-                >
-                  Take the Fit Quiz
-                </button>
-              </li>
-              <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  Fabric &amp; GSM Guide
-                </span>
-              </li>
-              <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  Store Locator (LA &amp; NY)
-                </span>
-              </li>
-              <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  Sustainability Standards
-                </span>
-              </li>
-            </ul>
-          </div>
-
-          {/* COLUMN 4: CONNECT */}
-          <div className="space-y-4">
-            <h4 className="font-bold text-white uppercase tracking-widest text-[11px] border-b border-neutral-800 pb-2">
-              CONNECT
-            </h4>
-            <ul className="space-y-2.5 text-neutral-400">
-              <li>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors"
-                >
-                  Instagram (@banzook.la)
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://tiktok.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors"
-                >
-                  TikTok
-                </a>
-              </li>
-              <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  Spotify Radio
-                </span>
-              </li>
-              <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  Community Rewards
-                </span>
-              </li>
-              <li>
-                <span className="hover:text-white transition-colors cursor-pointer">
-                  Press Inquiries
-                </span>
-              </li>
-            </ul>
-          </div>
-
-        </div>
-
-        {/* LARGE WORDMARK LOGO & SCROLL TO TOP */}
-        <div className="pt-8 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="text-center sm:text-left">
-            <div className="font-display font-extrabold text-3xl sm:text-4xl tracking-[-0.04em] text-white uppercase">
-              BANZOOK
+          {/* SHOP COLUMN */}
+          <div className="flex flex-col gap-4">
+            <h4 className="font-mono-banzook font-bold text-xs uppercase tracking-widest text-[#111111]">SHOP</h4>
+            <div className="flex flex-col gap-2 font-mono-banzook text-[11px] uppercase text-[#666660]">
+              <button onClick={() => onNavigate?.('bulk-orders')} className="text-left hover:text-[#1D3557] transition-colors">BUILD UR OWN BUNDLE</button>
+              <button onClick={() => onNavigate?.('bulk-orders')} className="text-left hover:text-[#1D3557] transition-colors">BULK ORDERS</button>
+              <button onClick={() => { onNavigate?.('home'); onNavigateCategory('new'); }} className="text-left hover:text-[#1D3557] transition-colors">NEW ARRIVALS</button>
+              <button onClick={() => { onNavigate?.('home'); onNavigateCategory('sale'); }} className="text-left hover:text-[#1D3557] transition-colors">SALE</button>
             </div>
-            <p className="text-[10px] text-neutral-400 tracking-widest uppercase mt-0.5">
-              Dressed for the way you move. EST. LOS ANGELES.
-            </p>
           </div>
 
-          <button
-            onClick={scrollToTop}
-            className="px-4 py-2 rounded-full border border-neutral-700 bg-neutral-900 text-xs text-neutral-300 hover:text-white hover:border-white transition-colors flex items-center gap-1.5 cursor-pointer"
-          >
-            <span>BACK TO TOP</span>
-            <ArrowUp className="w-3.5 h-3.5" />
-          </button>
+          {/* HELP COLUMN */}
+          <div className="flex flex-col gap-4">
+            <h4 className="font-mono-banzook font-bold text-xs uppercase tracking-widest text-[#111111]">HELP</h4>
+            <div className="flex flex-col gap-2 font-mono-banzook text-[11px] uppercase text-[#666660]">
+              <button onClick={() => onNavigate?.('faq')} className="text-left hover:text-[#1D3557] transition-colors">FAQ</button>
+              <button onClick={() => onNavigate?.('returns')} className="text-left hover:text-[#1D3557] transition-colors">RETURNS</button>
+              <button onClick={() => onNavigate?.('shipping')} className="text-left hover:text-[#1D3557] transition-colors">SHIPPING</button>
+              <button onClick={onOpenSizeGuide} className="text-left hover:text-[#1D3557] transition-colors">SIZE GUIDE</button>
+            </div>
+          </div>
+
+          {/* LEARN COLUMN */}
+          <div className="flex flex-col gap-4">
+            <h4 className="font-mono-banzook font-bold text-xs uppercase tracking-widest text-[#111111]">LEARN</h4>
+            <div className="flex flex-col gap-2 font-mono-banzook text-[11px] uppercase text-[#666660]">
+              <button onClick={() => onNavigate?.('about')} className="text-left hover:text-[#1D3557] transition-colors">ABOUT</button>
+              <button onClick={onOpenQuiz} className="text-left hover:text-[#1D3557] transition-colors">FIT GUIDE</button>
+              <button onClick={() => onNavigate?.('policies')} className="text-left hover:text-[#1D3557] transition-colors">TRY BEFORE YOU BUY</button>
+              <button onClick={() => onNavigate?.('care-guide')} className="text-left hover:text-[#1D3557] transition-colors">CARE GUIDE</button>
+            </div>
+          </div>
+
+          {/* CONNECT COLUMN */}
+          <div className="flex flex-col gap-4">
+            <h4 className="font-mono-banzook font-bold text-xs uppercase tracking-widest text-[#111111]">CONNECT</h4>
+            <div className="flex flex-col gap-2 font-mono-banzook text-[11px] uppercase text-[#666660]">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-[#1D3557] transition-colors">
+                <span>INSTAGRAM</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-[#1D3557] transition-colors">
+                <span>FACEBOOK</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </a>
+              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-[#1D3557] transition-colors">
+                <span>TIKTOK</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+
         </div>
 
-        {/* COPYRIGHT & COMPLIANCE BAR */}
-        <div className="border-t border-neutral-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-neutral-500">
-          <div className="flex items-center gap-4">
-            <span>© {new Date().getFullYear()} BANZOOK APPAREL CO. ALL RIGHTS RESERVED.</span>
-            <span className="hidden md:inline">·</span>
-            <span className="hidden md:inline hover:underline cursor-pointer">PRIVACY POLICY</span>
-            <span className="hidden md:inline hover:underline cursor-pointer">TERMS OF SERVICE</span>
+        {/* BOTTOM BRANDING */}
+        <div className="pt-8 border-t border-[#111111] flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col items-center md:items-start cursor-pointer" onClick={() => onNavigate?.('home')}>
+            <span className="font-display font-extrabold text-3xl tracking-[-0.04em] text-[#111111] leading-none uppercase select-none">
+              BANZOOK
+            </span>
           </div>
-
-          <div className="flex items-center gap-1.5 text-neutral-400">
-            <Globe className="w-3 h-3" />
-            <span>USD ($) · UNITED STATES · ENGLISH</span>
-          </div>
+          <p className="font-mono-banzook text-[10px] text-[#666660] uppercase">
+            © {new Date().getFullYear()} BANZOOK LA. ALL RIGHTS RESERVED.
+          </p>
         </div>
 
       </div>

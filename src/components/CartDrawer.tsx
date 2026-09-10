@@ -247,7 +247,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
               <p className="text-[10px] text-center text-[#666660] flex items-center justify-center gap-1">
                 <ShieldCheck className="w-3 h-3" />
-                30-Day Free In-Home Trial &amp; Free Returns
+                All Sales Final. No Returns or Exchanges.
               </p>
 
             </div>
