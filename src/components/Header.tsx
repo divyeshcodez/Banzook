@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Search, ShoppingBag, User, Menu, X, ArrowRight, Sparkles, HelpCircle } from 'lucide-react';
+import { Search, ShoppingBag, User, Menu, X, ArrowRight, Sparkles, HelpCircle, UserCheck } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 interface HeaderProps {
   cartCount: number;
@@ -22,6 +23,7 @@ export const Header: React.FC<HeaderProps> = ({
   onNavigateCategory,
   onNavigate
 }) => {
+  const { user, userProfile } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -113,11 +115,26 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={onOpenAccount}
-            className="p-2 text-[#111111] hover:text-[#A35843] transition-colors cursor-pointer flex items-center gap-1.5"
+            className={`p-1.5 sm:px-3 sm:py-1.5 rounded-full border transition-all cursor-pointer flex items-center gap-1.5 text-[11px] ${
+              user 
+                ? 'border-[#111111] bg-[#111111] text-white hover:bg-neutral-800 shadow-xs' 
+                : 'border-[#111111]/30 bg-transparent text-[#111111] hover:border-[#111111] hover:bg-white'
+            }`}
             aria-label="User Account"
           >
-            <User className="w-4 h-4 stroke-[1.75]" />
-            <span className="hidden xl:inline uppercase text-[11px]">ACCOUNT</span>
+            {user ? (
+              <>
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="font-bold uppercase truncate max-w-[90px]">
+                  {userProfile?.name?.split(' ')[0] || user.displayName?.split(' ')[0] || 'MEMBER'}
+                </span>
+              </>
+            ) : (
+              <>
+                <User className="w-3.5 h-3.5 stroke-[1.75]" />
+                <span className="font-bold uppercase">SIGN IN</span>
+              </>
+            )}
           </button>
 
           <button
@@ -162,12 +179,22 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="pt-2 flex flex-col gap-2 font-mono-banzook text-xs">
             <button
               onClick={() => {
+                onOpenAccount();
+                setMobileMenuOpen(false);
+              }}
+              className="w-full py-2.5 rounded-full border-2 border-[#111111] bg-white text-[#111111] font-bold flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <User className="w-3.5 h-3.5" />
+              {user ? `MEMBER PORTAL (${userProfile?.name?.split(' ')[0] || user.displayName?.split(' ')[0] || 'ACTIVE'})` : 'SIGN IN / REGISTER'}
+            </button>
+            <button
+              onClick={() => {
                 onOpenQuiz();
                 setMobileMenuOpen(false);
               }}
-              className="w-full py-3 rounded-full border border-[#111111] bg-[#111111] text-white flex items-center justify-center gap-2"
+              className="w-full py-3 rounded-full border border-[#111111] bg-[#111111] text-white flex items-center justify-center gap-2 cursor-pointer"
             >
-              <Sparkles className="w-3.5 h-3.5 text-[#A35843]" />
+              <Sparkles className="w-3.5 h-3.5 text-[#E65F2B]" />
               FIND YOUR FIT (QUIZ)
             </button>
             <button
@@ -175,7 +202,7 @@ export const Header: React.FC<HeaderProps> = ({
                 onOpenSizeGuide();
                 setMobileMenuOpen(false);
               }}
-              className="w-full py-2.5 rounded-full border border-[#111111] bg-white text-[#111111] text-center"
+              className="w-full py-2.5 rounded-full border border-[#111111] bg-white text-[#111111] text-center cursor-pointer"
             >
               SIZE & MEASUREMENT GUIDE
             </button>

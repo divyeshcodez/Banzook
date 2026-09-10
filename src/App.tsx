@@ -29,8 +29,10 @@ import { AboutPage } from './pages/AboutPage';
 import { BulkOrdersPage } from './pages/BulkOrdersPage';
 import { BundleBuilderModal } from './components/BulkOrders/BundleBuilderModal';
 import { InfoPage } from './pages/InfoPage';
+import { useAuth } from './context/AuthContext';
 
 export function App() {
+  const { user, userProfile, createOrderRecord } = useAuth();
   // Cart State with LocalStorage
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     try {
@@ -137,8 +139,40 @@ export function App() {
   };
 
   const handleCheckout = () => {
-    const randomOrderId = `BZ-${Math.floor(10000 + Math.random() * 90000)}`;
-    setLastOrderNumber(randomOrderId);
+    const rawSubtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const discountAmount = appliedPromoCode === 'BANZOOK15' ? rawSubtotal * 0.15 : 0;
+    const finalSubtotal = rawSubtotal - discountAmount;
+    const shippingFee = finalSubtotal >= 100 || cartItems.length === 0 ? 0 : 9;
+    const grandTotal = finalSubtotal + shippingFee;
+
+    const fallbackId = `BZ-${Math.floor(10000 + Math.random() * 90000)}`;
+    setLastOrderNumber(fallbackId);
+
+    // Save order in Firestore via AuthContext
+    createOrderRecord({
+      customerName: userProfile?.name || user?.displayName || 'Banzook Member',
+      shippingAddress: userProfile?.address || 'Standard Delivery Destination',
+      phone: userProfile?.phone || '',
+      items: cartItems.map((i) => ({
+        id: i.productId,
+        name: i.name,
+        price: i.price,
+        quantity: i.quantity,
+        size: i.size,
+        color: i.color,
+        image: i.image
+      })),
+      subtotal: rawSubtotal,
+      discount: discountAmount,
+      shipping: shippingFee,
+      total: grandTotal,
+      status: 'confirmed'
+    }).then((createdId) => {
+      if (createdId) {
+        setLastOrderNumber(createdId.substring(0, 10).toUpperCase());
+      }
+    });
+
     setCartItems([]);
     setIsCartOpen(false);
     setIsCheckoutSuccessOpen(true);
@@ -330,6 +364,10 @@ export function App() {
       <AccountModal
         isOpen={isAccountOpen}
         onClose={() => setIsAccountOpen(false)}
+        onNavigateToShop={() => {
+          setCurrentPage('shop');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
       />
 
       <CheckoutSuccessModal
