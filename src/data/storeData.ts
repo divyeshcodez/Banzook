@@ -787,82 +787,149 @@ export const INSTAGRAM_POSTS: InstagramPost[] = [
 export const FIT_QUIZ_QUESTIONS: FitQuizQuestion[] = [
   {
     id: 1,
-    question: 'How do you prefer your everyday silhouette to fit?',
-    subtitle: 'Select your natural proportion preference for daily apparel.',
+    stepNumber: '01',
+    category: 'SILHOUETTE IDENTITY',
+    question: "What's your signature everyday proportion?",
+    subtitle: 'Calibrating drape physics, shoulder drop, and hem geometry for your daily rotation.',
     options: [
       {
-        label: 'Boxy & Relaxed',
-        desc: 'Drop-shoulder cuts with generous chest room and clean drapery.',
-        recommendedProductId: 'heavyweight-boxy-tee'
+        label: 'Boxy & Dropped',
+        desc: 'Heavyweight drop-shoulder cut with generous chest room and clean structured drape.',
+        recommendedProductId: 'heavyweight-boxy-tee',
+        badge: '🔥 STREET CORE',
+        metric: 'Drape: 9.8/10 Structured'
       },
       {
-        label: 'Tailored & Architectural',
-        desc: 'Sharp pleats, straight wide legs, and refined structured lines.',
-        recommendedProductId: 'wide-leg-pleated-trouser'
+        label: 'Architectural Wide-Leg',
+        desc: 'Deep double pleats, fluid drape, and clean puddle stack at the sneaker break.',
+        recommendedProductId: 'wide-leg-pleated-trouser',
+        badge: '📐 EDITORIAL',
+        metric: 'Flow: 9.4/10 Japanese Twill'
       },
       {
-        label: 'Substantial & Cozy',
-        desc: 'Heavyweight fleece with standing crossover hoods and clean hems.',
-        recommendedProductId: 'heavyweight-loopback-hoodie'
+        label: 'Substantial 480 GSM Fleece',
+        desc: 'Ultra-dense loopback cotton with crossover hood that never collapses or droops.',
+        recommendedProductId: 'heavyweight-loopback-hoodie',
+        badge: '☁️ 480 GSM HEFT',
+        metric: 'Weight: 10/10 Cozy Armor'
       },
       {
-        label: 'Complete 3-Piece Capsule',
-        desc: 'An effortless ready-to-wear uniform combining top, pant, and layer.',
-        recommendedProductId: 'core-uniform-bundle'
+        label: 'Curated 3-Piece Uniform',
+        desc: 'Full monochromatic rotation: heavyweight tee, pleat trouser & layering overshirt.',
+        recommendedProductId: 'core-uniform-bundle',
+        badge: '⚡ FULL ROTATION',
+        metric: 'Value: -20% Bundle Match'
       }
     ]
   },
   {
     id: 2,
-    question: 'What is your primary everyday context?',
-    subtitle: 'We optimize textile weights and breathability for your daily movement.',
+    stepNumber: '02',
+    category: 'PROPORTION CALIBRATION',
+    question: 'How do you like garments to sit on your frame?',
+    subtitle: 'We tune collar tension, sleeve length, and torso drape to eliminate cling completely.',
     options: [
       {
-        label: 'Hybrid Work & Creative Studios',
-        desc: 'Clean tops, structured poplins, and trousers that move between desk and dinner.',
-        recommendedProductId: 'oversized-poplin-overshirt'
+        label: 'Cropped Boxy',
+        desc: 'Sits cleanly above the waistline to elongate leg lines and enhance proportions.',
+        recommendedProductId: 'heavyweight-boxy-tee',
+        badge: '✨ HIGH-RISE PAIR',
+        metric: 'Zero Cling Guarantee'
       },
       {
-        label: 'Transit, Travel & City Commutes',
-        desc: 'Weatherproof technical outerwear and heavy canvas carry-alls.',
-        recommendedProductId: 'technical-oversized-mac'
+        label: 'Relaxed Tailored',
+        desc: 'Sharp shoulders, structured chest, and effortless fluid taper through the body.',
+        recommendedProductId: 'oversized-poplin-overshirt',
+        badge: '👔 CLEAN MINIMAL',
+        metric: 'Desk-to-Dinner Ready'
       },
       {
-        label: 'Off-Duty & Slow Weekends',
-        desc: '480 GSM French Terry and washed twill pants for all-day comfort.',
-        recommendedProductId: 'heavyweight-loopback-hoodie'
+        label: 'Substantial Oversized Drape',
+        desc: 'Generous drape with structured body that holds its geometry all day long.',
+        recommendedProductId: 'heavyweight-loopback-hoodie',
+        badge: '🛡️ ARMOR STRUCTURE',
+        metric: '100% Organic Ring-Spun'
       },
       {
-        label: 'Year-Round Minimalist Layering',
-        desc: 'Melton wool bombers and heavyweight tees for easy temperature adaptation.',
-        recommendedProductId: 'minimalist-wool-bomber'
+        label: 'Floor-Sweeping Wide Flow',
+        desc: 'Voluminous straight cut that stacks effortlessly over your sneaker rotation.',
+        recommendedProductId: 'wide-leg-pleated-trouser',
+        badge: '👟 SNEAKER STACK',
+        metric: 'Wrinkle-Resistant Weave'
       }
     ]
   },
   {
     id: 3,
-    question: 'Which textile characteristic matters most to you?',
-    subtitle: 'Every Banzook garment is milled from premium natural fibers.',
+    stepNumber: '03',
+    category: 'AESTHETIC & CONTEXT',
+    question: 'Where is this piece putting in the most work?',
+    subtitle: 'Matching breathability, thermal comfort, and durability to your daily routine.',
     options: [
       {
-        label: 'Heavyweight Structure (280+ GSM)',
-        desc: 'Thick organic cotton that never clings or loses its collar tension.',
-        recommendedProductId: 'heavyweight-boxy-tee'
+        label: 'Creative Studio & Tech Minimalist',
+        desc: 'Sharp enough for meetings, relaxed enough for 12-hour design sprints.',
+        recommendedProductId: 'oversized-poplin-overshirt',
+        badge: '💻 FOUNDER / CREATIVE',
+        metric: '120s Compact Poplin'
       },
       {
-        label: 'Japanese Twill with Peach-Skin Hand',
-        desc: 'High-density weave with supple drape and durable pleating.',
-        recommendedProductId: 'wide-leg-pleated-trouser'
+        label: 'Transit, Coffee Runs & Street Life',
+        desc: 'Ultra-durable, weather-ready, and engineered for spontaneous city exploration.',
+        recommendedProductId: 'technical-oversized-mac',
+        badge: '🚇 COMMUTE PROOF',
+        metric: 'Weather-Shield Shell'
       },
       {
-        label: '700 GSM Thermal Melton Wool',
-        desc: 'Classic insulating warmth lined with breathable cupro.',
-        recommendedProductId: 'minimalist-wool-bomber'
+        label: 'Late Night Studios & Slow Weekends',
+        desc: 'Low-stimulation, heavyweight comfort that feels like a premium weighted blanket.',
+        recommendedProductId: 'heavyweight-loopback-hoodie',
+        badge: '🌙 UNWIND MODE',
+        metric: 'Cloud Terry Interior'
       },
       {
-        label: 'All-In-One Curated Capsule',
-        desc: 'A coordinated 3-piece set engineered for frictionless daily dressing.',
-        recommendedProductId: 'core-uniform-bundle'
+        label: 'Gallery Nights & Seasonal Layering',
+        desc: 'Dense Melton wool structured piece that makes every minimal fit look expensive.',
+        recommendedProductId: 'minimalist-wool-bomber',
+        badge: '🍸 NIGHT ROTATION',
+        metric: '700 GSM Heritage Wool'
+      }
+    ]
+  },
+  {
+    id: 4,
+    stepNumber: '04',
+    category: 'TEXTILE & TOUCH STANDARD',
+    question: 'What textile sensation do you demand against your skin?',
+    subtitle: 'Zero polyester. Only premium ring-spun organic cottons, Japanese twills, and natural wools.',
+    options: [
+      {
+        label: '280+ GSM Crisp Organic Cotton',
+        desc: 'Substantial hand feel, anti-sweat thickness, engineered high-retention rib collar.',
+        recommendedProductId: 'heavyweight-boxy-tee',
+        badge: '🏆 FLAGSHIP FABRIC',
+        metric: '280 GSM Organic'
+      },
+      {
+        label: 'Peach-Skin Draped Japanese Twill',
+        desc: 'Micro-sanded finish with fluid weighted drape that glides with every stride.',
+        recommendedProductId: 'wide-leg-pleated-trouser',
+        badge: '🇯🇵 OSAKA WEAVE',
+        metric: 'Sanded Twill Finish'
+      },
+      {
+        label: '480 GSM Loopback French Terry',
+        desc: 'Custom-knit dense loops, pre-shrunk, heavyweight fleece built for decades.',
+        recommendedProductId: 'heavyweight-loopback-hoodie',
+        badge: '🧶 HEAVYWEIGHT TERRY',
+        metric: '480 GSM Custom Knit'
+      },
+      {
+        label: 'All-In-One Uniform System',
+        desc: 'Get the complete synchronized capsule in our signature raw chalk & charcoal palette.',
+        recommendedProductId: 'core-uniform-bundle',
+        badge: '📦 COMPLETE KIT',
+        metric: 'Save $65 Instantly'
       }
     ]
   }

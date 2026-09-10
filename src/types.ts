@@ -106,12 +106,17 @@ export interface InstagramPost {
 
 export interface FitQuizQuestion {
   id: number;
+  stepNumber?: string;
+  category?: string;
   question: string;
   subtitle: string;
   options: Array<{
     label: string;
     desc: string;
     recommendedProductId: string;
+    badge?: string;
+    metric?: string;
+    icon?: string;
   }>;
 }
 
