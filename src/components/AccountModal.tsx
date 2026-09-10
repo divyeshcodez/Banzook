@@ -129,8 +129,18 @@ export const AccountModal: React.FC<AccountModalProps> = ({
       await signInWithGoogle();
       setSuccessMsg('Signed in with Google.');
     } catch (err: any) {
-      console.error(err);
-      setErrorMsg(err.message || 'Google sign-in was cancelled.');
+      console.error('Google Sign-In Error:', err);
+      if (err.code === 'auth/popup-closed-by-user') {
+        setErrorMsg('Sign-in popup was closed before completing. Please try again.');
+      } else if (err.code === 'auth/unauthorized-domain') {
+        setErrorMsg('Domain not authorized in Firebase: Add banzook.store & localhost to Firebase Console -> Authentication -> Settings -> Authorized Domains.');
+      } else if (err.code === 'auth/operation-not-allowed') {
+        setErrorMsg('Google Sign-In provider is disabled in Firebase Console. Please enable Google provider in Authentication -> Sign-in method.');
+      } else if (err.code === 'auth/popup-blocked') {
+        setErrorMsg('Popup was blocked by your browser. Please allow popups or use email sign-in.');
+      } else {
+        setErrorMsg(err.message || 'Google sign-in could not be completed.');
+      }
     } finally {
       setIsSubmitting(false);
     }

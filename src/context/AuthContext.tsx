@@ -5,6 +5,8 @@ import {
   createUserWithEmailAndPassword, 
   signOut, 
   signInWithPopup, 
+  signInWithRedirect,
+  getRedirectResult,
   sendPasswordResetEmail,
   updateProfile,
   onAuthStateChanged 
@@ -157,6 +159,19 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   useEffect(() => {
+    // Check for redirect result on page load (e.g., mobile or popup fallback)
+    getRedirectResult(auth)
+      .then(async (result) => {
+        if (result && result.user) {
+          setUser(result.user);
+          await fetchUserProfile(result.user);
+          await fetchUserOrders(result.user.uid, result.user.email || '');
+        }
+      })
+      .catch((err) => {
+        console.warn('Redirect sign-in result check:', err);
+      });
+
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
@@ -210,9 +225,20 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const signInWithGoogle = async () => {
-    const res = await signInWithPopup(auth, googleProvider);
-    await fetchUserProfile(res.user);
-    await fetchUserOrders(res.user.uid, res.user.email || '');
+    try {
+      const res = await signInWithPopup(auth, googleProvider);
+      if (res && res.user) {
+        await fetchUserProfile(res.user);
+        await fetchUserOrders(res.user.uid, res.user.email || '');
+      }
+    } catch (err: any) {
+      // If popup was blocked by browser, attempt redirect
+      if (err.code === 'auth/popup-blocked') {
+        await signInWithRedirect(auth, googleProvider);
+        return;
+      }
+      throw err;
+    }
   };
 
   const signOutUser = async () => {
