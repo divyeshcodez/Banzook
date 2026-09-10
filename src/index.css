@@ -15,46 +15,23 @@
   * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
   }
 
   body {
     background-color: var(--bg-page);
     color: var(--text-primary);
-    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    letter-spacing: -0.01em;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
-  /* Monospace typography for labels, nav, metadata, and prices */
+  /* Clean monospace for labels, tags, and prices */
   .font-mono-banzook {
-    font-family: 'IBM Plex Mono', 'Space Mono', monospace;
-    letter-spacing: 0.04em;
+    font-family: 'JetBrains Mono', monospace;
   }
 
-  /* Luxury Streetwear Display Font for Hero, Titles, and Headlines */
+  /* Clean bold display font */
   .font-display {
-    font-family: 'Syne', 'Archivo', 'Space Grotesk', sans-serif;
-    letter-spacing: -0.035em;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
-
-  /* Brutalist Technical Sans for secondary titles & section headers */
-  .font-technical {
-    font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
-    letter-spacing: -0.02em;
-  }
-}
-
-/* Custom Typographic Helpers */
-.tracking-ultra-wide {
-  letter-spacing: 0.22em;
-}
-
-.tracking-editorial {
-  letter-spacing: -0.04em;
-}
-
-.leading-headline {
-  line-height: 0.94;
 }
 
 /* Infinite Marquee animations */
@@ -90,15 +67,6 @@
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-
-/* Custom crisp flat border utilities */
-.border-banzook {
-  border: 1.5px solid #111111;
-}
-
-.border-banzook-subtle {
-  border: 1px solid #E2E0D8;
 }
 
 /* Focus styles */
