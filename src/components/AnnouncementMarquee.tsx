@@ -6,7 +6,7 @@ interface AnnouncementMarqueeProps {
 
 export const AnnouncementMarquee: React.FC<AnnouncementMarqueeProps> = ({ onPromoClick }) => {
   const items = [
-    'FREE SHIPPING OVER $100',
+    'WORLDWIDE DISPATCH · TRACKED EXPRESS COURIER',
     'ALL SALES FINAL · NO RETURNS OR EXCHANGES',
     'NEW DROP EVERY MONTH',
     'DRESSED FOR THE WAY YOU MOVE',

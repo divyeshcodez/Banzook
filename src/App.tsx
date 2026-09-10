@@ -291,7 +291,7 @@ export function App() {
         ) : currentRoute === 'returns' ? (
           <InfoPage title="Returns" content="All Sales Final. No Returns or Exchanges.\nPlease review your order carefully before purchasing. Once sold, items cannot be exchanged or returned." />
         ) : currentRoute === 'shipping' ? (
-          <InfoPage title="Shipping" content="We offer free shipping on orders over $100.\nStandard shipping takes 3-5 business days." />
+          <InfoPage title="Shipping" content="All orders are processed within 24-48 hours and shipped via express courier tracking.\nStandard delivery takes 3-5 business days." />
         ) : currentRoute === 'care-guide' ? (
           <InfoPage title="Care Guide" content="Machine wash cold with like colors. Tumble dry low. Do not bleach. Cool iron if needed." />
         ) : currentRoute === 'policies' ? (

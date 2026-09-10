@@ -34,11 +34,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   const discountRate = appliedPromoCode === 'BANZOOK15' ? 0.15 : 0;
   const discountAmount = rawSubtotal * discountRate;
   const finalSubtotal = rawSubtotal - discountAmount;
-  
-  const FREE_SHIPPING_THRESHOLD = 100;
-  const amountToFreeShipping = Math.max(0, FREE_SHIPPING_THRESHOLD - finalSubtotal);
-  const progressPercent = Math.min(100, (finalSubtotal / FREE_SHIPPING_THRESHOLD) * 100);
-  const shippingFee = finalSubtotal >= FREE_SHIPPING_THRESHOLD || items.length === 0 ? 0 : 9;
+  const shippingFee = items.length === 0 ? 0 : 9;
   const grandTotal = finalSubtotal + shippingFee;
 
   const handleApplyPromo = (e: React.FormEvent) => {
@@ -80,28 +76,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             >
               <X className="w-4 h-4 text-[#111111]" />
             </button>
-          </div>
-
-          {/* FREE SHIPPING PROGRESS METER */}
-          <div className="p-4 bg-white border-b border-[#111111] space-y-2">
-            <div className="flex items-center justify-between text-xs text-[#111111]">
-              <span className="font-bold flex items-center gap-1.5">
-                <Truck className="w-3.5 h-3.5 text-[#A35843]" />
-                {amountToFreeShipping === 0 ? (
-                  <span className="text-emerald-700 font-bold">YOU UNLOCKED FREE US SHIPPING!</span>
-                ) : (
-                  <span>Add ${amountToFreeShipping.toFixed(2)} more for FREE US SHIPPING</span>
-                )}
-              </span>
-            </div>
-
-            {/* BAR */}
-            <div className="w-full h-2 bg-[#F5F4F1] rounded-full border border-[#111111] overflow-hidden p-0.5">
-              <div
-                className="h-full bg-[#111111] rounded-full transition-all duration-300"
-                style={{ width: `${progressPercent}%` }}
-              />
-            </div>
           </div>
 
           {/* ITEMS LIST (SCROLLABLE) */}
